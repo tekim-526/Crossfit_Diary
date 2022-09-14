@@ -9,8 +9,8 @@ import Foundation
 import RealmSwift
 
 class WODRealmTable: Object {
-    let workOut: List<String> = List<String>()
-    let reps: List<Int> = List<Int>()
+    @Persisted var workOut: List<String> = List<String>()
+    @Persisted var reps: List<Int> = List<Int>()
     var repsArray: [Int] {
         get {
             return reps.map{$0}
@@ -29,6 +29,7 @@ class WODRealmTable: Object {
             workOut.append(objectsIn: newValue)
         }
     }
+    
     @Persisted var bbWeight: Int? = 0
     @Persisted var dbWeight: Int? = 0
     @Persisted var kbWeight: Int? = 0
@@ -56,6 +57,7 @@ class WODRealmTable: Object {
                      results: String?) {
         self.init()
         self.workOutArray = workOutArray
+        self.repsArray = repsArray
         self.bbWeight = bbWeight
         self.dbWeight = dbWeight
         self.kbWeight = kbWeight
