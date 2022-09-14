@@ -44,7 +44,7 @@ class WODRealmTable: Object {
     
     @Persisted(primaryKey: true) var objectId : ObjectId
     
-    convenience init(reps: Int,
+    convenience init(repsArray: [Int],
                      workOutArray: [String],
                      bbWeight: Int?,
                      dbWeight: Int?,

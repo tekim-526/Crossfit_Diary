@@ -7,10 +7,18 @@
 
 import UIKit
 import FSCalendar
+import RealmSwift
 
 class CalendarViewController: BaseViewController {
     let calendarView = CalendarView()
     let writeVC = WriteViewController()
+    let wodCRUD = WODRealmCRUD()
+    private var tasks: Results<WODRealmTable>! {
+        didSet {
+            calendarView.tableView.reloadData()
+        }
+    }
+    
     override func loadView() {
         view = calendarView
         
@@ -20,6 +28,16 @@ class CalendarViewController: BaseViewController {
         calendarView.tableView.delegate = self
         calendarView.calendar.delegate = self
         calendarView.calendar.dataSource = self
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tasks = wodCRUD.fetch()
+        
+        let task = WODRealmTable(repsArray: [1,2,3], workOutArray: ["HPC","Clean","Jerk"], bbWeight: 10, dbWeight: 10, kbWeight: 10, mbWeight: 10, vestWeight: 10, rounds: 3, additionalText: "123", results: "11m30s")
+        wodCRUD.addTask(task: task) {
+            print("error")
+        }
+        print(task.repsArray)
     }
     override func setupUI() {
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil)

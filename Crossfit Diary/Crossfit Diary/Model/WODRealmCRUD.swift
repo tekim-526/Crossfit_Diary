@@ -12,6 +12,7 @@ class WODRealmCRUD {
     let localRealm = try! Realm()
     
     func fetch() -> Results<WODRealmTable> {
+        print(localRealm.configuration.fileURL)
         return localRealm.objects(WODRealmTable.self)
     }
     
