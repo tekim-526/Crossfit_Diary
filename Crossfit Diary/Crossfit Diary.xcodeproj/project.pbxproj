@@ -16,6 +16,9 @@
 		932B83AA28D1B9B900EAF221 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83A928D1B9B900EAF221 /* DateFormatter+Extension.swift */; };
 		932B83B528D1C30C00EAF221 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83B428D1C30C00EAF221 /* BaseView.swift */; };
 		932B83B728D1C31600EAF221 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83B628D1C31600EAF221 /* BaseViewController.swift */; };
+		932B83BA28D2E81C00EAF221 /* WorkOutList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83B928D2E81C00EAF221 /* WorkOutList.swift */; };
+		932B83BC28D2F41400EAF221 /* ModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83BB28D2F41400EAF221 /* ModifyViewController.swift */; };
+		932B83BE28D2F42300EAF221 /* ModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83BD28D2F42300EAF221 /* ModifyView.swift */; };
 		93D941AB28CB129F002CDB03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AA28CB129F002CDB03 /* AppDelegate.swift */; };
 		93D941AD28CB129F002CDB03 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AC28CB129F002CDB03 /* SceneDelegate.swift */; };
 		93D941B428CB12A3002CDB03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93D941B328CB12A3002CDB03 /* Assets.xcassets */; };
@@ -44,6 +47,9 @@
 		932B83A928D1B9B900EAF221 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		932B83B428D1C30C00EAF221 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		932B83B628D1C31600EAF221 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		932B83B928D2E81C00EAF221 /* WorkOutList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutList.swift; sourceTree = "<group>"; };
+		932B83BB28D2F41400EAF221 /* ModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyViewController.swift; sourceTree = "<group>"; };
+		932B83BD28D2F42300EAF221 /* ModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyView.swift; sourceTree = "<group>"; };
 		93D941A728CB129F002CDB03 /* Crossfit Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crossfit Diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93D941AA28CB129F002CDB03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93D941AC28CB129F002CDB03 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +100,14 @@
 			path = BaseScene;
 			sourceTree = "<group>";
 		};
+		932B83B828D2E7FE00EAF221 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				932B83B928D2E81C00EAF221 /* WorkOutList.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		93D9419E28CB129F002CDB03 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +127,7 @@
 		93D941A928CB129F002CDB03 /* Crossfit Diary */ = {
 			isa = PBXGroup;
 			children = (
+				932B83B828D2E7FE00EAF221 /* Utils */,
 				93D941C528CB138F002CDB03 /* Extensions */,
 				93D941C328CB1383002CDB03 /* Model */,
 				93D941C928CB140F002CDB03 /* CalendarScene */,
@@ -172,6 +187,8 @@
 			children = (
 				93D941D028CB14B7002CDB03 /* WriteViewController.swift */,
 				93D941D228CB14C8002CDB03 /* WriteView.swift */,
+				932B83BB28D2F41400EAF221 /* ModifyViewController.swift */,
+				932B83BD28D2F42300EAF221 /* ModifyView.swift */,
 			);
 			path = WriteScene;
 			sourceTree = "<group>";
@@ -260,18 +277,21 @@
 			files = (
 				93D941D528CB14D5002CDB03 /* MapViewController.swift in Sources */,
 				93D941D728CB14DB002CDB03 /* MapView.swift in Sources */,
+				932B83BE28D2F42300EAF221 /* ModifyView.swift in Sources */,
 				93D941DD28CB1E33002CDB03 /* TabBarController.swift in Sources */,
 				932B83B528D1C30C00EAF221 /* BaseView.swift in Sources */,
 				932B83A628D1ADA300EAF221 /* WODRealmTable.swift in Sources */,
 				932B83B728D1C31600EAF221 /* BaseViewController.swift in Sources */,
 				93D941D328CB14C8002CDB03 /* WriteView.swift in Sources */,
 				93D941CF28CB1479002CDB03 /* CalendarView.swift in Sources */,
+				932B83BC28D2F41400EAF221 /* ModifyViewController.swift in Sources */,
 				932B83A428D1959500EAF221 /* WorkOutListTableViewCell.swift in Sources */,
 				93D941AB28CB129F002CDB03 /* AppDelegate.swift in Sources */,
 				9323D1F828D09AB000659885 /* WorkOutListView.swift in Sources */,
 				9323D1F628D09AA200659885 /* WorkOutListViewController.swift in Sources */,
 				93D941CD28CB1462002CDB03 /* CalendarViewController.swift in Sources */,
 				9323D1FA28D0A56B00659885 /* ExerciseModel.swift in Sources */,
+				932B83BA28D2E81C00EAF221 /* WorkOutList.swift in Sources */,
 				932B83AA28D1B9B900EAF221 /* DateFormatter+Extension.swift in Sources */,
 				93D941AD28CB129F002CDB03 /* SceneDelegate.swift in Sources */,
 				93D941D128CB14B7002CDB03 /* WriteViewController.swift in Sources */,

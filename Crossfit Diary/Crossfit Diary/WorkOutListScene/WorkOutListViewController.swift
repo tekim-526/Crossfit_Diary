@@ -7,24 +7,42 @@
 
 import UIKit
 
+protocol SendWorkoutListDelegate {
+    func getWorkoutList(list: [String])
+}
+
 class WorkOutListViewController: BaseViewController {
     let workOutListView = WorkOutListView()
     var allWorkOut = ExerciseModel().allWorkOutArray
-
+    var task: WODRealmTable!
+    
+    // SendData
+    var delegate: SendWorkoutListDelegate!
+    var workoutList: [String] = []
+    var repsList: [String] = []
+    
     override func loadView() {
         view = workOutListView
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         workOutListView.tableView.delegate = self
         workOutListView.tableView.dataSource = self
         workOutListView.searchbar.delegate = self
         workOutListView.tableView.register(WorkOutListTableViewCell.self, forCellReuseIdentifier: "WorkOutListTableViewCell")
         dump(allWorkOut)
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         workOutListView.tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        delegate.getWorkoutList(list: workoutList)
     }
 }
 
@@ -56,8 +74,8 @@ extension WorkOutListViewController: UITableViewDelegate, UITableViewDataSource,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "WorkOutListTableViewCell", for: indexPath) as? WorkOutListTableViewCell else { return UITableViewCell() }
         cell.titleLabel.text = allWorkOut[indexPath.section][indexPath.row]
+        
         return cell
-            
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
@@ -85,7 +103,9 @@ extension WorkOutListViewController: UITableViewDelegate, UITableViewDataSource,
         }
         return ""
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        workoutList.append(allWorkOut[indexPath.section][indexPath.row])
+    }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText != "" {
             allWorkOut = ExerciseModel().allWorkOutArray

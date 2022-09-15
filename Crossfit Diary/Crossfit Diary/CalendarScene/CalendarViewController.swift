@@ -16,6 +16,7 @@ class CalendarViewController: BaseViewController {
     private var tasks: Results<WODRealmTable>! {
         didSet {
             calendarView.tableView.reloadData()
+            writeVC.writeView.tableView.reloadData()
         }
     }
     
@@ -33,11 +34,6 @@ class CalendarViewController: BaseViewController {
         super.viewWillAppear(animated)
         tasks = wodCRUD.fetch()
         
-        let task = WODRealmTable(repsArray: [1,2,3], workOutArray: ["HPC","Clean","Jerk"], bbWeight: 10, dbWeight: 10, kbWeight: 10, mbWeight: 10, vestWeight: 10, rounds: 3, additionalText: "123", results: "11m30s")
-        wodCRUD.addTask(task: task) {
-            print("error")
-        }
-        print(task.repsArray)
     }
     override func setupUI() {
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil)
@@ -50,6 +46,7 @@ class CalendarViewController: BaseViewController {
     }
     
     func makePopUpMenu() -> [UIAction] {
+        
         let amrap = UIAction(title: "AMRAP", state: .off) { action in
             self.writeVC.kindOfWOD = "AMRAP"
             self.navigationController?.pushViewController(self.writeVC, animated: true)
@@ -66,6 +63,7 @@ class CalendarViewController: BaseViewController {
             self.writeVC.kindOfWOD = nil
             self.navigationController?.pushViewController(self.writeVC, animated: true)
         }
+        writeVC.isNew = true
         return [amrap, forTime, eMOM, extra]
     }
 }

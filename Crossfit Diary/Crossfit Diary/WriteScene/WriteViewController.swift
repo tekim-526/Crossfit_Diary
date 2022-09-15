@@ -6,11 +6,30 @@
 //
 
 import UIKit
+import RealmSwift
 
 class WriteViewController: BaseViewController {
+    let workoutListVC = WorkOutListViewController()
     let writeView = WriteView()
+    
+    let wodCRUD = WODRealmCRUD()
+    
+    var isNew: Bool = false
     var kindOfWOD: String?
     var selectedDate: Date?
+    var repsList: [String] = []
+    
+    var workoutList: [String] = [] {
+        didSet {
+            writeView.tableView.reloadData()
+        }
+    }
+    
+    private var tasks: Results<WODRealmTable>! {
+        didSet {
+            writeView.tableView.reloadData()
+        }
+    }
     
     override func loadView() {
         view = writeView
@@ -18,6 +37,7 @@ class WriteViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        workoutListVC.delegate = self
         writeView.tableView.delegate = self
         writeView.tableView.dataSource = self
         writeView.tableView.register(WorkOutListTableViewCell.self, forCellReuseIdentifier: "WorkOutListTableViewCell")
@@ -25,26 +45,63 @@ class WriteViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationItem.title = DateFormatter().makeNavigationTitle(selectedDate: selectedDate)
         makeWODString(kindOfWOD: kindOfWOD)
+        tasks = wodCRUD.fetch()
+        wodCRUD.addTask(task: WODRealmTable()) {
+            print("error")
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // save data to realm
+        if workoutList != [] || writeView.additionalTextView.text != "" {
+            wodCRUD.updateAll(task: tasks.last!,
+                              workOutArray: workoutList,
+                              bbWeight: Int(writeView.barbellTextField.text!),
+                              dbWeight: Int(writeView.dumbellTextField.text!),
+                              kbWeight: Int(writeView.kettlebellTextField.text!),
+                              mbWeight: Int(writeView.medicineBallTextField.text!),
+                              vestWeight: Int(writeView.weightedVestTextField.text!),
+                              rounds: Int(writeView.minuteTextField.text!),
+                              additionalText: writeView.additionalTextView.text,
+                              results: "",
+                              date: selectedDate ?? Date()) {
+                print("error")
+            }
+            
+        } else {
+            wodCRUD.deleteTask(task: tasks.last!) {
+                print("error")
+            }
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        writeView.minuteTextField.text = ""
+        writeView.minuteTextField.text = nil
+        writeView.additionalTextView.text = nil
+        writeView.barbellTextField.text = nil
+        writeView.dumbellTextField.text = nil
+        writeView.kettlebellTextField.text = nil
+        writeView.weightedVestTextField.text = nil
+        writeView.medicineBallTextField.text = nil
+        workoutList = []
     }
     
     override func setupUI() {
-        navigationItem.title = DateFormatter().makeNavigationTitle(selectedDate: selectedDate)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusButtonTapped))
+        let plusButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusButtonTapped))
+        let finishButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(finishButtonTapped))
+        navigationItem.rightBarButtonItems = [plusButton, finishButton]
     }
     @objc func plusButtonTapped() {
-        let vc = WorkOutListViewController()
-        present(vc, animated: true)
+        
+//        vc.task = tasks[0]
+        present(workoutListVC, animated: true)
+    }
+    @objc func finishButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     func makeWODString(kindOfWOD: String?) {
@@ -78,17 +135,23 @@ class WriteViewController: BaseViewController {
 
 }
 
-extension WriteViewController: UITableViewDelegate, UITableViewDataSource {
+extension WriteViewController: UITableViewDelegate, UITableViewDataSource, SendWorkoutListDelegate {
+    func getWorkoutList(list: [String]) {
+        workoutList = list
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return workoutList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "WorkOutListTableViewCell", for: indexPath) as? WorkOutListTableViewCell else { return UITableViewCell() }
-        cell.repsTextfield.isHidden = true
         
+        cell.titleLabel.text = workoutList[indexPath.row]
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        present(ModifyViewController(), animated: true)
+    }
     
 }
