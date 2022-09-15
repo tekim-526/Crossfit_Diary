@@ -9,7 +9,12 @@ import UIKit
 import RealmSwift
 
 class WriteViewController: BaseViewController {
+    
+   
+    
     let workoutListVC = WorkOutListViewController()
+    let modifyVC = ModifyViewController()
+    
     let writeView = WriteView()
     
     let wodCRUD = WODRealmCRUD()
@@ -17,7 +22,11 @@ class WriteViewController: BaseViewController {
     var isNew: Bool = false
     var kindOfWOD: String?
     var selectedDate: Date?
-    var repsList: [String] = []
+    var reps: String? = "" {
+        didSet {
+            writeView.tableView.reloadData()
+        }
+    }
     
     var workoutList: [String] = [] {
         didSet {
@@ -37,6 +46,7 @@ class WriteViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        modifyVC.delegate = self
         workoutListVC.delegate = self
         writeView.tableView.delegate = self
         writeView.tableView.dataSource = self
@@ -93,7 +103,7 @@ class WriteViewController: BaseViewController {
     override func setupUI() {
         let plusButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusButtonTapped))
         let finishButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(finishButtonTapped))
-        navigationItem.rightBarButtonItems = [plusButton, finishButton]
+        navigationItem.rightBarButtonItems = [finishButton, plusButton]
     }
     @objc func plusButtonTapped() {
         
@@ -135,7 +145,11 @@ class WriteViewController: BaseViewController {
 
 }
 
-extension WriteViewController: UITableViewDelegate, UITableViewDataSource, SendWorkoutListDelegate {
+extension WriteViewController: UITableViewDelegate, UITableViewDataSource, SendWorkoutListDelegate, SendRepsDelegate {
+    func getRepsString(reps: String?) {
+        self.reps = reps
+    }
+    
     func getWorkoutList(list: [String]) {
         workoutList = list
     }
@@ -147,11 +161,13 @@ extension WriteViewController: UITableViewDelegate, UITableViewDataSource, SendW
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "WorkOutListTableViewCell", for: indexPath) as? WorkOutListTableViewCell else { return UITableViewCell() }
         
-        cell.titleLabel.text = workoutList[indexPath.row]
+        cell.titleLabel.text = reps != "" ? (reps ?? "") + " " + workoutList[indexPath.row] : workoutList[indexPath.row]
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        present(ModifyViewController(), animated: true)
+        
+        modifyVC.modifyView.workoutLabel.text = workoutList[indexPath.row]
+        present(modifyVC, animated: true)
     }
     
 }

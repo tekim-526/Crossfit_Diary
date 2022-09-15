@@ -9,6 +9,20 @@ import UIKit
 
 class ModifyView: BaseView {
     
+    let workoutLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let repsTextField: UITextField = {
+        let tf = UITextField()
+        tf.font = .systemFont(ofSize: 16, weight: .black)
+        tf.textAlignment = .center
+        tf.placeholder = "횟수를 입력해 주세요"
+        return tf
+    }()
     
     let okButton: UIButton = {
         let view = UIButton()
@@ -30,15 +44,26 @@ class ModifyView: BaseView {
     }
     override func setupUI() {
         self.layer.cornerRadius = 15
-        [okButton].forEach { self.addSubview($0) }
+        [workoutLabel, repsTextField, okButton].forEach { self.addSubview($0) }
     }
     override func makeConstraints() {
-        let spacing = 16
-        
+        let spacing = 12
+        workoutLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(spacing)
+            make.leading.equalTo(spacing)
+            make.trailing.equalTo(-spacing)
+            make.height.equalTo(20)
+        }
+        repsTextField.snp.makeConstraints { make in
+            make.top.equalTo(workoutLabel.snp.bottom).offset(spacing)
+            make.leading.equalTo(spacing)
+            make.trailing.equalTo(-spacing)
+            make.height.equalTo(20)
+        }
         okButton.snp.makeConstraints { make in
             make.leading.equalTo(self.safeAreaLayoutGuide).offset(spacing)
             make.trailing.bottom.equalTo(self.safeAreaLayoutGuide).offset(-spacing)
-            make.height.equalTo(self.snp.height).multipliedBy(0.22)
+            make.height.equalTo(self.snp.height).multipliedBy(0.2)
         }
     }
     

@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol SendRepsDelegate {
+    func getRepsString(reps: String?)
+}
+
 class ModifyViewController: BaseViewController {
     let modifyView = ModifyView()
     
+    var delegate: SendRepsDelegate!
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -27,6 +32,8 @@ class ModifyViewController: BaseViewController {
         }
     }
     @objc func okButtonTapped() {
-        dismiss(animated: true) 
+        dismiss(animated: true) {
+            self.delegate.getRepsString(reps: self.modifyView.repsTextField.text)
+        }
     }
 }
