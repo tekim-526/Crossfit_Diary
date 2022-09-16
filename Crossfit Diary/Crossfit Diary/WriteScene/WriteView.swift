@@ -36,7 +36,7 @@ class WriteView: BaseView {
     }()
     let teamLabel: UILabel = {
         let label = UILabel()
-        label.text = "Team Of"
+        label.text = "Team of"
         label.font = .systemFont(ofSize: 16, weight: .bold)
         return label
     }()

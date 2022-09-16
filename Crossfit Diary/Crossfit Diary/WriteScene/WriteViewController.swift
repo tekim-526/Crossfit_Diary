@@ -10,8 +10,6 @@ import RealmSwift
 
 class WriteViewController: BaseViewController {
     
-   
-    
     let workoutListVC = WorkOutListViewController()
     let modifyVC = ModifyViewController()
     
@@ -22,7 +20,8 @@ class WriteViewController: BaseViewController {
     var isNew: Bool = false
     var kindOfWOD: String?
     var selectedDate: Date?
-    var reps: String? = "" {
+    
+    var repsList: [String] = [] {
         didSet {
             writeView.tableView.reloadData()
         }
@@ -69,6 +68,7 @@ class WriteViewController: BaseViewController {
         if workoutList != [] || writeView.additionalTextView.text != "" {
             wodCRUD.updateAll(task: tasks.last!,
                               workOutArray: workoutList,
+                              repsArray: repsList,
                               bbWeight: Int(writeView.barbellTextField.text!),
                               dbWeight: Int(writeView.dumbellTextField.text!),
                               kbWeight: Int(writeView.kettlebellTextField.text!),
@@ -106,8 +106,8 @@ class WriteViewController: BaseViewController {
         navigationItem.rightBarButtonItems = [finishButton, plusButton]
     }
     @objc func plusButtonTapped() {
-        
-//        vc.task = tasks[0]
+        workoutListVC.workoutList = workoutList
+        workoutListVC.repsList = repsList
         present(workoutListVC, animated: true)
     }
     @objc func finishButtonTapped() {
@@ -146,10 +146,15 @@ class WriteViewController: BaseViewController {
 }
 
 extension WriteViewController: UITableViewDelegate, UITableViewDataSource, SendWorkoutListDelegate, SendRepsDelegate {
-    func getRepsString(reps: String?) {
-        self.reps = reps
+    // 추가된 운동의 반복 횟수 배열 -> "0"으로 초기화 되어 있음
+    func getWorkoutRepsList(list: [String]) {
+        self.repsList = list
     }
-    
+    // 실질적인 횟수를 입력했을 때 데이터를 넣어주는 부분
+    func getRepsString(reps: [String]) {
+        self.repsList = reps
+        
+    }
     func getWorkoutList(list: [String]) {
         workoutList = list
     }
@@ -161,11 +166,12 @@ extension WriteViewController: UITableViewDelegate, UITableViewDataSource, SendW
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "WorkOutListTableViewCell", for: indexPath) as? WorkOutListTableViewCell else { return UITableViewCell() }
         
-        cell.titleLabel.text = reps != "" ? (reps ?? "") + " " + workoutList[indexPath.row] : workoutList[indexPath.row]
+        cell.titleLabel.text = repsList[indexPath.row] == "0" ? workoutList[indexPath.row] : repsList[indexPath.row] + " " + workoutList[indexPath.row]
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        modifyVC.indexPath = indexPath
+        modifyVC.repsList = repsList
         modifyVC.modifyView.workoutLabel.text = workoutList[indexPath.row]
         present(modifyVC, animated: true)
     }

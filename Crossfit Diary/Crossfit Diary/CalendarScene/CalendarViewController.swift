@@ -13,6 +13,7 @@ class CalendarViewController: BaseViewController {
     let calendarView = CalendarView()
     let writeVC = WriteViewController()
     let wodCRUD = WODRealmCRUD()
+    var selectedDate: Date = Date()
     private var tasks: Results<WODRealmTable>! {
         didSet {
             calendarView.tableView.reloadData()
@@ -26,13 +27,19 @@ class CalendarViewController: BaseViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        calendarView.tableView.delegate = self
+        
+        
+        calendarView.tableView.register(CalendarTableViewCell.self, forCellReuseIdentifier: "CalendarTableViewCell")
         calendarView.calendar.delegate = self
+        calendarView.tableView.delegate = self
+        calendarView.tableView.dataSource = self
         calendarView.calendar.dataSource = self
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tasks = wodCRUD.fetch()
+        
+        tasks = wodCRUD.fetchDate(date: calendarView.calendar.today!)
+        print(#function ,tasks.count)
         
     }
     override func setupUI() {
@@ -70,24 +77,36 @@ class CalendarViewController: BaseViewController {
 
 extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        
+        return tasks.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        44
-    }
-    func numberOfSections(in tableView: UITableView) -> Int {
-        2
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        return 140
     }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CalendarTableViewCell", for: indexPath) as? CalendarTableViewCell else { return UITableViewCell() }
+        cell.titleLabel.text = getCalendarTableViewString(task: tasks[indexPath.row], item: indexPath.row)
+        return cell
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "WOD"
+    }
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         if calendarView.calendar.selectedDate != nil {
-            writeVC.selectedDate = self.calendarView.calendar.selectedDate
+            writeVC.selectedDate = date
+            self.selectedDate = date
+            tasks = wodCRUD.fetchDate(date: selectedDate)
+            print(date)
         } else {
             writeVC.selectedDate = Date()
         }
     }
-    
+    func getCalendarTableViewString(task: WODRealmTable, item: Int) -> String {
+        let amrap = writeVC.kindOfWOD! + String(task.rounds ?? 0) + "minutes\n" +
+        let forTime = "Team of " + String(task.peopleCount) + "\n" + String(task.rounds ?? 1) + "For Time"
+        let emom = ""
+        let extra = ""
+        return amrap
+    }
 }

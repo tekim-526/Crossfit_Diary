@@ -38,17 +38,6 @@ class WorkOutListTableViewCell: UITableViewCell {
             make.width.equalTo(self.snp.width).multipliedBy(0.75)
             make.height.equalTo(self.snp.height).multipliedBy(0.4)
         }
-//        repsTextfield.snp.makeConstraints { make in
-//            make.centerY.equalTo(self.snp.centerY)
-//            make.leading.equalTo(titleLabel.snp.trailing)
-//            make.height.equalTo(titleLabel.snp.height)
-//        }
-//        repsLabel.snp.makeConstraints { make in
-//            make.centerY.equalTo(self.snp.centerY)
-//            make.leading.equalTo(repsTextfield.snp.trailing).offset(4)
-//            make.trailing.equalTo(-spacing)
-//            make.height.equalTo(titleLabel.snp.height)
-//        }
-        
+
     }
 }

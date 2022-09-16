@@ -10,17 +10,25 @@ import RealmSwift
 
 class WODRealmTable: Object {
     @Persisted var workOut: List<String> = List<String>()
-    
+    @Persisted var reps: List<String> = List<String>()
     var workOutArray: [String] {
         get {
-            return workOut.map{$0}
+            return workOut.map { $0 }
         }
         set {
             workOut.removeAll()
             workOut.append(objectsIn: newValue)
         }
     }
-    
+    var repsArray: [String] {
+        get {
+            return reps.map { $0 }
+        }
+        set {
+            reps.removeAll()
+            reps.append(objectsIn: newValue)
+        }
+    }
     @Persisted var bbWeight: Int?
     @Persisted var dbWeight: Int?
     @Persisted var kbWeight: Int?
@@ -37,6 +45,7 @@ class WODRealmTable: Object {
     @Persisted(primaryKey: true) var objectId : ObjectId
     
     convenience init(workOutArray: [String]?,
+                     repsArray: [String]?,
                      bbWeight: Int?,
                      dbWeight: Int?,
                      kbWeight: Int?,
@@ -48,6 +57,7 @@ class WODRealmTable: Object {
                      date: Date?) {
         self.init()
         self.workOutArray = workOutArray ?? []
+        self.repsArray = repsArray ?? []
         self.bbWeight = bbWeight
         self.dbWeight = dbWeight
         self.kbWeight = kbWeight

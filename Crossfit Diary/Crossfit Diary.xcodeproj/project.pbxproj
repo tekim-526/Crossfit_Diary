@@ -19,6 +19,7 @@
 		932B83BA28D2E81C00EAF221 /* WorkOutList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83B928D2E81C00EAF221 /* WorkOutList.swift */; };
 		932B83BC28D2F41400EAF221 /* ModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83BB28D2F41400EAF221 /* ModifyViewController.swift */; };
 		932B83BE28D2F42300EAF221 /* ModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83BD28D2F42300EAF221 /* ModifyView.swift */; };
+		9397458628D446B300F81DA5 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9397458528D446B300F81DA5 /* CalendarTableViewCell.swift */; };
 		93D941AB28CB129F002CDB03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AA28CB129F002CDB03 /* AppDelegate.swift */; };
 		93D941AD28CB129F002CDB03 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AC28CB129F002CDB03 /* SceneDelegate.swift */; };
 		93D941B428CB12A3002CDB03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93D941B328CB12A3002CDB03 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 		932B83B928D2E81C00EAF221 /* WorkOutList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutList.swift; sourceTree = "<group>"; };
 		932B83BB28D2F41400EAF221 /* ModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyViewController.swift; sourceTree = "<group>"; };
 		932B83BD28D2F42300EAF221 /* ModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyView.swift; sourceTree = "<group>"; };
+		9397458528D446B300F81DA5 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		93D941A728CB129F002CDB03 /* Crossfit Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crossfit Diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93D941AA28CB129F002CDB03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93D941AC28CB129F002CDB03 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				93D941CC28CB1462002CDB03 /* CalendarViewController.swift */,
+				9397458528D446B300F81DA5 /* CalendarTableViewCell.swift */,
 				93D941CE28CB1479002CDB03 /* CalendarView.swift */,
 			);
 			path = CalendarScene;
@@ -294,6 +297,7 @@
 				932B83BA28D2E81C00EAF221 /* WorkOutList.swift in Sources */,
 				932B83AA28D1B9B900EAF221 /* DateFormatter+Extension.swift in Sources */,
 				93D941AD28CB129F002CDB03 /* SceneDelegate.swift in Sources */,
+				9397458628D446B300F81DA5 /* CalendarTableViewCell.swift in Sources */,
 				93D941D128CB14B7002CDB03 /* WriteViewController.swift in Sources */,
 				932B83A828D1B17D00EAF221 /* WODRealmCRUD.swift in Sources */,
 			);

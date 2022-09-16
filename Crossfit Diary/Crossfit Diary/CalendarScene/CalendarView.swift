@@ -12,6 +12,7 @@ import FSCalendar
 class CalendarView: BaseView {
     let calendar: FSCalendar = {
         let calendar = FSCalendar()
+        calendar.locale = Locale(identifier: "ko_KR")
         calendar.appearance.headerDateFormat = "YYYY년 MM월"
         calendar.appearance.headerTitleColor = .black
         calendar.appearance.weekdayTextColor = .black
@@ -19,7 +20,7 @@ class CalendarView: BaseView {
         return calendar
     }()
     let tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.backgroundColor = .systemMint
         return tableView
     }()

@@ -9,6 +9,7 @@ import UIKit
 
 protocol SendWorkoutListDelegate {
     func getWorkoutList(list: [String])
+    func getWorkoutRepsList(list: [String])
 }
 
 class WorkOutListViewController: BaseViewController {
@@ -18,8 +19,8 @@ class WorkOutListViewController: BaseViewController {
     
     // SendData
     var delegate: SendWorkoutListDelegate!
-    var workoutList: [String] = []
-    var repsList: [String] = []
+    var workoutList: [String]!
+    var repsList: [String]!
     
     override func loadView() {
         view = workOutListView
@@ -43,6 +44,7 @@ class WorkOutListViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         delegate.getWorkoutList(list: workoutList)
+        delegate.getWorkoutRepsList(list: repsList)
     }
 }
 
@@ -105,6 +107,7 @@ extension WorkOutListViewController: UITableViewDelegate, UITableViewDataSource,
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         workoutList.append(allWorkOut[indexPath.section][indexPath.row])
+        repsList.append("0")
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText != "" {

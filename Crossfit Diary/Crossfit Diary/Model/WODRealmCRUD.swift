@@ -38,6 +38,7 @@ class WODRealmCRUD {
     
     func updateAll(task: WODRealmTable,
                    workOutArray: [String]?,
+                   repsArray: [String]?,
                    bbWeight: Int?,
                    dbWeight: Int?,
                    kbWeight: Int?,
@@ -51,6 +52,7 @@ class WODRealmCRUD {
         do {
             try localRealm.write {
                 task.workOutArray = workOutArray ?? []
+                task.repsArray = repsArray ?? []
                 task.bbWeight = bbWeight
                 task.dbWeight = dbWeight
                 task.kbWeight = kbWeight
@@ -64,5 +66,8 @@ class WODRealmCRUD {
         } catch {
             completion()
         }
+    }
+    func fetchDate(date: Date) -> Results<WODRealmTable> {
+        return localRealm.objects(WODRealmTable.self).filter("date >= %@ AND date < %@", date, Date(timeInterval: 86400, since: date))
     }
 }

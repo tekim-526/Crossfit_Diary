@@ -8,12 +8,13 @@
 import UIKit
 
 protocol SendRepsDelegate {
-    func getRepsString(reps: String?)
+    func getRepsString(reps: [String])
 }
 
 class ModifyViewController: BaseViewController {
     let modifyView = ModifyView()
-    
+    var repsList: [String]!
+    var indexPath: IndexPath!
     var delegate: SendRepsDelegate!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,9 @@ class ModifyViewController: BaseViewController {
     }
     @objc func okButtonTapped() {
         dismiss(animated: true) {
-            self.delegate.getRepsString(reps: self.modifyView.repsTextField.text)
+            self.repsList[self.indexPath.row] = self.modifyView.repsTextField.text ?? "0"
+            self.delegate.getRepsString(reps: self.repsList)
+            self.modifyView.repsTextField.text = nil
         }
     }
 }
