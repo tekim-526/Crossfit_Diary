@@ -39,12 +39,24 @@ class WriteViewController: BaseViewController {
         }
     }
     
+    var task: WODRealmTable?
+    
     override func loadView() {
         view = writeView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // writeView delegates
+        writeView.barbellTextField.delegate = self
+        writeView.dumbellTextField.delegate = self
+        writeView.kettlebellTextField.delegate = self
+        writeView.medicineBallTextField.delegate = self
+        writeView.weightedVestTextField.delegate = self
+        writeView.teamTextField.delegate = self
+        writeView.minuteTextField.delegate = self
+        
         modifyVC.delegate = self
         workoutListVC.delegate = self
         writeView.tableView.delegate = self
@@ -55,35 +67,51 @@ class WriteViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.title = DateFormatter().makeNavigationTitle(selectedDate: selectedDate)
-        makeWODString(kindOfWOD: kindOfWOD)
-        tasks = wodCRUD.fetch()
-        wodCRUD.addTask(task: WODRealmTable()) {
-            print("error")
+        print(kindOfWOD)
+        if isNew {
+            makeWODString(kindOfWOD: kindOfWOD)
+            tasks = wodCRUD.fetch()
+            wodCRUD.addTask(task: WODRealmTable()) {
+                print("error")
+            }
+            print(#function, writeView.teamLabel.isHidden)
+        } else {
+            writeView.barbellTextField.text = task?.bbWeight
+            writeView.dumbellTextField.text = task?.dbWeight
+            writeView.kettlebellTextField.text = task?.kbWeight
+            writeView.medicineBallTextField.text = task?.mbWeight
+            writeView.weightedVestTextField.text = task?.vestWeight
+            writeView.teamTextField.text = task?.peopleCount
+            writeView.minuteTextField.text = task?.rounds
+            writeView.additionalTextView.text = task?.additionalText
+            workoutList = task?.workOutArray ?? []
+            repsList = task?.repsArray ?? []
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // save data to realm
-        if workoutList != [] || writeView.additionalTextView.text != "" {
-            wodCRUD.updateAll(task: tasks.last!,
-                              workOutArray: workoutList,
-                              repsArray: repsList,
-                              bbWeight: Int(writeView.barbellTextField.text!),
-                              dbWeight: Int(writeView.dumbellTextField.text!),
-                              kbWeight: Int(writeView.kettlebellTextField.text!),
-                              mbWeight: Int(writeView.medicineBallTextField.text!),
-                              vestWeight: Int(writeView.weightedVestTextField.text!),
-                              rounds: Int(writeView.minuteTextField.text!),
-                              additionalText: writeView.additionalTextView.text,
-                              results: "",
-                              date: selectedDate ?? Date()) {
-                print("error")
+        print(isNew)
+        if isNew {
+            if workoutList != [] || writeView.additionalTextView.text != "" {
+                updateRealm(task: tasks.last!)
+            } else {
+                if isNew == true {
+                    wodCRUD.deleteTask(task: tasks.last!) {
+                        print("error")
+                    }
+                }
             }
-            
         } else {
-            wodCRUD.deleteTask(task: tasks.last!) {
-                print("error")
+            if workoutList != [] || writeView.additionalTextView.text != "" {
+                updateRealm(task: task!)
+            } else {
+                if isNew == true {
+                    wodCRUD.deleteTask(task: task!) {
+                        print("error")
+                    }
+                }
             }
         }
     }
@@ -97,7 +125,9 @@ class WriteViewController: BaseViewController {
         writeView.kettlebellTextField.text = nil
         writeView.weightedVestTextField.text = nil
         writeView.medicineBallTextField.text = nil
+        writeView.teamTextField.text = nil
         workoutList = []
+        repsList = []
     }
     
     override func setupUI() {
@@ -122,12 +152,16 @@ class WriteViewController: BaseViewController {
             writeView.kindOfWODLabel.isHidden = false
             writeView.minuteTextField.isHidden = false
             writeView.minuteLabel.isHidden = false
+            writeView.teamLabel.isHidden = false
+            writeView.teamTextField.isHidden = false
         case "For Time":
             writeView.minuteLabel.text = " Round(s) For Time"
             writeView.minuteTextField.placeholder = "n"
             writeView.minuteLabel.isHidden = false
             writeView.minuteTextField.isHidden = false
             writeView.kindOfWODLabel.isHidden = true
+            writeView.teamLabel.isHidden = false
+            writeView.teamTextField.isHidden = false
         case "EMOM":
             writeView.kindOfWODLabel.text = "EMOM"
             writeView.minuteLabel.text = "minutes"
@@ -135,17 +169,42 @@ class WriteViewController: BaseViewController {
             writeView.kindOfWODLabel.isHidden = false
             writeView.minuteTextField.isHidden = false
             writeView.minuteLabel.isHidden = false
-        default:
-            writeView.kindOfWODLabel.text = "Practice"
+            writeView.teamLabel.isHidden = true
+            writeView.teamTextField.isHidden = true
+        case "Extra":
+            writeView.kindOfWODLabel.text = "Extra"
             writeView.kindOfWODLabel.isHidden = false
             writeView.minuteTextField.isHidden = true
             writeView.minuteLabel.isHidden = true
+            writeView.teamLabel.isHidden = true
+            writeView.teamTextField.isHidden = true
+        default:
+            print("default")
+        }
+    }
+    func updateRealm(task: WODRealmTable) {
+        
+        wodCRUD.updateAll(task: task,
+                          workOutArray: workoutList,
+                          repsArray: repsList,
+                          kindOfWOD: kindOfWOD,
+                          bbWeight: writeView.barbellTextField.text!,
+                          dbWeight: writeView.dumbellTextField.text!,
+                          kbWeight: writeView.kettlebellTextField.text!,
+                          mbWeight: writeView.medicineBallTextField.text!,
+                          vestWeight: writeView.weightedVestTextField.text!,
+                          peopleCount: writeView.teamTextField.text!,
+                          rounds: writeView.minuteTextField.text!,
+                          additionalText: writeView.additionalTextView.text,
+                          results: "",
+                          date: selectedDate ?? Date()) {
+            print("error")
         }
     }
 
 }
 
-extension WriteViewController: UITableViewDelegate, UITableViewDataSource, SendWorkoutListDelegate, SendRepsDelegate {
+extension WriteViewController: UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, SendWorkoutListDelegate, SendRepsDelegate {
     // 추가된 운동의 반복 횟수 배열 -> "0"으로 초기화 되어 있음
     func getWorkoutRepsList(list: [String]) {
         self.repsList = list
@@ -176,4 +235,26 @@ extension WriteViewController: UITableViewDelegate, UITableViewDataSource, SendW
         present(modifyVC, animated: true)
     }
     
+    // MARK: - TextField Method
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    
+        if textField == writeView.teamTextField {
+            if range.location >= 1 {
+                return false
+            }
+        } else if textField == writeView.minuteTextField {
+            if range.location >= 2 {
+                return false
+            }
+        } else {
+            if range.location >= 4 {
+                return false
+            }
+        }
+        if string.isEmpty || string >= "0" && string <= "9" {
+            return true
+        }
+        return false
+    }
+
 }

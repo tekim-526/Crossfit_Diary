@@ -21,7 +21,6 @@ class CalendarView: BaseView {
     }()
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.backgroundColor = .systemMint
         return tableView
     }()
     let lineViewBetweenBarAndCalendar: UIView = {
@@ -34,7 +33,7 @@ class CalendarView: BaseView {
         view.backgroundColor = .lightGray
         return view
     }()
-    
+    var calendarHeightConstraint: Constraint?
   
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,9 +53,10 @@ class CalendarView: BaseView {
             make.height.equalTo(0.5)
         }
         calendar.snp.makeConstraints { make in
+            self.calendarHeightConstraint = make.height.equalTo(self.snp.height).multipliedBy(0.36).constraint
             make.top.equalTo(lineViewBetweenBarAndCalendar.snp.bottom)
             make.leading.trailing.equalTo(0)
-            make.height.equalTo(self.snp.height).multipliedBy(0.36)
+    
         }
         lineViewBetweenCalendarAndTableView.snp.makeConstraints { make in
             make.top.equalTo(calendar.snp.bottom)

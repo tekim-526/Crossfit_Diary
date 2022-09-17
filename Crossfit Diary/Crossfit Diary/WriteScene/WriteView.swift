@@ -31,6 +31,7 @@ class WriteView: BaseView {
     let teamTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "n"
+        tf.keyboardType = .numberPad
         tf.font = .systemFont(ofSize: 16, weight: .bold)
         return tf
     }()
@@ -47,10 +48,8 @@ class WriteView: BaseView {
         stackView.spacing = 0
         stackView.addArrangedSubview(teamLabel)
         stackView.addArrangedSubview(teamTextField)
-        
         return stackView
     }()
-    
     
     // kind of WOD StackView
     let kindOfWODLabel: UILabel = {
@@ -64,6 +63,7 @@ class WriteView: BaseView {
         let tf = UITextField()
         tf.placeholder = "min"
         tf.textAlignment = .center
+        tf.keyboardType = .numberPad
         tf.font = .systemFont(ofSize: 16, weight: .bold)
         return tf
     }()
@@ -89,7 +89,7 @@ class WriteView: BaseView {
     let additionalTextView: UITextView = {
         let tv = UITextView()
         tv.textAlignment = .center
-    
+        tv.resignFirstResponder()
         tv.textContainer.maximumNumberOfLines = 3
         tv.font = .systemFont(ofSize: 16, weight: .bold)
         return tv
@@ -98,7 +98,6 @@ class WriteView: BaseView {
     // tableView
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.backgroundColor = .systemMint
         return tableView
     }()
     
@@ -127,6 +126,7 @@ class WriteView: BaseView {
         constraintsBetweenTfAndLabel(tf: kettlebellTextField, label: kettlebellLabel, safeArea, dumbellLabel.snp.trailing, topPadding: topPadding, tfHeight: tfHeight, labelHeight: labelHeight)
         constraintsBetweenTfAndLabel(tf: medicineBallTextField, label: medicineBallLabel, safeArea, kettlebellLabel.snp.trailing, topPadding: topPadding, tfHeight: tfHeight, labelHeight: labelHeight)
         constraintsBetweenTfAndLabel(tf: weightedVestTextField, label: weightedVestLabel, safeArea, medicineBallLabel.snp.trailing, topPadding: topPadding, tfHeight: tfHeight, labelHeight: labelHeight)
+        
         teamStackView.snp.makeConstraints { make in
             make.top.equalTo(kettlebellLabel.snp.bottom).offset(4)
             make.centerX.equalTo(self.snp.centerX)
@@ -185,6 +185,7 @@ extension UITextField {
         tf.textColor = .black
         tf.attributedPlaceholder = NSAttributedString(string: "--", attributes: [NSAttributedString.Key.foregroundColor : UIColor.black])
         tf.textAlignment = .center
+        tf.keyboardType = .numberPad
         return tf
     }
 }

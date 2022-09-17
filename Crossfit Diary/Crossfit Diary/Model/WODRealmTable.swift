@@ -29,13 +29,14 @@ class WODRealmTable: Object {
             reps.append(objectsIn: newValue)
         }
     }
-    @Persisted var bbWeight: Int?
-    @Persisted var dbWeight: Int?
-    @Persisted var kbWeight: Int?
-    @Persisted var mbWeight: Int?
-    @Persisted var vestWeight: Int?
-    @Persisted var peopleCount: Int = 1
-    @Persisted var rounds: Int?
+    @Persisted var kindOfWOD: String?
+    @Persisted var bbWeight: String?
+    @Persisted var dbWeight: String?
+    @Persisted var kbWeight: String?
+    @Persisted var mbWeight: String?
+    @Persisted var vestWeight: String?
+    @Persisted var peopleCount: String = "1"
+    @Persisted var rounds: String?
     @Persisted var additionalText: String?
 
     @Persisted var date: Date? = Date()
@@ -46,23 +47,27 @@ class WODRealmTable: Object {
     
     convenience init(workOutArray: [String]?,
                      repsArray: [String]?,
-                     bbWeight: Int?,
-                     dbWeight: Int?,
-                     kbWeight: Int?,
-                     mbWeight: Int?,
-                     vestWeight: Int?,
-                     rounds: Int?,
+                     kindOfWOD: String?,
+                     bbWeight: String?,
+                     dbWeight: String?,
+                     kbWeight: String?,
+                     mbWeight: String?,
+                     vestWeight: String?,
+                     peopleCount: String,
+                     rounds: String?,
                      additionalText: String?,
                      results: String?,
                      date: Date?) {
         self.init()
         self.workOutArray = workOutArray ?? []
         self.repsArray = repsArray ?? []
+        self.kindOfWOD = kindOfWOD
         self.bbWeight = bbWeight
         self.dbWeight = dbWeight
         self.kbWeight = kbWeight
         self.mbWeight = mbWeight
         self.vestWeight = vestWeight
+        self.peopleCount = peopleCount
         self.rounds = rounds
         self.additionalText = additionalText
         self.results = results

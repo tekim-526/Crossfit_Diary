@@ -39,12 +39,14 @@ class WODRealmCRUD {
     func updateAll(task: WODRealmTable,
                    workOutArray: [String]?,
                    repsArray: [String]?,
-                   bbWeight: Int?,
-                   dbWeight: Int?,
-                   kbWeight: Int?,
-                   mbWeight: Int?,
-                   vestWeight: Int?,
-                   rounds: Int?,
+                   kindOfWOD: String?,
+                   bbWeight: String?,
+                   dbWeight: String?,
+                   kbWeight: String?,
+                   mbWeight: String?,
+                   vestWeight: String?,
+                   peopleCount: String,
+                   rounds: String?,
                    additionalText: String?,
                    results: String?,
                    date: Date?,
@@ -53,11 +55,13 @@ class WODRealmCRUD {
             try localRealm.write {
                 task.workOutArray = workOutArray ?? []
                 task.repsArray = repsArray ?? []
+                task.kindOfWOD = kindOfWOD
                 task.bbWeight = bbWeight
                 task.dbWeight = dbWeight
                 task.kbWeight = kbWeight
                 task.mbWeight = mbWeight
                 task.vestWeight = vestWeight
+                task.peopleCount = peopleCount
                 task.rounds = rounds
                 task.additionalText = additionalText
                 task.results = results
