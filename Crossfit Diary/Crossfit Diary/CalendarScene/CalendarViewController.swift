@@ -13,7 +13,8 @@ class CalendarViewController: BaseViewController {
     let calendarView = CalendarView()
     let writeVC = WriteViewController()
     let wodCRUD = WODRealmCRUD()
-    var selectedDate: Date = Date()
+    var selectedDate: Date?
+    
     private var tasks: Results<WODRealmTable>! {
         didSet {
             calendarView.tableView.reloadData()
@@ -23,11 +24,10 @@ class CalendarViewController: BaseViewController {
     
     override func loadView() {
         view = calendarView
-        
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // SwipeGesture
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeEvent(_:)))
         swipeUp.direction = .up
@@ -44,11 +44,12 @@ class CalendarViewController: BaseViewController {
         calendarView.calendar.dataSource = self
         calendarView.tableView.register(CalendarTableViewCell.self, forCellReuseIdentifier: "CalendarTableViewCell")
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()
-        tasks = wodCRUD.fetchDate(date: calendarView.calendar.today!)
-        
+        calendarView.calendar.reloadData()
+        tasks = wodCRUD.fetchDate(date: selectedDate ?? calendarView.calendar.today!)
     }
     override func setupUI() {
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil)
@@ -116,6 +117,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UITa
             self.wodCRUD.deleteTask(task: self.tasks[indexPath.section]) {
                 print("error")
             }
+            self.calendarView.calendar.reloadData()
             tableView.reloadData()
         }
         action.image = UIImage(systemName: "trash.fill")
@@ -139,7 +141,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UITa
         if calendarView.calendar.selectedDate != nil {
             writeVC.selectedDate = date
             self.selectedDate = date
-            tasks = wodCRUD.fetchDate(date: selectedDate)
+            tasks = wodCRUD.fetchDate(date: selectedDate ?? calendarView.calendar.today!)
         } else {
             writeVC.selectedDate = Date()
         }
@@ -151,9 +153,16 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UITa
         } else if calendarView.calendar.scope == .month {
             calendarView.calendarHeightConstraint?.update(offset: 0)
         }
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.3) {
             self.calendarView.layoutIfNeeded()
         }
+    }
+    
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        if wodCRUD.fetchDate(date: date).isEmpty {
+            return 0
+        }
+        return 1
     }
     
     // CalendarTableView List - Make Text

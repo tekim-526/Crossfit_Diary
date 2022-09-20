@@ -56,6 +56,7 @@ class WriteViewController: BaseViewController {
         writeView.weightedVestTextField.delegate = self
         writeView.teamTextField.delegate = self
         writeView.minuteTextField.delegate = self
+        writeView.additionalTextView.delegate = self
         
         modifyVC.delegate = self
         workoutListVC.delegate = self
@@ -67,14 +68,9 @@ class WriteViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.title = DateFormatter().makeNavigationTitle(selectedDate: selectedDate)
-        print(kindOfWOD)
+        writeView.additionalTextView.resignFirstResponder()
         if isNew {
             makeWODString(kindOfWOD: kindOfWOD)
-            tasks = wodCRUD.fetch()
-            wodCRUD.addTask(task: WODRealmTable()) {
-                print("error")
-            }
-            print(#function, writeView.teamLabel.isHidden)
         } else {
             writeView.barbellTextField.text = task?.bbWeight
             writeView.dumbellTextField.text = task?.dbWeight
@@ -92,25 +88,24 @@ class WriteViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // save data to realm
-        print(isNew)
         if isNew {
-            if workoutList != [] || writeView.additionalTextView.text != "" {
+            tasks = wodCRUD.fetch()
+            wodCRUD.addTask(task: WODRealmTable()) {
+                print("error")
+            }
+            if workoutList != [] || !writeView.additionalTextView.text.isEmpty {
                 updateRealm(task: tasks.last!)
             } else {
-                if isNew == true {
-                    wodCRUD.deleteTask(task: tasks.last!) {
-                        print("error")
-                    }
+                wodCRUD.deleteTask(task: tasks.last!) {
+                    print("error")
                 }
             }
         } else {
-            if workoutList != [] || writeView.additionalTextView.text != "" {
+            if workoutList != [] || !writeView.additionalTextView.text.isEmpty {
                 updateRealm(task: task!)
             } else {
-                if isNew == true {
-                    wodCRUD.deleteTask(task: task!) {
-                        print("error")
-                    }
+                wodCRUD.deleteTask(task: task!) {
+                    print("error")
                 }
             }
         }
@@ -126,6 +121,7 @@ class WriteViewController: BaseViewController {
         writeView.weightedVestTextField.text = nil
         writeView.medicineBallTextField.text = nil
         writeView.teamTextField.text = nil
+        writeView.additionalTextView.text = nil
         workoutList = []
         repsList = []
     }
@@ -196,7 +192,6 @@ class WriteViewController: BaseViewController {
                           peopleCount: writeView.teamTextField.text!,
                           rounds: writeView.minuteTextField.text!,
                           additionalText: writeView.additionalTextView.text,
-                          results: "",
                           date: selectedDate ?? Date()) {
             print("error")
         }
@@ -204,7 +199,7 @@ class WriteViewController: BaseViewController {
 
 }
 
-extension WriteViewController: UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, SendWorkoutListDelegate, SendRepsDelegate {
+extension WriteViewController: UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, SendWorkoutListDelegate, SendRepsDelegate {
     // 추가된 운동의 반복 횟수 배열 -> "0"으로 초기화 되어 있음
     func getWorkoutRepsList(list: [String]) {
         self.repsList = list
@@ -224,8 +219,13 @@ extension WriteViewController: UITableViewDelegate, UITableViewDataSource, UITex
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "WorkOutListTableViewCell", for: indexPath) as? WorkOutListTableViewCell else { return UITableViewCell() }
+       
+        if repsList[indexPath.row] == "" || repsList[indexPath.row] == "0" {
+            cell.titleLabel.text = workoutList[indexPath.row]
+        } else {
+            cell.titleLabel.text = repsList[indexPath.row] + " " + workoutList[indexPath.row]
+        }
         
-        cell.titleLabel.text = repsList[indexPath.row] == "0" ? workoutList[indexPath.row] : repsList[indexPath.row] + " " + workoutList[indexPath.row]
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -256,5 +256,17 @@ extension WriteViewController: UITableViewDelegate, UITableViewDataSource, UITex
         }
         return false
     }
-
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        var cnt = 0
+        for i in textView.text {
+            if i == "\n" { cnt += 1 }
+        }
+        if cnt == 1 && text == "\n" {
+            return false
+        }
+        return true
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
 }

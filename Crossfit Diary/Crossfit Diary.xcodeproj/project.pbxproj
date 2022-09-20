@@ -19,6 +19,12 @@
 		932B83BA28D2E81C00EAF221 /* WorkOutList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83B928D2E81C00EAF221 /* WorkOutList.swift */; };
 		932B83BC28D2F41400EAF221 /* ModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83BB28D2F41400EAF221 /* ModifyViewController.swift */; };
 		932B83BE28D2F42300EAF221 /* ModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83BD28D2F42300EAF221 /* ModifyView.swift */; };
+		93333C760EDC28331BCD8463 /* Pods_Crossfit_Diary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 078181CAD74CA8352254757D /* Pods_Crossfit_Diary.framework */; };
+		9374377328D97D6800D67C12 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374377228D97D6800D67C12 /* APIKey.swift */; };
+		9374377528D97DB400D67C12 /* NaverSearchAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374377428D97DB400D67C12 /* NaverSearchAPIManager.swift */; };
+		9374377828D97DFF00D67C12 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9374377728D97DFF00D67C12 /* Alamofire */; };
+		9374377B28D97E1300D67C12 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 9374377A28D97E1300D67C12 /* SwiftyJSON */; };
+		9374378028D99FEF00D67C12 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374377F28D99FEF00D67C12 /* MapView.swift */; };
 		9397458628D446B300F81DA5 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9397458528D446B300F81DA5 /* CalendarTableViewCell.swift */; };
 		93D941AB28CB129F002CDB03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AA28CB129F002CDB03 /* AppDelegate.swift */; };
 		93D941AD28CB129F002CDB03 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AC28CB129F002CDB03 /* SceneDelegate.swift */; };
@@ -29,7 +35,6 @@
 		93D941D128CB14B7002CDB03 /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941D028CB14B7002CDB03 /* WriteViewController.swift */; };
 		93D941D328CB14C8002CDB03 /* WriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941D228CB14C8002CDB03 /* WriteView.swift */; };
 		93D941D528CB14D5002CDB03 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941D428CB14D5002CDB03 /* MapViewController.swift */; };
-		93D941D728CB14DB002CDB03 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941D628CB14DB002CDB03 /* MapView.swift */; };
 		93D941DD28CB1E33002CDB03 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941DC28CB1E33002CDB03 /* TabBarController.swift */; };
 		93D941E028CB1F72002CDB03 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 93D941DF28CB1F72002CDB03 /* SnapKit */; };
 		93D941E328CB1F9C002CDB03 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 93D941E228CB1F9C002CDB03 /* Realm */; };
@@ -39,6 +44,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		078181CAD74CA8352254757D /* Pods_Crossfit_Diary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Crossfit_Diary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C1D94B4648AFEF3AC1ECC18 /* Pods-Crossfit Diary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Crossfit Diary.debug.xcconfig"; path = "Target Support Files/Pods-Crossfit Diary/Pods-Crossfit Diary.debug.xcconfig"; sourceTree = "<group>"; };
+		6BA27EEFE1299CF16BB157A4 /* Pods-Crossfit Diary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Crossfit Diary.release.xcconfig"; path = "Target Support Files/Pods-Crossfit Diary/Pods-Crossfit Diary.release.xcconfig"; sourceTree = "<group>"; };
 		9323D1F528D09AA200659885 /* WorkOutListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutListViewController.swift; sourceTree = "<group>"; };
 		9323D1F728D09AB000659885 /* WorkOutListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutListView.swift; sourceTree = "<group>"; };
 		9323D1F928D0A56B00659885 /* ExerciseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseModel.swift; sourceTree = "<group>"; };
@@ -51,6 +59,9 @@
 		932B83B928D2E81C00EAF221 /* WorkOutList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutList.swift; sourceTree = "<group>"; };
 		932B83BB28D2F41400EAF221 /* ModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyViewController.swift; sourceTree = "<group>"; };
 		932B83BD28D2F42300EAF221 /* ModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyView.swift; sourceTree = "<group>"; };
+		9374377228D97D6800D67C12 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		9374377428D97DB400D67C12 /* NaverSearchAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSearchAPIManager.swift; sourceTree = "<group>"; };
+		9374377F28D99FEF00D67C12 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		9397458528D446B300F81DA5 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		93D941A728CB129F002CDB03 /* Crossfit Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crossfit Diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93D941AA28CB129F002CDB03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,7 +74,6 @@
 		93D941D028CB14B7002CDB03 /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
 		93D941D228CB14C8002CDB03 /* WriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteView.swift; sourceTree = "<group>"; };
 		93D941D428CB14D5002CDB03 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		93D941D628CB14DB002CDB03 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		93D941DC28CB1E33002CDB03 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		93D941E928CB2D1A002CDB03 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,15 +84,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				93D941E528CB1F9C002CDB03 /* RealmSwift in Frameworks */,
+				9374377B28D97E1300D67C12 /* SwiftyJSON in Frameworks */,
 				93D941E828CB1FAC002CDB03 /* FSCalendar in Frameworks */,
 				93D941E328CB1F9C002CDB03 /* Realm in Frameworks */,
+				9374377828D97DFF00D67C12 /* Alamofire in Frameworks */,
 				93D941E028CB1F72002CDB03 /* SnapKit in Frameworks */,
+				93333C760EDC28331BCD8463 /* Pods_Crossfit_Diary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6610791295C8B44CA6A871C9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				078181CAD74CA8352254757D /* Pods_Crossfit_Diary.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9323D1F428D09A7F00659885 /* WorkOutListScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,12 +123,14 @@
 			path = BaseScene;
 			sourceTree = "<group>";
 		};
-		932B83B828D2E7FE00EAF221 /* Utils */ = {
+		932B83B828D2E7FE00EAF221 /* Utils & Network */ = {
 			isa = PBXGroup;
 			children = (
 				932B83B928D2E81C00EAF221 /* WorkOutList.swift */,
+				9374377228D97D6800D67C12 /* APIKey.swift */,
+				9374377428D97DB400D67C12 /* NaverSearchAPIManager.swift */,
 			);
-			path = Utils;
+			path = "Utils & Network";
 			sourceTree = "<group>";
 		};
 		93D9419E28CB129F002CDB03 = {
@@ -115,6 +138,8 @@
 			children = (
 				93D941A928CB129F002CDB03 /* Crossfit Diary */,
 				93D941A828CB129F002CDB03 /* Products */,
+				F89D34F9F599D4E65F1ED19E /* Pods */,
+				6610791295C8B44CA6A871C9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -129,7 +154,7 @@
 		93D941A928CB129F002CDB03 /* Crossfit Diary */ = {
 			isa = PBXGroup;
 			children = (
-				932B83B828D2E7FE00EAF221 /* Utils */,
+				932B83B828D2E7FE00EAF221 /* Utils & Network */,
 				93D941C528CB138F002CDB03 /* Extensions */,
 				93D941C328CB1383002CDB03 /* Model */,
 				93D941C928CB140F002CDB03 /* CalendarScene */,
@@ -180,7 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				93D941D428CB14D5002CDB03 /* MapViewController.swift */,
-				93D941D628CB14DB002CDB03 /* MapView.swift */,
+				9374377F28D99FEF00D67C12 /* MapView.swift */,
 			);
 			path = MapScene;
 			sourceTree = "<group>";
@@ -196,6 +221,15 @@
 			path = WriteScene;
 			sourceTree = "<group>";
 		};
+		F89D34F9F599D4E65F1ED19E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3C1D94B4648AFEF3AC1ECC18 /* Pods-Crossfit Diary.debug.xcconfig */,
+				6BA27EEFE1299CF16BB157A4 /* Pods-Crossfit Diary.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -203,6 +237,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 93D941BB28CB12A3002CDB03 /* Build configuration list for PBXNativeTarget "Crossfit Diary" */;
 			buildPhases = (
+				C5E7EBF1E6D836B71E6E3937 /* [CP] Check Pods Manifest.lock */,
 				93D941A328CB129F002CDB03 /* Sources */,
 				93D941A428CB129F002CDB03 /* Frameworks */,
 				93D941A528CB129F002CDB03 /* Resources */,
@@ -217,6 +252,8 @@
 				93D941E228CB1F9C002CDB03 /* Realm */,
 				93D941E428CB1F9C002CDB03 /* RealmSwift */,
 				93D941E728CB1FAC002CDB03 /* FSCalendar */,
+				9374377728D97DFF00D67C12 /* Alamofire */,
+				9374377A28D97E1300D67C12 /* SwiftyJSON */,
 			);
 			productName = "Crossfit Diary";
 			productReference = 93D941A728CB129F002CDB03 /* Crossfit Diary.app */;
@@ -250,6 +287,8 @@
 				93D941DE28CB1F72002CDB03 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				93D941E128CB1F9C002CDB03 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				93D941E628CB1FAC002CDB03 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				9374377628D97DFF00D67C12 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				9374377928D97E1300D67C12 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = 93D941A828CB129F002CDB03 /* Products */;
 			projectDirPath = "";
@@ -273,13 +312,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C5E7EBF1E6D836B71E6E3937 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Crossfit Diary-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		93D941A328CB129F002CDB03 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				93D941D528CB14D5002CDB03 /* MapViewController.swift in Sources */,
-				93D941D728CB14DB002CDB03 /* MapView.swift in Sources */,
+				9374378028D99FEF00D67C12 /* MapView.swift in Sources */,
+				9374377328D97D6800D67C12 /* APIKey.swift in Sources */,
 				932B83BE28D2F42300EAF221 /* ModifyView.swift in Sources */,
 				93D941DD28CB1E33002CDB03 /* TabBarController.swift in Sources */,
 				932B83B528D1C30C00EAF221 /* BaseView.swift in Sources */,
@@ -298,6 +363,7 @@
 				932B83AA28D1B9B900EAF221 /* DateFormatter+Extension.swift in Sources */,
 				93D941AD28CB129F002CDB03 /* SceneDelegate.swift in Sources */,
 				9397458628D446B300F81DA5 /* CalendarTableViewCell.swift in Sources */,
+				9374377528D97DB400D67C12 /* NaverSearchAPIManager.swift in Sources */,
 				93D941D128CB14B7002CDB03 /* WriteViewController.swift in Sources */,
 				932B83A828D1B17D00EAF221 /* WODRealmCRUD.swift in Sources */,
 			);
@@ -433,6 +499,7 @@
 		};
 		93D941BC28CB12A3002CDB03 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C1D94B4648AFEF3AC1ECC18 /* Pods-Crossfit Diary.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -462,6 +529,7 @@
 		};
 		93D941BD28CB12A3002CDB03 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BA27EEFE1299CF16BB157A4 /* Pods-Crossfit Diary.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -513,6 +581,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9374377628D97DFF00D67C12 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		9374377928D97E1300D67C12 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		93D941DE28CB1F72002CDB03 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -540,6 +624,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9374377728D97DFF00D67C12 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9374377628D97DFF00D67C12 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		9374377A28D97E1300D67C12 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9374377928D97E1300D67C12 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
 		93D941DF28CB1F72002CDB03 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 93D941DE28CB1F72002CDB03 /* XCRemoteSwiftPackageReference "SnapKit" */;

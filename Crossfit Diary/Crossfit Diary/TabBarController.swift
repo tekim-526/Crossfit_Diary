@@ -20,6 +20,7 @@ class TabBarController: UITabBarController {
         calendarVC.tabBarItem = UITabBarItem(title: "calendar", image: UIImage(systemName: "calendar"), selectedImage: nil)
         mapVC.tabBarItem = UITabBarItem(title: "Boxes", image: UIImage(systemName: "mappin.and.ellipse"), selectedImage: nil)
         let calendarNav = UINavigationController(rootViewController: calendarVC)
+        self.tabBar.backgroundColor = .systemBackground
         viewControllers = [calendarNav, mapVC]
     }
 }

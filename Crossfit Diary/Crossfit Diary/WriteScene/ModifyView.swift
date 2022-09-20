@@ -21,6 +21,7 @@ class ModifyView: BaseView {
         tf.font = .systemFont(ofSize: 16, weight: .black)
         tf.textAlignment = .center
         tf.placeholder = "횟수를 입력해 주세요"
+        tf.keyboardType = .numberPad
         return tf
     }()
     

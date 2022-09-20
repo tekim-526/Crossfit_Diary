@@ -18,6 +18,11 @@ class ModifyViewController: BaseViewController {
     var delegate: SendRepsDelegate!
     override func viewDidLoad() {
         super.viewDidLoad()
+        modifyView.repsTextField.delegate = self
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        modifyView.repsTextField.becomeFirstResponder()
     }
     override func setupUI() {
         view.addSubview(modifyView)
@@ -38,5 +43,18 @@ class ModifyViewController: BaseViewController {
             self.delegate.getRepsString(reps: self.repsList)
             self.modifyView.repsTextField.text = nil
         }
+    }
+}
+extension ModifyViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        if range.location >= 3 {
+            return false
+        }
+        
+        if string.isEmpty || string >= "0" && string <= "9" {
+            return true
+        }
+        return false
     }
 }

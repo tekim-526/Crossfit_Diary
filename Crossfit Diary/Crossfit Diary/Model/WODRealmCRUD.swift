@@ -48,7 +48,6 @@ class WODRealmCRUD {
                    peopleCount: String,
                    rounds: String?,
                    additionalText: String?,
-                   results: String?,
                    date: Date?,
                    completion: () -> Void) {
         do {
@@ -64,7 +63,6 @@ class WODRealmCRUD {
                 task.peopleCount = peopleCount
                 task.rounds = rounds
                 task.additionalText = additionalText
-                task.results = results
                 task.date = date
             }
         } catch {

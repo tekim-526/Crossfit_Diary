@@ -89,8 +89,9 @@ class WriteView: BaseView {
     let additionalTextView: UITextView = {
         let tv = UITextView()
         tv.textAlignment = .center
-        tv.resignFirstResponder()
-        tv.textContainer.maximumNumberOfLines = 3
+        tv.layer.borderWidth = 1.0
+        tv.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.7).cgColor
+        tv.textContainerInset = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
         tv.font = .systemFont(ofSize: 16, weight: .bold)
         return tv
     }()
@@ -142,7 +143,7 @@ class WriteView: BaseView {
         additionalTextView.snp.makeConstraints { make in
             make.top.equalTo(kindOfWODStackView.snp.bottom).offset(4)
             make.centerX.equalTo(self.snp.centerX)
-            make.width.equalTo(self.snp.width).multipliedBy(0.7)
+            make.width.equalTo(self.snp.width).multipliedBy(0.9)
             make.height.equalTo(68)
         }
         tableView.snp.makeConstraints { make in
@@ -183,7 +184,7 @@ extension UITextField {
         tf.borderStyle = .none
         tf.font = UIFont.systemFont(ofSize: 18, weight: .black)
         tf.textColor = .black
-        tf.attributedPlaceholder = NSAttributedString(string: "--", attributes: [NSAttributedString.Key.foregroundColor : UIColor.black])
+        tf.attributedPlaceholder = NSAttributedString(string: "--", attributes: [NSAttributedString.Key.foregroundColor : UIColor.label])
         tf.textAlignment = .center
         tf.keyboardType = .numberPad
         return tf

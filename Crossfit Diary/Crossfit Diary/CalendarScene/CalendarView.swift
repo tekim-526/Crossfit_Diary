@@ -14,13 +14,16 @@ class CalendarView: BaseView {
         let calendar = FSCalendar()
         calendar.locale = Locale(identifier: "ko_KR")
         calendar.appearance.headerDateFormat = "YYYY년 MM월"
-        calendar.appearance.headerTitleColor = .black
-        calendar.appearance.weekdayTextColor = .black
+        calendar.appearance.headerTitleColor = .label
+        calendar.appearance.headerTitleFont = .systemFont(ofSize: 16, weight: .semibold)
+        calendar.appearance.weekdayTextColor = .label
+        calendar.appearance.titleDefaultColor = .label
         calendar.appearance.headerTitleAlignment = .center
         return calendar
     }()
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        
         return tableView
     }()
     let lineViewBetweenBarAndCalendar: UIView = {
