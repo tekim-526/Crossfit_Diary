@@ -35,7 +35,6 @@ class WorkOutListViewController: BaseViewController {
         workOutListView.tableView.dataSource = self
         workOutListView.searchbar.delegate = self
         workOutListView.tableView.register(WorkOutListTableViewCell.self, forCellReuseIdentifier: "WorkOutListTableViewCell")
-        dump(allWorkOut)
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -41,7 +41,6 @@ class WODRealmTable: Object {
 
     @Persisted var date: Date? = Date()
 
-    
     @Persisted(primaryKey: true) var objectId : ObjectId
     
     convenience init(workOutArray: [String]?,
@@ -69,6 +68,6 @@ class WODRealmTable: Object {
         self.rounds = rounds
         self.additionalText = additionalText
         self.date = date
+        
     }
 }
-

@@ -14,6 +14,21 @@ class MapView: BaseView {
         return map
     }()
     
+    let annotationDetailLabel: UILabel = {
+        let label = UILabel()
+        label.isHidden = true
+        
+        label.backgroundColor = .systemBackground
+        label.textAlignment = .center
+
+        label.layer.cornerRadius = 20
+        label.numberOfLines = 3
+        label.layer.shadowColor = UIColor.black.cgColor
+        label.layer.shadowOffset = CGSize(width: 0, height: 4)
+        label.layer.shadowRadius = 3
+        label.layer.shadowOpacity = 0.2
+        return label
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,11 +39,18 @@ class MapView: BaseView {
     }
     override func setupUI() {
         self.backgroundColor = .systemBackground
-        self.addSubview(map)
+        [map, annotationDetailLabel].forEach { self.addSubview($0) }
     }
     override func makeConstraints() {
+        
         map.snp.makeConstraints { make in
             make.edges.equalTo(self.safeAreaLayoutGuide)
+        }
+        annotationDetailLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(12)
+            make.leading.equalTo(12)
+            make.width.equalTo(self.snp.width).multipliedBy(0.5)
+            make.height.equalTo(self.snp.height).multipliedBy(0.1)
         }
     }
 }

@@ -14,6 +14,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
     var mapView = MapView()
     var locationManager = CLLocationManager()
     var authStatus: CLAuthorizationStatus!
+    var placeList: [Place]!
     
     override func loadView() {
         view = mapView
@@ -25,13 +26,15 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
         locationManager.delegate = self
         checkDeviceLocationAuth()
         mapView.map.showsUserLocation = true
+    
         mapView.map.setUserTrackingMode(.follow, animated: true)
+
     }
     
     // MARK: - Methods
     func mapViewSetUp(center: CLLocationCoordinate2D) {
 
-        let region = MKCoordinateRegion(center: center, latitudinalMeters: 1500, longitudinalMeters: 1500)
+        let region = MKCoordinateRegion(center: center, latitudinalMeters: 3000, longitudinalMeters: 300)
         mapView.map.setRegion(region, animated: true)
     }
     
@@ -84,18 +87,18 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
         alert.addAction(cancel)
         present(alert, animated: true)
     }
-
-    func makeAnnotation(longitudeX: String, latitudeY: String, placeName: String) {
+    
+    func makeAnnotation(place: Place) {
         let annotation = MKPointAnnotation()
-        let x = CLLocationDegrees(floatLiteral: Double(longitudeX) ?? 0.0)
-        let y = CLLocationDegrees(floatLiteral: Double(latitudeY) ?? 0.0)
+        let x = CLLocationDegrees(floatLiteral: Double(place.longitudeX) ?? 0.0)
+        let y = CLLocationDegrees(floatLiteral: Double(place.latitudeY) ?? 0.0)
         annotation.coordinate = CLLocationCoordinate2DMake(y, x)
-        annotation.title = placeName
+        annotation.title = place.placeName
         
         mapView.map.addAnnotation(annotation)
     }
-    
 }
+
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
 //       locationManager.stopUpdatingLocation()
@@ -109,8 +112,10 @@ extension MapViewController {
             mapViewSetUp(center: coordinate)
             KakaoSearchAPIManager.kakaoSearchPlace(searchName: "크로스핏", x: coordinate.longitude, y: coordinate.latitude) { placeList in
                 for i in 0...placeList.count - 1 {
-                    self.makeAnnotation(longitudeX: placeList[i].longitudeX, latitudeY: placeList[i].latitudeY, placeName: placeList[i].placeName)
+                    self.makeAnnotation(place: placeList[i])
                 }
+                self.placeList = placeList
+                
             }
             
         }
@@ -121,5 +126,34 @@ extension MapViewController {
     }
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkDeviceLocationAuth()
+    }
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if view.annotation?.title == "My Location" {
+            self.mapView.annotationDetailLabel.isHidden = true
+            return
+        }
+        for place in placeList {
+            if let annotation = view.annotation, place.placeName == annotation.title  {
+                makeAttributedLabel(label: self.mapView.annotationDetailLabel, first: place.placeName, second: place.roadAdressName, third: place.phone)
+            }
+        }
+        self.mapView.annotationDetailLabel.isHidden = false
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        self.mapView.annotationDetailLabel.isHidden = true
+            
+        
+    }
+    
+    func makeAttributedLabel(label: UILabel, first: String, second: String, third: String?) {
+        let attributedTitle = NSMutableAttributedString(string: first + "\n", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: .bold)])
+        attributedTitle.append(NSAttributedString(string: second + "\n", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13, weight: .regular)]))
+        guard let third else {
+            label.attributedText = attributedTitle
+            return
+        }
+        attributedTitle.append(NSAttributedString(string: third, attributes: [NSAttributedString.Key.foregroundColor : UIColor.tintColor, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13, weight: .regular)]))
+        label.attributedText = attributedTitle
     }
 }

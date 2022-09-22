@@ -24,7 +24,7 @@ struct ExerciseModel {
     // MARK: - Gymnastics
     var gymnastics: [String]
     var bar = ["Banded Pull Ups", "Chest To Bar Pull Ups", "Muscle Ups", "Pull Ups", "Strict Banded Pull Ups", "Strict Chest To Bar Pull Ups", "Strict Muscle Ups", "Strict Pull Ups", "Toes To Bar"]
-    var box = ["Box Jump Overs", "Box Jump(Step Down)", "Box Step Ups", "Burpee Box Jump Overs"]
+    var box = ["Box Jumps","Box Jump Overs", "Box Jump(Step Down)", "Box Step Ups", "Burpee Box Jump Overs"]
     var handstand = ["Handstand Hold", "Handstand Push Ups", "Handstand Walk", "Strict Handstand Push Ups"]
     var ring = ["Ring Muscle Ups", "Ring Dips", "Ring Rows", "Toes To Ring"]
     var jumpRope = ["Single Unders", "Double Unders", "Triple Unders"]

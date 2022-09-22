@@ -12,10 +12,11 @@ import SwiftyJSON
 import CoreLocation
 
 struct Place{
-        let placeName: String
-        let roadAdressName: String
-        let longitudeX: String
-        let latitudeY: String
+    let placeName: String
+    let roadAdressName: String
+    let longitudeX: String
+    let latitudeY: String
+    let phone: String?
     }
     
 struct KakaoSearchAPIManager {
@@ -34,11 +35,13 @@ struct KakaoSearchAPIManager {
                     let longitudeX = json["documents"][i]["x"].stringValue
                     let latitiudeY = json["documents"][i]["y"].stringValue
                     let roadAdressName = json["documents"][i]["road_address_name"].stringValue
-                    placeList.append(Place(placeName: placeName, roadAdressName: roadAdressName, longitudeX: longitudeX, latitudeY: latitiudeY))
+                    let phone = json["documents"][i]["phone"].string
+                    placeList.append(Place(placeName: placeName, roadAdressName: roadAdressName, longitudeX: longitudeX, latitudeY: latitiudeY, phone: phone))
                 }
-                
+                print("JSON\n",json)
                 completionHandler(placeList)
             case .failure(let error):
+                print("data load failed")
                 print(error)
             }
         }

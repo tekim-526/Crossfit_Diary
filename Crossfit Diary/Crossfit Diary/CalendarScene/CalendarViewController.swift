@@ -66,7 +66,7 @@ class CalendarViewController: BaseViewController {
         let uiMenu = UIMenu(title: "운동종류", image: nil, identifier: nil, options: .displayInline, children: makePopUpMenu())
         rightBarButtonItem.menu = uiMenu
         
-        navigationItem.title = "크다"
+        navigationItem.title = "WODO"
         navigationItem.rightBarButtonItem = rightBarButtonItem
         
     }
@@ -85,8 +85,8 @@ class CalendarViewController: BaseViewController {
     func sendNoti(notificationCenter: UNUserNotificationCenter) {
         notificationCenter.removeAllPendingNotificationRequests()
         let content = UNMutableNotificationContent()
-        content.title = "오늘 운동하셨나요?"
-        
+        content.title = "와두"
+        content.subtitle = "오늘 운동하셨나요?"
         var dateComponents = DateComponents()
         dateComponents.hour = 23
         dateComponents.minute = 30
