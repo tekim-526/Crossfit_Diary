@@ -88,8 +88,8 @@ class CalendarViewController: BaseViewController {
         content.title = "와두"
         content.subtitle = "오늘 운동하셨나요?"
         var dateComponents = DateComponents()
-        dateComponents.hour = 23
-        dateComponents.minute = 30
+        dateComponents.hour = 22
+        dateComponents.minute = 00
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         notificationCenter.add(request) { (error) in
