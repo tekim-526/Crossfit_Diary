@@ -21,7 +21,7 @@ struct Place{
 struct KakaoSearchAPIManager {
     
     static func kakaoSearchPlace(searchName: String, x: CLLocationDegrees, y: CLLocationDegrees, completionHandler: @escaping ([Place]) -> Void) {
-        let headers: HTTPHeaders = ["Authorization": "KakaoAK d8fb7f244531306565821b4e53ac63da"]
+        let headers: HTTPHeaders = ["Authorization": "KakaoAK \(APIKey.kakaoAK)"]
         let parameters: [String: Any] = ["query": searchName, "page": 1, "size": 15]
         
         AF.request("https://dapi.kakao.com/v2/local/search/keyword.json?y=\(y)&x=\(x)&radius=3000", method: .get, parameters: parameters, headers: headers).responseData { response in

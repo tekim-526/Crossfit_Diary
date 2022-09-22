@@ -16,15 +16,15 @@
 		932B83AA28D1B9B900EAF221 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83A928D1B9B900EAF221 /* DateFormatter+Extension.swift */; };
 		932B83B528D1C30C00EAF221 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83B428D1C30C00EAF221 /* BaseView.swift */; };
 		932B83B728D1C31600EAF221 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83B628D1C31600EAF221 /* BaseViewController.swift */; };
-		932B83BA28D2E81C00EAF221 /* WorkOutList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83B928D2E81C00EAF221 /* WorkOutList.swift */; };
 		932B83BC28D2F41400EAF221 /* ModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83BB28D2F41400EAF221 /* ModifyViewController.swift */; };
 		932B83BE28D2F42300EAF221 /* ModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83BD28D2F42300EAF221 /* ModifyView.swift */; };
 		93333C760EDC28331BCD8463 /* Pods_Crossfit_Diary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 078181CAD74CA8352254757D /* Pods_Crossfit_Diary.framework */; };
 		9374377328D97D6800D67C12 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374377228D97D6800D67C12 /* APIKey.swift */; };
-		9374377528D97DB400D67C12 /* NaverSearchAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374377428D97DB400D67C12 /* NaverSearchAPIManager.swift */; };
+		9374377528D97DB400D67C12 /* KakaoSearchAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374377428D97DB400D67C12 /* KakaoSearchAPIManager.swift */; };
 		9374377828D97DFF00D67C12 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9374377728D97DFF00D67C12 /* Alamofire */; };
 		9374377B28D97E1300D67C12 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 9374377A28D97E1300D67C12 /* SwiftyJSON */; };
 		9374378028D99FEF00D67C12 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374377F28D99FEF00D67C12 /* MapView.swift */; };
+		9374378328DAEF6D00D67C12 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 9374378228DAEF6D00D67C12 /* Toast */; };
 		9397458628D446B300F81DA5 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9397458528D446B300F81DA5 /* CalendarTableViewCell.swift */; };
 		93D941AB28CB129F002CDB03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AA28CB129F002CDB03 /* AppDelegate.swift */; };
 		93D941AD28CB129F002CDB03 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AC28CB129F002CDB03 /* SceneDelegate.swift */; };
@@ -56,11 +56,10 @@
 		932B83A928D1B9B900EAF221 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		932B83B428D1C30C00EAF221 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		932B83B628D1C31600EAF221 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		932B83B928D2E81C00EAF221 /* WorkOutList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutList.swift; sourceTree = "<group>"; };
 		932B83BB28D2F41400EAF221 /* ModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyViewController.swift; sourceTree = "<group>"; };
 		932B83BD28D2F42300EAF221 /* ModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyView.swift; sourceTree = "<group>"; };
 		9374377228D97D6800D67C12 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
-		9374377428D97DB400D67C12 /* NaverSearchAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSearchAPIManager.swift; sourceTree = "<group>"; };
+		9374377428D97DB400D67C12 /* KakaoSearchAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSearchAPIManager.swift; sourceTree = "<group>"; };
 		9374377F28D99FEF00D67C12 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		9397458528D446B300F81DA5 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		93D941A728CB129F002CDB03 /* Crossfit Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crossfit Diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9374378328DAEF6D00D67C12 /* Toast in Frameworks */,
 				93D941E528CB1F9C002CDB03 /* RealmSwift in Frameworks */,
 				9374377B28D97E1300D67C12 /* SwiftyJSON in Frameworks */,
 				93D941E828CB1FAC002CDB03 /* FSCalendar in Frameworks */,
@@ -126,9 +126,8 @@
 		932B83B828D2E7FE00EAF221 /* Utils & Network */ = {
 			isa = PBXGroup;
 			children = (
-				932B83B928D2E81C00EAF221 /* WorkOutList.swift */,
 				9374377228D97D6800D67C12 /* APIKey.swift */,
-				9374377428D97DB400D67C12 /* NaverSearchAPIManager.swift */,
+				9374377428D97DB400D67C12 /* KakaoSearchAPIManager.swift */,
 			);
 			path = "Utils & Network";
 			sourceTree = "<group>";
@@ -254,6 +253,7 @@
 				93D941E728CB1FAC002CDB03 /* FSCalendar */,
 				9374377728D97DFF00D67C12 /* Alamofire */,
 				9374377A28D97E1300D67C12 /* SwiftyJSON */,
+				9374378228DAEF6D00D67C12 /* Toast */,
 			);
 			productName = "Crossfit Diary";
 			productReference = 93D941A728CB129F002CDB03 /* Crossfit Diary.app */;
@@ -289,6 +289,7 @@
 				93D941E628CB1FAC002CDB03 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 				9374377628D97DFF00D67C12 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				9374377928D97E1300D67C12 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				9374378128DAEF6D00D67C12 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = 93D941A828CB129F002CDB03 /* Products */;
 			projectDirPath = "";
@@ -359,11 +360,10 @@
 				9323D1F628D09AA200659885 /* WorkOutListViewController.swift in Sources */,
 				93D941CD28CB1462002CDB03 /* CalendarViewController.swift in Sources */,
 				9323D1FA28D0A56B00659885 /* ExerciseModel.swift in Sources */,
-				932B83BA28D2E81C00EAF221 /* WorkOutList.swift in Sources */,
 				932B83AA28D1B9B900EAF221 /* DateFormatter+Extension.swift in Sources */,
 				93D941AD28CB129F002CDB03 /* SceneDelegate.swift in Sources */,
 				9397458628D446B300F81DA5 /* CalendarTableViewCell.swift in Sources */,
-				9374377528D97DB400D67C12 /* NaverSearchAPIManager.swift in Sources */,
+				9374377528D97DB400D67C12 /* KakaoSearchAPIManager.swift in Sources */,
 				93D941D128CB14B7002CDB03 /* WriteViewController.swift in Sources */,
 				932B83A828D1B17D00EAF221 /* WODRealmCRUD.swift in Sources */,
 			);
@@ -508,11 +508,12 @@
 				DEVELOPMENT_TEAM = FQ63CT4A3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Crossfit Diary/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "when in use";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -538,11 +539,12 @@
 				DEVELOPMENT_TEAM = FQ63CT4A3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Crossfit Diary/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "when in use";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -597,6 +599,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		9374378128DAEF6D00D67C12 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		93D941DE28CB1F72002CDB03 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -633,6 +643,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9374377928D97E1300D67C12 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		9374378228DAEF6D00D67C12 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9374378128DAEF6D00D67C12 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
 		};
 		93D941DF28CB1F72002CDB03 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

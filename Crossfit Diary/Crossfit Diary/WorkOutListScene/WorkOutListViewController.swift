@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Toast
+
 
 protocol SendWorkoutListDelegate {
     func getWorkoutList(list: [String])
@@ -108,6 +110,7 @@ extension WorkOutListViewController: UITableViewDelegate, UITableViewDataSource,
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         workoutList.append(allWorkOut[indexPath.section][indexPath.row])
         repsList.append("0")
+        self.view.makeToast("\(allWorkOut[indexPath.section][indexPath.row]) 추가되었습니다", duration: 1.0, position: .top)
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText != "" {

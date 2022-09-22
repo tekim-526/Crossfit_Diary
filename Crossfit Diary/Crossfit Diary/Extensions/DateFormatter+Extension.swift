@@ -13,3 +13,4 @@ extension DateFormatter {
         return self.string(from: selectedDate ?? Date()) + " WOD"
     }
 }
+

@@ -11,8 +11,9 @@ import CoreLocation
 import MapKit
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate {
-    var locationManager = CLLocationManager()
     var mapView = MapView()
+    var locationManager = CLLocationManager()
+    var authStatus: CLAuthorizationStatus!
     
     override func loadView() {
         view = mapView
@@ -30,24 +31,24 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
     // MARK: - Methods
     func mapViewSetUp(center: CLLocationCoordinate2D) {
 
-        let region = MKCoordinateRegion(center: center, latitudinalMeters: 1000, longitudinalMeters: 1000)
-        
+        let region = MKCoordinateRegion(center: center, latitudinalMeters: 1500, longitudinalMeters: 1500)
         mapView.map.setRegion(region, animated: true)
     }
     
     func checkDeviceLocationAuth() {
-        let authStatus: CLAuthorizationStatus
-        if CLLocationManager.locationServicesEnabled() {
-            // 기기 위치설정이 되어 있으므로 앱 설정 체크
-            if #available(iOS 14.0, *) {
-                authStatus = locationManager.authorizationStatus
+        DispatchQueue.global().async {
+            if CLLocationManager.locationServicesEnabled() {
+                // 기기 위치설정이 되어 있으므로 앱 설정 체크
+                if #available(iOS 14.0, *) {
+                    self.authStatus = self.locationManager.authorizationStatus
+                } else {
+                    self.authStatus = CLLocationManager.authorizationStatus()
+                }
+                self.checkAppLocationAuth(authStatus: self.authStatus)
             } else {
-                authStatus = CLLocationManager.authorizationStatus()
+                self.showAlert()
+                // 기기 위치설정 안되있는 경우 -> Alert 띄우고 설정으로 유도
             }
-            checkAppLocationAuth(authStatus: authStatus)
-        } else {
-            showAlert()
-            // 기기 위치설정 안되있는 경우 -> Alert 띄우고 설정으로 유도
         }
     }
     
@@ -111,6 +112,7 @@ extension MapViewController {
                     self.makeAnnotation(longitudeX: placeList[i].longitudeX, latitudeY: placeList[i].latitudeY, placeName: placeList[i].placeName)
                 }
             }
+            
         }
         locationManager.stopUpdatingLocation()
     }

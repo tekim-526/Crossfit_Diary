@@ -8,6 +8,6 @@
 import Foundation
 
 struct APIKey {
-    static let XNaverClientId = "C3BXaAjbj39uMapzTwlx"
-    static let XNaverClientSecret = "YC45n8bEtG"
+    
+    static let kakaoAK = "d8fb7f244531306565821b4e53ac63da"
 }

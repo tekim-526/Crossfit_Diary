@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import UserNotifications
+
 import FSCalendar
 import RealmSwift
 
@@ -32,7 +34,7 @@ class CalendarViewController: BaseViewController {
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeEvent(_:)))
         swipeUp.direction = .up
         self.view.addGestureRecognizer(swipeUp)
-
+        
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(swipeEvent(_:)))
         swipeDown.direction = .down
         self.view.addGestureRecognizer(swipeDown)
@@ -43,22 +45,58 @@ class CalendarViewController: BaseViewController {
         calendarView.tableView.dataSource = self
         calendarView.calendar.dataSource = self
         calendarView.tableView.register(CalendarTableViewCell.self, forCellReuseIdentifier: "CalendarTableViewCell")
+        
+        // notification
+        let notificationCenter = UNUserNotificationCenter.current()
+        requestNotificationAuth(notificationCenter: notificationCenter)
+        sendNoti(notificationCenter: notificationCenter)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()
+        
+        
         calendarView.calendar.reloadData()
         tasks = wodCRUD.fetchDate(date: selectedDate ?? calendarView.calendar.today!)
     }
+
     override func setupUI() {
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil)
         let uiMenu = UIMenu(title: "운동종류", image: nil, identifier: nil, options: .displayInline, children: makePopUpMenu())
         rightBarButtonItem.menu = uiMenu
         
-        navigationItem.title = "크로스핏 다이어리(가제)"
+        navigationItem.title = "크다"
         navigationItem.rightBarButtonItem = rightBarButtonItem
         
+    }
+    // noti Methods
+    func requestNotificationAuth(notificationCenter: UNUserNotificationCenter) {
+        let authOptions: UNAuthorizationOptions = UNAuthorizationOptions(arrayLiteral: .badge, .alert, .sound)
+        notificationCenter.requestAuthorization(options: authOptions) { success, error in
+            if success {
+                self.sendNoti(notificationCenter: notificationCenter)
+            } else {
+                print(error)
+            }
+        }
+    }
+    
+    func sendNoti(notificationCenter: UNUserNotificationCenter) {
+        notificationCenter.removeAllPendingNotificationRequests()
+        let content = UNMutableNotificationContent()
+        content.title = "오늘 운동하셨나요?"
+        
+        var dateComponents = DateComponents()
+        dateComponents.hour = 23
+        dateComponents.minute = 30
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        notificationCenter.add(request) { (error) in
+            if error != nil {
+                // handle errors
+            }
+        }
     }
     
     func makePopUpMenu() -> [UIAction] {
@@ -128,6 +166,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UITa
         writeVC.isNew = false
         writeVC.task = tasks[indexPath.section]
         writeVC.kindOfWOD = tasks[indexPath.section].kindOfWOD
+        writeVC.view.endEditing(true)
         self.navigationController?.pushViewController(writeVC, animated: true)
     }
     

@@ -63,15 +63,17 @@ class WriteViewController: BaseViewController {
         writeView.tableView.delegate = self
         writeView.tableView.dataSource = self
         writeView.tableView.register(WorkOutListTableViewCell.self, forCellReuseIdentifier: "WorkOutListTableViewCell")
+        print(#function)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.title = DateFormatter().makeNavigationTitle(selectedDate: selectedDate)
-        writeView.additionalTextView.resignFirstResponder()
+        
         if isNew {
             makeWODString(kindOfWOD: kindOfWOD)
         } else {
+            makeWODString(kindOfWOD: kindOfWOD)
             writeView.barbellTextField.text = task?.bbWeight
             writeView.dumbellTextField.text = task?.dbWeight
             writeView.kettlebellTextField.text = task?.kbWeight
@@ -87,6 +89,7 @@ class WriteViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        view.endEditing(true)
         // save data to realm
         if isNew {
             tasks = wodCRUD.fetch()
@@ -124,6 +127,7 @@ class WriteViewController: BaseViewController {
         writeView.additionalTextView.text = nil
         workoutList = []
         repsList = []
+        
     }
     
     override func setupUI() {
@@ -196,7 +200,7 @@ class WriteViewController: BaseViewController {
             print("error")
         }
     }
-
+    
 }
 
 extension WriteViewController: UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, SendWorkoutListDelegate, SendRepsDelegate {
@@ -234,7 +238,16 @@ extension WriteViewController: UITableViewDelegate, UITableViewDataSource, UITex
         modifyVC.modifyView.workoutLabel.text = workoutList[indexPath.row]
         present(modifyVC, animated: true)
     }
-    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .destructive, title: nil) { action, view, handler in
+            self.repsList.remove(at: indexPath.row)
+            self.workoutList.remove(at: indexPath.row)
+            tableView.reloadData()
+        }
+        action.image = UIImage(systemName: "trash.fill")
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        return configuration
+    }
     // MARK: - TextField Method
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     

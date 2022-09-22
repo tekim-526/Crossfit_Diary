@@ -187,6 +187,7 @@ extension UITextField {
         tf.attributedPlaceholder = NSAttributedString(string: "--", attributes: [NSAttributedString.Key.foregroundColor : UIColor.label])
         tf.textAlignment = .center
         tf.keyboardType = .numberPad
+        tf.resignFirstResponder()
         return tf
     }
 }
