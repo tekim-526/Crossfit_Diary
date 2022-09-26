@@ -88,11 +88,8 @@ class WODRealmTable: Object {
 }
 
 class Workout: Object {
-    @Persisted var workout: String?
-    @Persisted var reps: Int
+    @Persisted var workout: String = ""
+    @Persisted var reps: Int = 0
     
-    init(workout: String?, reps: Int = 0) {
-        self.workout = workout
-        self.reps = reps
-    }
+    
 }

@@ -20,7 +20,7 @@ class WriteViewController: BaseViewController {
     var isNew: Bool = false
     var kindOfWOD: String?
     var selectedDate: Date?
-    
+    var workout: [Workout] = []
     var repsList: [String] = [] {
         didSet {
             writeView.tableView.reloadData()
@@ -77,7 +77,7 @@ class WriteViewController: BaseViewController {
             makeWODString(kindOfWOD: kindOfWOD)
             
             let itoAarr = itoaArr(bb: task?.bbWeight, db: task?.dbWeight, kb: task?.kbWeight, mb: task?.mbWeight, v: task?.vestWeight)
-            print(itoAarr)
+            
             writeView.barbellTextField.text = String(describing: itoAarr[0])
             writeView.dumbellTextField.text = String(describing: itoAarr[1])
             writeView.kettlebellTextField.text = String(describing: itoAarr[2])
@@ -88,6 +88,7 @@ class WriteViewController: BaseViewController {
             writeView.additionalTextView.text = task?.additionalText
             workoutList = task?.workOutArray ?? []
             repsList = task?.repsArray ?? []
+            workout = task?.workoutWithRepsArray ?? []
         }
     }
     func itoaArr(bb: Int?, db: Int?, kb: Int?, mb: Int?, v: Int?) -> [String] {
@@ -102,6 +103,10 @@ class WriteViewController: BaseViewController {
         super.viewWillDisappear(animated)
         view.endEditing(true)
         // save data to realm
+        for i in 0...workoutList.count - 1 {
+            let tempWorkout = Workout(value: ["workout" : workoutList[i], "reps" : Int(repsList[i]) ?? 0])
+            workout.append(tempWorkout)
+        }
         if isNew {
             tasks = wodCRUD.fetch()
             wodCRUD.addTask(task: WODRealmTable()) {
@@ -123,7 +128,6 @@ class WriteViewController: BaseViewController {
                 }
             }
         }
-        print("barbel weight", Int(writeView.barbellTextField.text!), #function)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -208,7 +212,8 @@ class WriteViewController: BaseViewController {
                           peopleCount: writeView.teamTextField.text!,
                           rounds: writeView.minuteTextField.text!,
                           additionalText: writeView.additionalTextView.text,
-                          date: selectedDate ?? Date()) {
+                          date: selectedDate ?? Date(),
+                          workoutWithRepsArray: workout) {
             showAlert(title: "WOD 업데이트중에 오류가 발생했습니다.", message: "다시 시도해 보세요.")
         }
     }

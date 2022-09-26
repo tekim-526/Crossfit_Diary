@@ -23,6 +23,7 @@ class WODRealmCRUD {
     func addTask(task: WODRealmTable, completion: () -> Void) {
         do {
             try localRealm.write {
+                
                 localRealm.add(task)
             }
         } catch {
@@ -53,8 +54,10 @@ class WODRealmCRUD {
                    rounds: String?,
                    additionalText: String?,
                    date: Date?,
+                   workoutWithRepsArray: [Workout],
                    completion: () -> Void) {
         do {
+            let workout = Workout(value: ["workout" : "123", "reps" : 0])
             try localRealm.write {
                 task.workOutArray = workOutArray ?? []
                 task.repsArray = repsArray ?? []
@@ -68,6 +71,7 @@ class WODRealmCRUD {
                 task.rounds = rounds
                 task.additionalText = additionalText
                 task.date = date
+                task.workoutWithRepsArray = workoutWithRepsArray
             }
         } catch {
             completion()
