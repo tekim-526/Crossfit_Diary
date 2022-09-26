@@ -31,7 +31,7 @@ class ModifyView: BaseView {
         view.titleLabel?.font = .systemFont(ofSize: 20, weight: .heavy)
         view.layer.cornerRadius = 15
         view.setTitleColor(.white, for: .normal)
-        view.backgroundColor = .systemOrange
+        view.backgroundColor = .mainColor
         return view
     }()
     

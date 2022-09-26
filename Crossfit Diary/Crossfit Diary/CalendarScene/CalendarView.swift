@@ -19,6 +19,11 @@ class CalendarView: BaseView {
         calendar.appearance.weekdayTextColor = .label
         calendar.appearance.titleDefaultColor = .label
         calendar.appearance.headerTitleAlignment = .center
+        calendar.appearance.selectionColor = .mainColor
+        calendar.appearance.eventDefaultColor = .brown
+        calendar.appearance.eventSelectionColor = .brown
+        calendar.appearance.todayColor = .lightGray
+        calendar.appearance.headerMinimumDissolvedAlpha = 0.0
         return calendar
     }()
     let tableView: UITableView = {
@@ -26,16 +31,12 @@ class CalendarView: BaseView {
         
         return tableView
     }()
-    let lineViewBetweenBarAndCalendar: UIView = {
-        let view = UIView()
-        view.backgroundColor = .lightGray
-        return view
-    }()
     let lineViewBetweenCalendarAndTableView: UIView = {
         let view = UIView()
         view.backgroundColor = .lightGray
         return view
     }()
+   
     var calendarHeightConstraint: Constraint?
   
     override init(frame: CGRect) {
@@ -47,17 +48,12 @@ class CalendarView: BaseView {
     }
     
     override func setupUI() {
-        [lineViewBetweenBarAndCalendar, calendar, lineViewBetweenCalendarAndTableView, tableView].forEach { self.addSubview($0) }
+        [calendar, lineViewBetweenCalendarAndTableView, tableView].forEach { self.addSubview($0) }
     }
     override func makeConstraints() {
-        lineViewBetweenBarAndCalendar.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide)
-            make.leading.trailing.equalTo(0)
-            make.height.equalTo(0.5)
-        }
         calendar.snp.makeConstraints { make in
             self.calendarHeightConstraint = make.height.equalTo(self.snp.height).multipliedBy(0.36).constraint
-            make.top.equalTo(lineViewBetweenBarAndCalendar.snp.bottom)
+            make.top.equalTo(self.safeAreaLayoutGuide)
             make.leading.trailing.equalTo(0)
     
         }
@@ -71,5 +67,6 @@ class CalendarView: BaseView {
             make.leading.trailing.equalTo(0)
             make.bottom.equalTo(self.safeAreaLayoutGuide)
         }
+        
     }
 }

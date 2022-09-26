@@ -39,12 +39,16 @@ class CalendarViewController: BaseViewController {
         swipeDown.direction = .down
         self.view.addGestureRecognizer(swipeDown)
         
+        
+        
         // calendar
         calendarView.calendar.delegate = self
         calendarView.tableView.delegate = self
         calendarView.tableView.dataSource = self
         calendarView.calendar.dataSource = self
         calendarView.tableView.register(CalendarTableViewCell.self, forCellReuseIdentifier: "CalendarTableViewCell")
+        
+        calendarView.tableView.rowHeight = UITableView.automaticDimension
         
         // notification
         let notificationCenter = UNUserNotificationCenter.current()
@@ -56,7 +60,6 @@ class CalendarViewController: BaseViewController {
         super.viewWillAppear(animated)
         setupUI()
         
-        
         calendarView.calendar.reloadData()
         tasks = wodCRUD.fetchDate(date: selectedDate ?? calendarView.calendar.today!)
     }
@@ -66,9 +69,18 @@ class CalendarViewController: BaseViewController {
         let uiMenu = UIMenu(title: "운동종류", image: nil, identifier: nil, options: .displayInline, children: makePopUpMenu())
         rightBarButtonItem.menu = uiMenu
         
-        navigationItem.title = "WODO"
+        navigationItem.title = "WODI"
         navigationItem.rightBarButtonItem = rightBarButtonItem
+        navigationController?.navigationBar.tintColor = .white
         
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .mainColor
+        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
+        
+        calendarView.calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red
     }
     // noti Methods
     func requestNotificationAuth(notificationCenter: UNUserNotificationCenter) {
@@ -138,18 +150,31 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UITa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return tasks.count
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CalendarTableViewCell", for: indexPath) as? CalendarTableViewCell else { return UITableViewCell() }
-        cell.titleLabel.text = getCalendarTableViewString(task: tasks[indexPath.section])
+        let workoutString = workoutString(task: tasks[indexPath.section])
+        cell.secondLine.isHidden = false
+        
+        cell.wodLabel.text = getCalendarTableViewString(task: tasks[indexPath.section])
+        cell.additionalTextLabel.text = tasks[indexPath.section].additionalText
+        cell.workoutLabel.attributedText = workoutString
+        
+        cell.wodLabel.textAlignment = .center
+        cell.additionalTextLabel.textAlignment = .center
+        cell.workoutLabel.textAlignment = .center
+        
+        if cell.additionalTextLabel.text == nil || cell.additionalTextLabel.text == "" {
+            cell.secondLine.isHidden = true
+        }
+        //cell.titleLabel.textAlignment = .center
         return cell
     }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive, title: nil) { action, view, handler in
             self.wodCRUD.deleteTask(task: self.tasks[indexPath.section]) {
@@ -162,6 +187,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UITa
         let configuration = UISwipeActionsConfiguration(actions: [action])
         return configuration
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         writeVC.isNew = false
         writeVC.task = tasks[indexPath.section]
@@ -172,6 +198,12 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UITa
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "WOD - \(section + 1)"
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        header.textLabel?.textColor = .label
     }
     
     // MARK: - Calendar Method
@@ -188,7 +220,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UITa
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         if calendarView.calendar.scope == .week {
-            calendarView.calendarHeightConstraint?.update(inset: bounds.height / 1.2)
+            calendarView.calendarHeightConstraint?.update(inset: bounds.height / 1.21)
         } else if calendarView.calendar.scope == .month {
             calendarView.calendarHeightConstraint?.update(offset: 0)
         }
@@ -207,26 +239,32 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UITa
     // CalendarTableView List - Make Text
     func getCalendarTableViewString(task: WODRealmTable) -> String {
         let kindOfWOD = task.kindOfWOD ?? "Extra"
-        let workoutString = workoutString(task: task)
         switch kindOfWOD {
         case "AMRAP":
-            return "Team of \(task.peopleCount)\n\(kindOfWOD) \(task.rounds ?? "0")minutes\n\(task.additionalText ?? "")\n\(workoutString)"
+            return "Team of \(task.peopleCount)\n\(kindOfWOD) \(task.rounds ?? "0") minutes"
         case "For Time":
-            return "Team of \(task.peopleCount)\n\(task.rounds ?? "1")rounds \(kindOfWOD)\n\(task.additionalText ?? "")\n\(workoutString)"
+            guard let rounds = task.rounds else { return "" }
+            return "Team of \(task.peopleCount == "" ? "1" : task.peopleCount)\n\(rounds == "" ? "1" : rounds) rounds \(kindOfWOD) Of :"
         case "EMOM":
-            return "\(kindOfWOD) \(task.rounds ?? "1")minutes\n\(task.additionalText ?? "")\n\(workoutString)"
+            return "\(kindOfWOD) \(task.rounds ?? "1")minutes"
         default:
-            return "Extra\n\(task.additionalText ?? "")\n\(workoutString)"
+            return "Extra\n\(task.additionalText ?? "")"
         }
     }
     
-    func workoutString(task: WODRealmTable) -> String {
+    func workoutString(task: WODRealmTable) -> NSAttributedString {
         var wodStringArr: [String] = []
         for i in task.workOut.indices {
             let wodString = task.reps[i] == "0" ? task.workOut[i] : task.reps[i] + " " + task.workOut[i]
             wodStringArr.append(wodString)
         }
-        return wodStringArr.reduce("") { $0 + $1 + "\n" }
+
+        let attrString = NSMutableAttributedString(string: wodStringArr.reduce("") { $0 + $1 + "\n" })
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1
+        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
+        
+        return attrString
     }
     
 }

@@ -29,6 +29,7 @@ class WODRealmTable: Object {
             reps.append(objectsIn: newValue)
         }
     }
+
     @Persisted var kindOfWOD: String?
     @Persisted var bbWeight: String?
     @Persisted var dbWeight: String?

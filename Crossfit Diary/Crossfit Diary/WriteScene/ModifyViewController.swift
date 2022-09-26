@@ -24,6 +24,13 @@ class ModifyViewController: BaseViewController {
         super.viewDidAppear(animated)
         modifyView.repsTextField.becomeFirstResponder()
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let repsText = Int(modifyView.repsTextField.text ?? "0")
+        self.repsList[self.indexPath.row] = String(describing: repsText!) 
+        self.delegate.getRepsString(reps: self.repsList)
+        self.modifyView.repsTextField.text = nil
+    }
     override func setupUI() {
         view.addSubview(modifyView)
         modifyView.okButton.addTarget(self, action: #selector(okButtonTapped), for: .touchUpInside)
@@ -32,17 +39,13 @@ class ModifyViewController: BaseViewController {
     override func makeConstraints() {
         modifyView.snp.makeConstraints { make in
             make.centerX.equalTo(view.snp.centerX)
-            make.centerY.equalTo(view.snp.centerY)
+            make.centerY.equalTo(view.snp.centerY).offset(-72)
             make.height.equalTo(view.snp.height).multipliedBy(0.3)
             make.width.equalTo(view.snp.width).multipliedBy(0.7)
         }
     }
     @objc func okButtonTapped() {
-        dismiss(animated: true) {
-            self.repsList[self.indexPath.row] = self.modifyView.repsTextField.text ?? "0"
-            self.delegate.getRepsString(reps: self.repsList)
-            self.modifyView.repsTextField.text = nil
-        }
+        dismiss(animated: true)
     }
 }
 extension ModifyViewController: UITextFieldDelegate {
@@ -51,10 +54,12 @@ extension ModifyViewController: UITextFieldDelegate {
         if range.location >= 3 {
             return false
         }
-        
         if string.isEmpty || string >= "0" && string <= "9" {
             return true
         }
         return false
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        dismiss(animated: true)
     }
 }

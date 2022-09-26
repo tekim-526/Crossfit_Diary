@@ -19,6 +19,7 @@ class TabBarController: UITabBarController {
         calendarVC.tabBarItem = UITabBarItem(title: "기록", image: UIImage(systemName: "note.text"), selectedImage: nil)
         mapVC.tabBarItem = UITabBarItem(title: "주변 박스", image: UIImage(systemName: "mappin.and.ellipse"), selectedImage: nil)
         let calendarNav = UINavigationController(rootViewController: calendarVC)
+        self.tabBar.tintColor = .mainColor
         self.tabBar.backgroundColor = .systemBackground
         viewControllers = [calendarNav, mapVC]
     }

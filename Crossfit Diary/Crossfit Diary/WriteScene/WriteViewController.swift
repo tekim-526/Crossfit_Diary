@@ -279,6 +279,9 @@ extension WriteViewController: UITableViewDelegate, UITableViewDataSource, UITex
         }
         return true
     }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        view.endEditing(true)
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }

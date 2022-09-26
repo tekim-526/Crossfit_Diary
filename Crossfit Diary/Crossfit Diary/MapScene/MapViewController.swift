@@ -28,7 +28,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
         mapView.map.showsUserLocation = true
     
         mapView.map.setUserTrackingMode(.follow, animated: true)
-
+        
+        view.backgroundColor = .mainColor
     }
     
     // MARK: - Methods

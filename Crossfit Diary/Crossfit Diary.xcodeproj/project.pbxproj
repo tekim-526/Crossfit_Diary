@@ -25,6 +25,8 @@
 		9374377B28D97E1300D67C12 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 9374377A28D97E1300D67C12 /* SwiftyJSON */; };
 		9374378028D99FEF00D67C12 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374377F28D99FEF00D67C12 /* MapView.swift */; };
 		9374378328DAEF6D00D67C12 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 9374378228DAEF6D00D67C12 /* Toast */; };
+		9374378728DD94C800D67C12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374378628DD94C800D67C12 /* UIColor+Extension.swift */; };
+		9374378A28DDA3D100D67C12 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9374378928DDA3D100D67C12 /* IQKeyboardManagerSwift */; };
 		9397458628D446B300F81DA5 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9397458528D446B300F81DA5 /* CalendarTableViewCell.swift */; };
 		93D941AB28CB129F002CDB03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AA28CB129F002CDB03 /* AppDelegate.swift */; };
 		93D941AD28CB129F002CDB03 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AC28CB129F002CDB03 /* SceneDelegate.swift */; };
@@ -61,6 +63,7 @@
 		9374377228D97D6800D67C12 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		9374377428D97DB400D67C12 /* KakaoSearchAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSearchAPIManager.swift; sourceTree = "<group>"; };
 		9374377F28D99FEF00D67C12 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		9374378628DD94C800D67C12 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		9397458528D446B300F81DA5 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		93D941A728CB129F002CDB03 /* Crossfit Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crossfit Diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93D941AA28CB129F002CDB03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +90,7 @@
 				9374377B28D97E1300D67C12 /* SwiftyJSON in Frameworks */,
 				93D941E828CB1FAC002CDB03 /* FSCalendar in Frameworks */,
 				93D941E328CB1F9C002CDB03 /* Realm in Frameworks */,
+				9374378A28DDA3D100D67C12 /* IQKeyboardManagerSwift in Frameworks */,
 				9374377828D97DFF00D67C12 /* Alamofire in Frameworks */,
 				93D941E028CB1F72002CDB03 /* SnapKit in Frameworks */,
 				93333C760EDC28331BCD8463 /* Pods_Crossfit_Diary.framework in Frameworks */,
@@ -185,6 +189,7 @@
 		93D941C528CB138F002CDB03 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9374378628DD94C800D67C12 /* UIColor+Extension.swift */,
 				932B83A928D1B9B900EAF221 /* DateFormatter+Extension.swift */,
 			);
 			path = Extensions;
@@ -254,6 +259,7 @@
 				9374377728D97DFF00D67C12 /* Alamofire */,
 				9374377A28D97E1300D67C12 /* SwiftyJSON */,
 				9374378228DAEF6D00D67C12 /* Toast */,
+				9374378928DDA3D100D67C12 /* IQKeyboardManagerSwift */,
 			);
 			productName = "Crossfit Diary";
 			productReference = 93D941A728CB129F002CDB03 /* Crossfit Diary.app */;
@@ -290,6 +296,7 @@
 				9374377628D97DFF00D67C12 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				9374377928D97E1300D67C12 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				9374378128DAEF6D00D67C12 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				9374378828DDA3D000D67C12 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 93D941A828CB129F002CDB03 /* Products */;
 			projectDirPath = "";
@@ -348,6 +355,7 @@
 				9374377328D97D6800D67C12 /* APIKey.swift in Sources */,
 				932B83BE28D2F42300EAF221 /* ModifyView.swift in Sources */,
 				93D941DD28CB1E33002CDB03 /* TabBarController.swift in Sources */,
+				9374378728DD94C800D67C12 /* UIColor+Extension.swift in Sources */,
 				932B83B528D1C30C00EAF221 /* BaseView.swift in Sources */,
 				932B83A628D1ADA300EAF221 /* WODRealmTable.swift in Sources */,
 				932B83B728D1C31600EAF221 /* BaseViewController.swift in Sources */,
@@ -513,7 +521,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -544,7 +552,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -607,6 +615,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		9374378828DDA3D000D67C12 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.3.0;
+			};
+		};
 		93D941DE28CB1F72002CDB03 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -648,6 +664,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9374378128DAEF6D00D67C12 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
+		};
+		9374378928DDA3D100D67C12 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9374378828DDA3D000D67C12 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		93D941DF28CB1F72002CDB03 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
