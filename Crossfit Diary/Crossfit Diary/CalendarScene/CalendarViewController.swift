@@ -89,7 +89,7 @@ class CalendarViewController: BaseViewController {
             if success {
                 self.sendNoti(notificationCenter: notificationCenter)
             } else {
-                print(error)
+                self.showAlert(title: "푸쉬 알람 등록을 실패했습니다.", message: "다시 시도해 보세요.")
             }
         }
     }
@@ -106,7 +106,7 @@ class CalendarViewController: BaseViewController {
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         notificationCenter.add(request) { (error) in
             if error != nil {
-                // handle errors
+                self.showAlert(title: "푸쉬 알람 등록을 실패했습니다.", message: "다시 시도해 보세요.")
             }
         }
     }
@@ -178,7 +178,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UITa
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive, title: nil) { action, view, handler in
             self.wodCRUD.deleteTask(task: self.tasks[indexPath.section]) {
-                print("error")
+                self.showAlert(title: "WOD를 지우는 중에 오류가 발생했습니다.", message: "다시 시도해 보세요.")
             }
             self.calendarView.calendar.reloadData()
             tableView.reloadData()
@@ -239,16 +239,22 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UITa
     // CalendarTableView List - Make Text
     func getCalendarTableViewString(task: WODRealmTable) -> String {
         let kindOfWOD = task.kindOfWOD ?? "Extra"
+        guard let rounds = task.rounds else { return "" }
+        var round = rounds == "" ? "-" : rounds
         switch kindOfWOD {
         case "AMRAP":
-            return "Team of \(task.peopleCount)\n\(kindOfWOD) \(task.rounds ?? "0") minutes"
+            return "Team of \(task.peopleCount == "" ? "-" : task.peopleCount)\n\(kindOfWOD) \(round) minutes"
         case "For Time":
-            guard let rounds = task.rounds else { return "" }
-            return "Team of \(task.peopleCount == "" ? "1" : task.peopleCount)\n\(rounds == "" ? "1" : rounds) rounds \(kindOfWOD) Of :"
+            if round == "-" || round == "1" {
+                round = ""
+            } else {
+                round += " rounds"
+            }
+            return "Team of \(task.peopleCount == "" ? "-" : task.peopleCount)\n" + "\(round)" + "\(kindOfWOD) Of :"
         case "EMOM":
-            return "\(kindOfWOD) \(task.rounds ?? "1")minutes"
+            return "\(kindOfWOD) \(round)minutes"
         default:
-            return "Extra\n\(task.additionalText ?? "")"
+            return "Extra"
         }
     }
     

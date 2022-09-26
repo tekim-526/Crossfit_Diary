@@ -9,6 +9,7 @@ import UIKit
 
 import CoreLocation
 import MapKit
+import SnapKit
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate {
     var mapView = MapView()
@@ -50,7 +51,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
                 }
                 self.checkAppLocationAuth(authStatus: self.authStatus)
             } else {
-                self.showAlert()
+                self.showAlert(title: "기기 위치권한 설정이 되어있지 않습니다.", message: "설정 -> 개인정보 보호 및 보안 -> 위치서비스로 가셔서 권한을 허용해 주세요.")
                 // 기기 위치설정 안되있는 경우 -> Alert 띄우고 설정으로 유도
             }
         }
@@ -59,7 +60,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
     func checkAppLocationAuth(authStatus: CLAuthorizationStatus) {
         switch authStatus {
         case .notDetermined:
-            print("notDetermined")
             DispatchQueue.main.async {
                 self.locationManager.requestWhenInUseAuthorization()
                 self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -69,25 +69,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
             // 아이폰 설정으로 유도
             print("denied")
         case .authorizedWhenInUse:
-            print("authorizedWhenInUse")
             locationManager.startUpdatingLocation()
         default: print("DEFAULT")
         }
     }
 
-    func showAlert() {
-        let alert = UIAlertController(title: "권한 주세요", message: nil, preferredStyle: .alert)
-        let action = UIAlertAction(title: "설정으로 가기", style: .destructive) {_ in
-            let url = UIApplication.openSettingsURLString
-            if let goSetting = URL(string: url) {
-                UIApplication.shared.open(goSetting)
-            }
-        }
-        let cancel = UIAlertAction(title: "취소", style: .default)
-        alert.addAction(action)
-        alert.addAction(cancel)
-        present(alert, animated: true)
-    }
+    
     
     func makeAnnotation(place: Place) {
         let annotation = MKPointAnnotation()
@@ -95,7 +82,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
         let y = CLLocationDegrees(floatLiteral: Double(place.latitudeY) ?? 0.0)
         annotation.coordinate = CLLocationCoordinate2DMake(y, x)
         annotation.title = place.placeName
-        
         mapView.map.addAnnotation(annotation)
     }
 }
@@ -116,21 +102,17 @@ extension MapViewController {
                     self.makeAnnotation(place: placeList[i])
                 }
                 self.placeList = placeList
-                
             }
-            
         }
         locationManager.stopUpdatingLocation()
     }
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
-    }
+    
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkDeviceLocationAuth()
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if view.annotation?.title == "My Location" {
-            self.mapView.annotationDetailLabel.isHidden = true
+            self.mapView.annotationDetailView.isHidden = true
             return
         }
         for place in placeList {
@@ -138,13 +120,41 @@ extension MapViewController {
                 makeAttributedLabel(label: self.mapView.annotationDetailLabel, first: place.placeName, second: place.roadAdressName, third: place.phone)
             }
         }
-        self.mapView.annotationDetailLabel.isHidden = false
+        self.mapView.annotationDetailView.isHidden = false
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        self.mapView.annotationDetailLabel.isHidden = true
-            
+        self.mapView.annotationDetailView.isHidden = true
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "custom")
         
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "custom")
+        } else {
+            annotationView?.annotation = annotation
+        }
+        
+        let mappinImage = UIImage(named: "mappin")
+        let size = CGSize(width: 40, height: 40)
+        UIGraphicsBeginImageContext(size)
+        mappinImage?.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        annotationView?.image = resizedImage
+        
+        let annotationLabel = UILabel(frame: CGRect(x: -20, y: 40, width: 80, height: 30))
+        annotationLabel.numberOfLines = 1
+        annotationLabel.textAlignment = .center
+        annotationLabel.font = .systemFont(ofSize: 10, weight: .bold)
+        annotationLabel.text = annotation.title as? String
+//        annotationLabel.textColor =
+        annotationView?.addSubview(annotationLabel)
+
+        return annotationView
     }
     
     func makeAttributedLabel(label: UILabel, first: String, second: String, third: String?) {
@@ -154,7 +164,9 @@ extension MapViewController {
             label.attributedText = attributedTitle
             return
         }
-        attributedTitle.append(NSAttributedString(string: third, attributes: [NSAttributedString.Key.foregroundColor : UIColor.tintColor, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13, weight: .regular)]))
+        attributedTitle.append(NSAttributedString(string: third == "" ? "연락처 정보 없음" : third, attributes: [NSAttributedString.Key.foregroundColor : UIColor.tintColor, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13, weight: .regular)]))
         label.attributedText = attributedTitle
     }
 }
+
+

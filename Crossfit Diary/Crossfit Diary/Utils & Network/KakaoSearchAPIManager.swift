@@ -41,7 +41,6 @@ struct KakaoSearchAPIManager {
                 print("JSON\n",json)
                 completionHandler(placeList)
             case .failure(let error):
-                print("data load failed")
                 print(error)
             }
         }

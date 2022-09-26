@@ -36,7 +36,9 @@ class WorkOutListViewController: BaseViewController {
         workOutListView.searchbar.delegate = self
         workOutListView.tableView.register(WorkOutListTableViewCell.self, forCellReuseIdentifier: "WorkOutListTableViewCell")
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         workOutListView.tableView.reloadData()
@@ -44,8 +46,14 @@ class WorkOutListViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        workOutListView.searchbar.resignFirstResponder()
+        workOutListView.searchbar.text = ""
+        
         delegate.getWorkoutList(list: workoutList)
         delegate.getWorkoutRepsList(list: repsList)
+        
+        allWorkOut = ExerciseModel().allWorkOutArray
+        workOutListView.tableView.reloadData()
     }
 }
 

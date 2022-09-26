@@ -62,8 +62,9 @@ class WriteViewController: BaseViewController {
         workoutListVC.delegate = self
         writeView.tableView.delegate = self
         writeView.tableView.dataSource = self
+        writeView.tableView.dragDelegate = self
+        writeView.tableView.dropDelegate = self
         writeView.tableView.register(WorkOutListTableViewCell.self, forCellReuseIdentifier: "WorkOutListTableViewCell")
-        print(#function)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,11 +75,14 @@ class WriteViewController: BaseViewController {
             makeWODString(kindOfWOD: kindOfWOD)
         } else {
             makeWODString(kindOfWOD: kindOfWOD)
-            writeView.barbellTextField.text = task?.bbWeight
-            writeView.dumbellTextField.text = task?.dbWeight
-            writeView.kettlebellTextField.text = task?.kbWeight
-            writeView.medicineBallTextField.text = task?.mbWeight
-            writeView.weightedVestTextField.text = task?.vestWeight
+            
+            let itoAarr = itoaArr(bb: task?.bbWeight, db: task?.dbWeight, kb: task?.kbWeight, mb: task?.mbWeight, v: task?.vestWeight)
+            print(itoAarr)
+            writeView.barbellTextField.text = String(describing: itoAarr[0])
+            writeView.dumbellTextField.text = String(describing: itoAarr[1])
+            writeView.kettlebellTextField.text = String(describing: itoAarr[2])
+            writeView.medicineBallTextField.text = String(describing: itoAarr[3])
+            writeView.weightedVestTextField.text = String(describing: itoAarr[4])
             writeView.teamTextField.text = task?.peopleCount
             writeView.minuteTextField.text = task?.rounds
             writeView.additionalTextView.text = task?.additionalText
@@ -86,7 +90,14 @@ class WriteViewController: BaseViewController {
             repsList = task?.repsArray ?? []
         }
     }
-    
+    func itoaArr(bb: Int?, db: Int?, kb: Int?, mb: Int?, v: Int?) -> [String] {
+        let bb = String(describing: bb ?? 0), db = String(describing: db ?? 0), kb = String(describing: kb ?? 0), mb = String(describing: mb ?? 0), v = String(describing: v ?? 0)
+        var arr = [bb,db,kb,mb,v]
+        for i in 0...4 {
+            if arr[i] == "0" { arr[i] = "" }
+        }
+        return arr
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         view.endEditing(true)
@@ -94,13 +105,13 @@ class WriteViewController: BaseViewController {
         if isNew {
             tasks = wodCRUD.fetch()
             wodCRUD.addTask(task: WODRealmTable()) {
-                print("error")
+                showAlert(title: "WOD를 추가하는 중에 오류가 발생했습니다.", message: "다시 시도해 보세요.")
             }
             if workoutList != [] || !writeView.additionalTextView.text.isEmpty {
                 updateRealm(task: tasks.last!)
             } else {
                 wodCRUD.deleteTask(task: tasks.last!) {
-                    print("error")
+                    showAlert(title: "WOD를 지우는 중에 오류가 발생했습니다.", message: "다시 시도해 보세요.")
                 }
             }
         } else {
@@ -108,10 +119,11 @@ class WriteViewController: BaseViewController {
                 updateRealm(task: task!)
             } else {
                 wodCRUD.deleteTask(task: task!) {
-                    print("error")
+                    showAlert(title: "WOD를 지우는 중에 오류가 발생했습니다.", message: "다시 시도해 보세요.")
                 }
             }
         }
+        print("barbel weight", Int(writeView.barbellTextField.text!), #function)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -188,16 +200,16 @@ class WriteViewController: BaseViewController {
                           workOutArray: workoutList,
                           repsArray: repsList,
                           kindOfWOD: kindOfWOD,
-                          bbWeight: writeView.barbellTextField.text!,
-                          dbWeight: writeView.dumbellTextField.text!,
-                          kbWeight: writeView.kettlebellTextField.text!,
-                          mbWeight: writeView.medicineBallTextField.text!,
-                          vestWeight: writeView.weightedVestTextField.text!,
+                          bbWeight: Int(writeView.barbellTextField.text!),
+                          dbWeight: Int(writeView.dumbellTextField.text!),
+                          kbWeight: Int(writeView.kettlebellTextField.text!),
+                          mbWeight: Int(writeView.medicineBallTextField.text!),
+                          vestWeight: Int(writeView.weightedVestTextField.text!),
                           peopleCount: writeView.teamTextField.text!,
                           rounds: writeView.minuteTextField.text!,
                           additionalText: writeView.additionalTextView.text,
                           date: selectedDate ?? Date()) {
-            print("error")
+            showAlert(title: "WOD 업데이트중에 오류가 발생했습니다.", message: "다시 시도해 보세요.")
         }
     }
     
@@ -248,6 +260,18 @@ extension WriteViewController: UITableViewDelegate, UITableViewDataSource, UITex
         let configuration = UISwipeActionsConfiguration(actions: [action])
         return configuration
     }
+
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let reps = repsList[sourceIndexPath.row]
+        let workout = workoutList[sourceIndexPath.row]
+        repsList.remove(at: sourceIndexPath.row)
+        workoutList.remove(at: sourceIndexPath.row)
+        repsList.insert(reps, at: destinationIndexPath.row)
+        workoutList.insert(workout, at: destinationIndexPath.row)
+    }
+    
+    
+    
     // MARK: - TextField Method
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     
@@ -285,4 +309,19 @@ extension WriteViewController: UITableViewDelegate, UITableViewDataSource, UITex
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+}
+extension WriteViewController: UITableViewDragDelegate {
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        return [UIDragItem(itemProvider: NSItemProvider())]
+    }
+}
+
+extension WriteViewController: UITableViewDropDelegate {
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        if session.localDragSession != nil {
+            return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        }
+        return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
+    }
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) { }
 }

@@ -27,7 +27,7 @@ class ModifyViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         let repsText = Int(modifyView.repsTextField.text ?? "0")
-        self.repsList[self.indexPath.row] = String(describing: repsText!) 
+        self.repsList[self.indexPath.row] = String(describing: repsText ?? 1) 
         self.delegate.getRepsString(reps: self.repsList)
         self.modifyView.repsTextField.text = nil
     }

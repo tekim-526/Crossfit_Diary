@@ -16,6 +16,10 @@ class WODRealmCRUD {
         return localRealm.objects(WODRealmTable.self)
     }
     
+    func fetch() -> Results<Workout> {
+        return localRealm.objects(Workout.self)
+    }
+    
     func addTask(task: WODRealmTable, completion: () -> Void) {
         do {
             try localRealm.write {
@@ -40,11 +44,11 @@ class WODRealmCRUD {
                    workOutArray: [String]?,
                    repsArray: [String]?,
                    kindOfWOD: String?,
-                   bbWeight: String?,
-                   dbWeight: String?,
-                   kbWeight: String?,
-                   mbWeight: String?,
-                   vestWeight: String?,
+                   bbWeight: Int?,
+                   dbWeight: Int?,
+                   kbWeight: Int?,
+                   mbWeight: Int?,
+                   vestWeight: Int?,
                    peopleCount: String,
                    rounds: String?,
                    additionalText: String?,

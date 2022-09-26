@@ -31,31 +31,44 @@ class WODRealmTable: Object {
     }
 
     @Persisted var kindOfWOD: String?
-    @Persisted var bbWeight: String?
-    @Persisted var dbWeight: String?
-    @Persisted var kbWeight: String?
-    @Persisted var mbWeight: String?
-    @Persisted var vestWeight: String?
+    @Persisted var bbWeight: Int?
+    @Persisted var dbWeight: Int?
+    @Persisted var kbWeight: Int?
+    @Persisted var mbWeight: Int?
+    @Persisted var vestWeight: Int?
     @Persisted var peopleCount: String = "1"
     @Persisted var rounds: String?
     @Persisted var additionalText: String?
 
     @Persisted var date: Date? = Date()
-
+    
+    @Persisted var workoutWithReps: List<Workout> = List<Workout>()
+    
+    var workoutWithRepsArray: [Workout] {
+        get {
+            return workoutWithReps.map { $0 }
+        }
+        set {
+            workoutWithReps.removeAll()
+            workoutWithReps.append(objectsIn: newValue)
+        }
+    }
+    
     @Persisted(primaryKey: true) var objectId : ObjectId
     
     convenience init(workOutArray: [String]?,
                      repsArray: [String]?,
                      kindOfWOD: String?,
-                     bbWeight: String?,
-                     dbWeight: String?,
-                     kbWeight: String?,
-                     mbWeight: String?,
-                     vestWeight: String?,
+                     bbWeight: Int?,
+                     dbWeight: Int?,
+                     kbWeight: Int?,
+                     mbWeight: Int?,
+                     vestWeight: Int?,
                      peopleCount: String,
                      rounds: String?,
                      additionalText: String?,
-                     date: Date?) {
+                     date: Date?,
+                     workoutWithRepsArray: [Workout]) {
         self.init()
         self.workOutArray = workOutArray ?? []
         self.repsArray = repsArray ?? []
@@ -69,6 +82,17 @@ class WODRealmTable: Object {
         self.rounds = rounds
         self.additionalText = additionalText
         self.date = date
+        self.workoutWithRepsArray = workoutWithRepsArray
         
+    }
+}
+
+class Workout: Object {
+    @Persisted var workout: String?
+    @Persisted var reps: Int
+    
+    init(workout: String?, reps: Int = 0) {
+        self.workout = workout
+        self.reps = reps
     }
 }
