@@ -10,19 +10,18 @@ import Toast
 
 
 protocol SendWorkoutListDelegate {
-    func getWorkoutList(list: [String])
-    func getWorkoutRepsList(list: [String])
+    func getWorkoutRecordWorkout(list: [Workout])
 }
 
 class WorkOutListViewController: BaseViewController {
     let workOutListView = WorkOutListView()
     var allWorkOut = ExerciseModel().allWorkOutArray
-    var task: WODRealmTable!
+    
+    var workout: [Workout]!
     
     // SendData
     var delegate: SendWorkoutListDelegate!
-    var workoutList: [String]!
-    var repsList: [String]!
+    
     
     override func loadView() {
         view = workOutListView
@@ -30,14 +29,15 @@ class WorkOutListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         workOutListView.tableView.delegate = self
         workOutListView.tableView.dataSource = self
         workOutListView.searchbar.delegate = self
         workOutListView.tableView.register(WorkOutListTableViewCell.self, forCellReuseIdentifier: "WorkOutListTableViewCell")
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        workOutListView.searchbar.autocapitalizationType = .words
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -49,8 +49,9 @@ class WorkOutListViewController: BaseViewController {
         workOutListView.searchbar.resignFirstResponder()
         workOutListView.searchbar.text = ""
         
-        delegate.getWorkoutList(list: workoutList)
-        delegate.getWorkoutRepsList(list: repsList)
+       
+        
+        delegate.getWorkoutRecordWorkout(list: workout)
         
         allWorkOut = ExerciseModel().allWorkOutArray
         workOutListView.tableView.reloadData()
@@ -115,10 +116,13 @@ extension WorkOutListViewController: UITableViewDelegate, UITableViewDataSource,
         return ""
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        workoutList.append(allWorkOut[indexPath.section][indexPath.row])
-        repsList.append("0")
+        workout.append(Workout(value: ["workout" : allWorkOut[indexPath.section][indexPath.row], "reps" : 0]))
+
         self.view.makeToast("\(allWorkOut[indexPath.section][indexPath.row]) 추가되었습니다", duration: 1.0, position: .top)
+        workOutListView.tableView.deselectRow(at: indexPath, animated: true)
     }
+
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText != "" {
             allWorkOut = ExerciseModel().allWorkOutArray

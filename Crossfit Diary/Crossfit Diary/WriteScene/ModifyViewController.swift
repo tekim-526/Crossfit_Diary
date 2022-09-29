@@ -8,17 +8,23 @@
 import UIKit
 
 protocol SendRepsDelegate {
-    func getRepsString(reps: [String])
+    func getRepsRecordReps(list: [Workout])
 }
 
 class ModifyViewController: BaseViewController {
     let modifyView = ModifyView()
-    var repsList: [String]!
     var indexPath: IndexPath!
     var delegate: SendRepsDelegate!
+    
+    var workout: [Workout]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         modifyView.repsTextField.delegate = self
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        modifyView.workoutLabel.text = workout[indexPath.row].workout
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -26,9 +32,10 @@ class ModifyViewController: BaseViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        let repsText = Int(modifyView.repsTextField.text ?? "0")
-        self.repsList[self.indexPath.row] = String(describing: repsText ?? 1) 
-        self.delegate.getRepsString(reps: self.repsList)
+        let repsText = Int(modifyView.repsTextField.text ?? "1")
+        
+        self.workout[indexPath.row] = Workout(value: ["workout" : workout[indexPath.row].workout, "reps" : repsText ?? 0])
+        self.delegate.getRepsRecordReps(list: workout)
         self.modifyView.repsTextField.text = nil
     }
     override func setupUI() {

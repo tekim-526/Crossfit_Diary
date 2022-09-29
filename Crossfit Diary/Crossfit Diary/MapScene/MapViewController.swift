@@ -43,7 +43,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
     func checkDeviceLocationAuth() {
         DispatchQueue.global().async {
             if CLLocationManager.locationServicesEnabled() {
-                // 기기 위치설정이 되어 있으므로 앱 설정 체크
                 if #available(iOS 14.0, *) {
                     self.authStatus = self.locationManager.authorizationStatus
                 } else {
@@ -52,7 +51,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
                 self.checkAppLocationAuth(authStatus: self.authStatus)
             } else {
                 self.showAlert(title: "기기 위치권한 설정이 되어있지 않습니다.", message: "설정 -> 개인정보 보호 및 보안 -> 위치서비스로 가셔서 권한을 허용해 주세요.")
-                // 기기 위치설정 안되있는 경우 -> Alert 띄우고 설정으로 유도
             }
         }
     }
@@ -74,8 +72,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
         }
     }
 
-    
-    
     func makeAnnotation(place: Place) {
         let annotation = MKPointAnnotation()
         let x = CLLocationDegrees(floatLiteral: Double(place.longitudeX) ?? 0.0)
@@ -97,6 +93,7 @@ extension MapViewController {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinate = locations.last?.coordinate {
             mapViewSetUp(center: coordinate)
+            mapView.map.removeAnnotations(mapView.map.annotations)
             KakaoSearchAPIManager.kakaoSearchPlace(searchName: "크로스핏", x: coordinate.longitude, y: coordinate.latitude) { placeList in
                 for i in 0...placeList.count - 1 {
                     self.makeAnnotation(place: placeList[i])
@@ -151,7 +148,6 @@ extension MapViewController {
         annotationLabel.textAlignment = .center
         annotationLabel.font = .systemFont(ofSize: 10, weight: .bold)
         annotationLabel.text = annotation.title as? String
-//        annotationLabel.textColor =
         annotationView?.addSubview(annotationLabel)
 
         return annotationView
@@ -168,5 +164,3 @@ extension MapViewController {
         label.attributedText = attributedTitle
     }
 }
-
-

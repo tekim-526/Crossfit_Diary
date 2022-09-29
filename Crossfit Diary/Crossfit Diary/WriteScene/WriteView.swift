@@ -97,8 +97,9 @@ class WriteView: BaseView {
     }()
     
     // tableView
-    let tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        
         return tableView
     }()
     
@@ -151,6 +152,7 @@ class WriteView: BaseView {
             make.leading.trailing.equalTo(0)
             make.bottom.equalTo(self.safeAreaLayoutGuide)
         }
+        
     }
     
 }

@@ -8,6 +8,5 @@
 import Foundation
 
 struct APIKey {
-    
     static let kakaoAK = "d8fb7f244531306565821b4e53ac63da"
 }

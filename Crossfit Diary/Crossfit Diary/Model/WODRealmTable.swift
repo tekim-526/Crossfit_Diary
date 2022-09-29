@@ -9,27 +9,6 @@ import Foundation
 import RealmSwift
 
 class WODRealmTable: Object {
-    @Persisted var workOut: List<String> = List<String>()
-    @Persisted var reps: List<String> = List<String>()
-    var workOutArray: [String] {
-        get {
-            return workOut.map { $0 }
-        }
-        set {
-            workOut.removeAll()
-            workOut.append(objectsIn: newValue)
-        }
-    }
-    var repsArray: [String] {
-        get {
-            return reps.map { $0 }
-        }
-        set {
-            reps.removeAll()
-            reps.append(objectsIn: newValue)
-        }
-    }
-
     @Persisted var kindOfWOD: String?
     @Persisted var bbWeight: Int?
     @Persisted var dbWeight: Int?
@@ -39,7 +18,8 @@ class WODRealmTable: Object {
     @Persisted var peopleCount: String = "1"
     @Persisted var rounds: String?
     @Persisted var additionalText: String?
-
+    @Persisted var resultText: String?
+    
     @Persisted var date: Date? = Date()
     
     @Persisted var workoutWithReps: List<Workout> = List<Workout>()
@@ -56,9 +36,7 @@ class WODRealmTable: Object {
     
     @Persisted(primaryKey: true) var objectId : ObjectId
     
-    convenience init(workOutArray: [String]?,
-                     repsArray: [String]?,
-                     kindOfWOD: String?,
+    convenience init(kindOfWOD: String?,
                      bbWeight: Int?,
                      dbWeight: Int?,
                      kbWeight: Int?,
@@ -67,11 +45,10 @@ class WODRealmTable: Object {
                      peopleCount: String,
                      rounds: String?,
                      additionalText: String?,
+                     resultText: String?,
                      date: Date?,
                      workoutWithRepsArray: [Workout]) {
         self.init()
-        self.workOutArray = workOutArray ?? []
-        self.repsArray = repsArray ?? []
         self.kindOfWOD = kindOfWOD
         self.bbWeight = bbWeight
         self.dbWeight = dbWeight
@@ -81,15 +58,23 @@ class WODRealmTable: Object {
         self.peopleCount = peopleCount
         self.rounds = rounds
         self.additionalText = additionalText
+        self.resultText = resultText
         self.date = date
         self.workoutWithRepsArray = workoutWithRepsArray
-        
     }
 }
 
 class Workout: Object {
+    @Persisted (primaryKey: true) var objectID: ObjectId
     @Persisted var workout: String = ""
     @Persisted var reps: Int = 0
-    
-    
 }
+
+//class OneRM: Object {
+//    @Persisted (primaryKey: true) var objectID: ObjectId
+//    @Persisted var oneRM: Double
+//    @Persisted var twoRM: Double
+//    @Persisted var threeRM: Double
+//    @Persisted var fiveRM: Double
+//    @Persisted var workout: String
+//}

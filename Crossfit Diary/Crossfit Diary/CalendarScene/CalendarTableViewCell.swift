@@ -22,7 +22,12 @@ class CalendarTableViewCell: UITableViewCell {
         label.numberOfLines = 2
         return label
     }()
-    
+    let resultLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .label
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        return label
+    }()
     let firstLine: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(red: 242/255, green: 243/255, blue: 245/255, alpha: 1)
@@ -63,7 +68,7 @@ class CalendarTableViewCell: UITableViewCell {
     }
     
     func configureUI() {
-        [wodLabel, firstLine, additionalTextLabel, secondLine, workoutLabel].forEach { self.addSubview($0) }
+        [wodLabel, firstLine, additionalTextLabel, secondLine, workoutLabel, resultLabel].forEach { self.addSubview($0) }
     }
     
     func makeConstraints() {
@@ -72,6 +77,10 @@ class CalendarTableViewCell: UITableViewCell {
         wodLabel.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide).offset(spacing)
             make.leading.equalTo(self.safeAreaLayoutGuide).offset(spacing)
+            make.trailing.equalTo(self.safeAreaLayoutGuide).offset(-spacing)
+        }
+        resultLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(self.wodLabel.snp.top).offset(8)
             make.trailing.equalTo(self.safeAreaLayoutGuide).offset(-spacing)
         }
         firstLine.snp.makeConstraints { make in

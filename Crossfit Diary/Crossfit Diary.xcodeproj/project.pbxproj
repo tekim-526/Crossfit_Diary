@@ -28,6 +28,9 @@
 		9374378728DD94C800D67C12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374378628DD94C800D67C12 /* UIColor+Extension.swift */; };
 		9374378A28DDA3D100D67C12 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9374378928DDA3D100D67C12 /* IQKeyboardManagerSwift */; };
 		9397458628D446B300F81DA5 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9397458528D446B300F81DA5 /* CalendarTableViewCell.swift */; };
+		93CAC5FF28E2CA8B00DC85D0 /* WriteTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CAC5FE28E2CA8B00DC85D0 /* WriteTableViewHeaderView.swift */; };
+		93CAC60228E3DCEE00DC85D0 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC60128E3DCEE00DC85D0 /* Realm */; };
+		93CAC60428E3DCEE00DC85D0 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC60328E3DCEE00DC85D0 /* RealmSwift */; };
 		93D941AB28CB129F002CDB03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AA28CB129F002CDB03 /* AppDelegate.swift */; };
 		93D941AD28CB129F002CDB03 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AC28CB129F002CDB03 /* SceneDelegate.swift */; };
 		93D941B428CB12A3002CDB03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93D941B328CB12A3002CDB03 /* Assets.xcassets */; };
@@ -39,8 +42,6 @@
 		93D941D528CB14D5002CDB03 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941D428CB14D5002CDB03 /* MapViewController.swift */; };
 		93D941DD28CB1E33002CDB03 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941DC28CB1E33002CDB03 /* TabBarController.swift */; };
 		93D941E028CB1F72002CDB03 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 93D941DF28CB1F72002CDB03 /* SnapKit */; };
-		93D941E328CB1F9C002CDB03 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 93D941E228CB1F9C002CDB03 /* Realm */; };
-		93D941E528CB1F9C002CDB03 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 93D941E428CB1F9C002CDB03 /* RealmSwift */; };
 		93D941E828CB1FAC002CDB03 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 93D941E728CB1FAC002CDB03 /* FSCalendar */; };
 		93D941EA28CB2D1A002CDB03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D941E928CB2D1A002CDB03 /* Main.storyboard */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,7 @@
 		9374377F28D99FEF00D67C12 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		9374378628DD94C800D67C12 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		9397458528D446B300F81DA5 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
+		93CAC5FE28E2CA8B00DC85D0 /* WriteTableViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTableViewHeaderView.swift; sourceTree = "<group>"; };
 		93D941A728CB129F002CDB03 /* Crossfit Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crossfit Diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93D941AA28CB129F002CDB03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93D941AC28CB129F002CDB03 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,13 +88,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9374378328DAEF6D00D67C12 /* Toast in Frameworks */,
-				93D941E528CB1F9C002CDB03 /* RealmSwift in Frameworks */,
 				9374377B28D97E1300D67C12 /* SwiftyJSON in Frameworks */,
 				93D941E828CB1FAC002CDB03 /* FSCalendar in Frameworks */,
-				93D941E328CB1F9C002CDB03 /* Realm in Frameworks */,
+				93CAC60428E3DCEE00DC85D0 /* RealmSwift in Frameworks */,
 				9374378A28DDA3D100D67C12 /* IQKeyboardManagerSwift in Frameworks */,
 				9374377828D97DFF00D67C12 /* Alamofire in Frameworks */,
 				93D941E028CB1F72002CDB03 /* SnapKit in Frameworks */,
+				93CAC60228E3DCEE00DC85D0 /* Realm in Frameworks */,
 				93333C760EDC28331BCD8463 /* Pods_Crossfit_Diary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,6 +221,7 @@
 			children = (
 				93D941D028CB14B7002CDB03 /* WriteViewController.swift */,
 				93D941D228CB14C8002CDB03 /* WriteView.swift */,
+				93CAC5FE28E2CA8B00DC85D0 /* WriteTableViewHeaderView.swift */,
 				932B83BB28D2F41400EAF221 /* ModifyViewController.swift */,
 				932B83BD28D2F42300EAF221 /* ModifyView.swift */,
 			);
@@ -253,13 +256,13 @@
 			name = "Crossfit Diary";
 			packageProductDependencies = (
 				93D941DF28CB1F72002CDB03 /* SnapKit */,
-				93D941E228CB1F9C002CDB03 /* Realm */,
-				93D941E428CB1F9C002CDB03 /* RealmSwift */,
 				93D941E728CB1FAC002CDB03 /* FSCalendar */,
 				9374377728D97DFF00D67C12 /* Alamofire */,
 				9374377A28D97E1300D67C12 /* SwiftyJSON */,
 				9374378228DAEF6D00D67C12 /* Toast */,
 				9374378928DDA3D100D67C12 /* IQKeyboardManagerSwift */,
+				93CAC60128E3DCEE00DC85D0 /* Realm */,
+				93CAC60328E3DCEE00DC85D0 /* RealmSwift */,
 			);
 			productName = "Crossfit Diary";
 			productReference = 93D941A728CB129F002CDB03 /* Crossfit Diary.app */;
@@ -291,12 +294,12 @@
 			mainGroup = 93D9419E28CB129F002CDB03;
 			packageReferences = (
 				93D941DE28CB1F72002CDB03 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				93D941E128CB1F9C002CDB03 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				93D941E628CB1FAC002CDB03 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 				9374377628D97DFF00D67C12 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				9374377928D97E1300D67C12 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				9374378128DAEF6D00D67C12 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				9374378828DDA3D000D67C12 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				93CAC60028E3DCEE00DC85D0 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 93D941A828CB129F002CDB03 /* Products */;
 			projectDirPath = "";
@@ -360,6 +363,7 @@
 				932B83A628D1ADA300EAF221 /* WODRealmTable.swift in Sources */,
 				932B83B728D1C31600EAF221 /* BaseViewController.swift in Sources */,
 				93D941D328CB14C8002CDB03 /* WriteView.swift in Sources */,
+				93CAC5FF28E2CA8B00DC85D0 /* WriteTableViewHeaderView.swift in Sources */,
 				93D941CF28CB1479002CDB03 /* CalendarView.swift in Sources */,
 				932B83BC28D2F41400EAF221 /* ModifyViewController.swift in Sources */,
 				932B83A428D1959500EAF221 /* WorkOutListTableViewCell.swift in Sources */,
@@ -512,17 +516,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = FQ63CT4A3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Crossfit Diary/Info.plist";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "when in use";
+				INFOPLIST_KEY_CFBundleDisplayName = "와디";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치서비스를 허용하시면 이 근처 크로스핏 박스들을 확인할 수 있어요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -530,6 +536,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tekim.Crossfit-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -543,17 +552,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = FQ63CT4A3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Crossfit Diary/Info.plist";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "when in use";
+				INFOPLIST_KEY_CFBundleDisplayName = "와디";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치서비스를 허용하시면 이 근처 크로스핏 박스들을 확인할 수 있어요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -561,6 +572,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tekim.Crossfit-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -623,20 +637,20 @@
 				minimumVersion = 6.3.0;
 			};
 		};
+		93CAC60028E3DCEE00DC85D0 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.30.0;
+			};
+		};
 		93D941DE28CB1F72002CDB03 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.0.0;
-			};
-		};
-		93D941E128CB1F9C002CDB03 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.0.0;
 			};
 		};
 		93D941E628CB1FAC002CDB03 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
@@ -670,20 +684,20 @@
 			package = 9374378828DDA3D000D67C12 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
 		};
+		93CAC60128E3DCEE00DC85D0 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 93CAC60028E3DCEE00DC85D0 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		93CAC60328E3DCEE00DC85D0 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 93CAC60028E3DCEE00DC85D0 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		93D941DF28CB1F72002CDB03 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 93D941DE28CB1F72002CDB03 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		93D941E228CB1F9C002CDB03 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 93D941E128CB1F9C002CDB03 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		93D941E428CB1F9C002CDB03 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 93D941E128CB1F9C002CDB03 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 		93D941E728CB1FAC002CDB03 /* FSCalendar */ = {
 			isa = XCSwiftPackageProductDependency;

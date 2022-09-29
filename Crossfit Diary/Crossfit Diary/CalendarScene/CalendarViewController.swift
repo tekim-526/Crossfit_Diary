@@ -30,6 +30,8 @@ class CalendarViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         // SwipeGesture
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeEvent(_:)))
         swipeUp.direction = .up
@@ -38,22 +40,18 @@ class CalendarViewController: BaseViewController {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(swipeEvent(_:)))
         swipeDown.direction = .down
         self.view.addGestureRecognizer(swipeDown)
-        
-        
-        
+                
         // calendar
         calendarView.calendar.delegate = self
         calendarView.tableView.delegate = self
         calendarView.tableView.dataSource = self
         calendarView.calendar.dataSource = self
         calendarView.tableView.register(CalendarTableViewCell.self, forCellReuseIdentifier: "CalendarTableViewCell")
-        
         calendarView.tableView.rowHeight = UITableView.automaticDimension
         
         // notification
         let notificationCenter = UNUserNotificationCenter.current()
         requestNotificationAuth(notificationCenter: notificationCenter)
-        sendNoti(notificationCenter: notificationCenter)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,7 +61,7 @@ class CalendarViewController: BaseViewController {
         calendarView.calendar.reloadData()
         tasks = wodCRUD.fetchDate(date: selectedDate ?? calendarView.calendar.today!)
     }
-
+    
     override func setupUI() {
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil)
         let uiMenu = UIMenu(title: "운동종류", image: nil, identifier: nil, options: .displayInline, children: makePopUpMenu())
@@ -82,37 +80,8 @@ class CalendarViewController: BaseViewController {
         
         calendarView.calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red
     }
-    // noti Methods
-    func requestNotificationAuth(notificationCenter: UNUserNotificationCenter) {
-        let authOptions: UNAuthorizationOptions = UNAuthorizationOptions(arrayLiteral: .badge, .alert, .sound)
-        notificationCenter.requestAuthorization(options: authOptions) { success, error in
-            if success {
-                self.sendNoti(notificationCenter: notificationCenter)
-            } else {
-                self.showAlert(title: "푸쉬 알람 등록을 실패했습니다.", message: "다시 시도해 보세요.")
-            }
-        }
-    }
-    
-    func sendNoti(notificationCenter: UNUserNotificationCenter) {
-        notificationCenter.removeAllPendingNotificationRequests()
-        let content = UNMutableNotificationContent()
-        content.title = "와두"
-        content.subtitle = "오늘 운동하셨나요?"
-        var dateComponents = DateComponents()
-        dateComponents.hour = 22
-        dateComponents.minute = 00
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        notificationCenter.add(request) { (error) in
-            if error != nil {
-                self.showAlert(title: "푸쉬 알람 등록을 실패했습니다.", message: "다시 시도해 보세요.")
-            }
-        }
-    }
     
     func makePopUpMenu() -> [UIAction] {
-        
         let amrap = UIAction(title: "AMRAP", state: .off) { action in
             self.writeVC.kindOfWOD = "AMRAP"
             self.navigationController?.pushViewController(self.writeVC, animated: true)
@@ -144,9 +113,10 @@ class CalendarViewController: BaseViewController {
     }
 }
 
-extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
-    
-    // MARK: - TableView Method
+
+
+// MARK: - TableView Extensions
+extension CalendarViewController: UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -168,10 +138,12 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UITa
         cell.additionalTextLabel.textAlignment = .center
         cell.workoutLabel.textAlignment = .center
         
+        cell.resultLabel.text = tasks[indexPath.section].resultText
+        
         if cell.additionalTextLabel.text == nil || cell.additionalTextLabel.text == "" {
             cell.secondLine.isHidden = true
         }
-        //cell.titleLabel.textAlignment = .center
+        
         return cell
     }
     
@@ -195,7 +167,6 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UITa
         writeVC.view.endEditing(true)
         self.navigationController?.pushViewController(writeVC, animated: true)
     }
-    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "WOD - \(section + 1)"
     }
@@ -205,8 +176,54 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UITa
         header.textLabel?.font = .systemFont(ofSize: 16, weight: .bold)
         header.textLabel?.textColor = .label
     }
+
+    // Method usage in TableView - Make Text
+    func getCalendarTableViewString(task: WODRealmTable) -> String {
+        let kindOfWOD = task.kindOfWOD ?? "Extra"
+        guard let rounds = task.rounds else { return "" }
+        var round = rounds == "" ? "-" : rounds
+        switch kindOfWOD {
+        case "AMRAP":
+            return "Team of \(task.peopleCount == "" ? "-" : task.peopleCount)\n\(kindOfWOD) \(round) minutes"
+        case "For Time":
+            if round == "-" || round == "1" {
+                round = ""
+            } else {
+                round += " rounds "
+            }
+            return "Team of \(task.peopleCount == "" ? "-" : task.peopleCount)\n" + "\(round)\(kindOfWOD) Of :"
+        case "EMOM":
+            return "\(kindOfWOD) \(round) minutes"
+        default:
+            return "Extra"
+        }
+    }
     
-    // MARK: - Calendar Method
+    func workoutString(task: WODRealmTable) -> NSAttributedString {
+        var wodStringArr: [String] = []
+        for i in task.workoutWithRepsArray.indices {
+            var wodString: String
+            if task.workoutWithRepsArray[i].reps == 0 || task.workoutWithRepsArray[i].reps == 1 {
+                wodString = task.workoutWithRepsArray[i].workout
+            } else {
+                wodString = "\(task.workoutWithRepsArray[i].reps) \(task.workoutWithRepsArray[i].workout)"
+            }
+            wodStringArr.append(wodString)
+        }
+        
+        let attrString = NSMutableAttributedString(string: wodStringArr.reduce("") { $0 + $1 + "\n" })
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1
+        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
+        
+        return attrString
+    }
+}
+
+
+
+// MARK: - Calendar Extensions
+extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     // Calendar - Set Date
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         if calendarView.calendar.selectedDate != nil {
@@ -235,42 +252,34 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UITa
         }
         return 1
     }
-    
-    // CalendarTableView List - Make Text
-    func getCalendarTableViewString(task: WODRealmTable) -> String {
-        let kindOfWOD = task.kindOfWOD ?? "Extra"
-        guard let rounds = task.rounds else { return "" }
-        var round = rounds == "" ? "-" : rounds
-        switch kindOfWOD {
-        case "AMRAP":
-            return "Team of \(task.peopleCount == "" ? "-" : task.peopleCount)\n\(kindOfWOD) \(round) minutes"
-        case "For Time":
-            if round == "-" || round == "1" {
-                round = ""
-            } else {
-                round += " rounds"
+}
+
+// MARK: - Notification Method (Push Alarm)
+extension CalendarViewController {
+    func requestNotificationAuth(notificationCenter: UNUserNotificationCenter) {
+        let authOptions: UNAuthorizationOptions = UNAuthorizationOptions(arrayLiteral: .badge, .alert, .sound)
+        notificationCenter.requestAuthorization(options: authOptions) { success, error in
+            if success {
+                self.sendNoti(notificationCenter: notificationCenter)
             }
-            return "Team of \(task.peopleCount == "" ? "-" : task.peopleCount)\n" + "\(round)" + "\(kindOfWOD) Of :"
-        case "EMOM":
-            return "\(kindOfWOD) \(round)minutes"
-        default:
-            return "Extra"
         }
     }
     
-    func workoutString(task: WODRealmTable) -> NSAttributedString {
-        var wodStringArr: [String] = []
-        for i in task.workOut.indices {
-            let wodString = task.reps[i] == "0" ? task.workOut[i] : task.reps[i] + " " + task.workOut[i]
-            wodStringArr.append(wodString)
+    func sendNoti(notificationCenter: UNUserNotificationCenter) {
+        notificationCenter.removeAllPendingNotificationRequests()
+        let content = UNMutableNotificationContent()
+        content.title = "와두"
+        content.subtitle = "오늘 운동하셨나요?"
+        var dateComponents = DateComponents()
+        dateComponents.hour = 22
+        dateComponents.minute = 00
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        notificationCenter.add(request) { (error) in
+            if error != nil {
+                self.showAlert(title: "푸쉬 알람 등록을 실패했습니다.", message: "다시 시도해 보세요.")
+            }
         }
-
-        let attrString = NSMutableAttributedString(string: wodStringArr.reduce("") { $0 + $1 + "\n" })
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 1
-        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
-        
-        return attrString
     }
     
 }

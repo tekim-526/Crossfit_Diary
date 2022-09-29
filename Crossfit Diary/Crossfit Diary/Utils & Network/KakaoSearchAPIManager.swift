@@ -38,7 +38,7 @@ struct KakaoSearchAPIManager {
                     let phone = json["documents"][i]["phone"].string
                     placeList.append(Place(placeName: placeName, roadAdressName: roadAdressName, longitudeX: longitudeX, latitudeY: latitiudeY, phone: phone))
                 }
-                print("JSON\n",json)
+                
                 completionHandler(placeList)
             case .failure(let error):
                 print(error)
