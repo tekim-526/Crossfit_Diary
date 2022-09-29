@@ -104,6 +104,11 @@ extension MapViewController {
         locationManager.stopUpdatingLocation()
     }
     
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        print(#function)
+        self.mapView.map.reloadInputViews()
+    }
+    
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkDeviceLocationAuth()
     }
@@ -125,29 +130,31 @@ extension MapViewController {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+       
+        
         if annotation is MKUserLocation {
             return nil
         }
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "custom")
-        
+
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "custom")
         } else {
             annotationView?.annotation = annotation
         }
-        
+
         let mappinImage = UIImage(named: "mappin")
         let size = CGSize(width: 40, height: 40)
         UIGraphicsBeginImageContext(size)
         mappinImage?.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
         annotationView?.image = resizedImage
-        
+
         let annotationLabel = UILabel(frame: CGRect(x: -20, y: 40, width: 80, height: 30))
         annotationLabel.numberOfLines = 1
         annotationLabel.textAlignment = .center
-        annotationLabel.font = .systemFont(ofSize: 10, weight: .bold)
-        annotationLabel.text = annotation.title as? String
+        annotationLabel.font = .systemFont(ofSize: 8, weight: .bold)
+        annotationLabel.text = (annotation.title ?? "") ?? ""
         annotationView?.addSubview(annotationLabel)
 
         return annotationView
