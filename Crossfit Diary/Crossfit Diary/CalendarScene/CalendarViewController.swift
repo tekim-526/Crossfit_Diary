@@ -268,7 +268,7 @@ extension CalendarViewController {
     func sendNoti(notificationCenter: UNUserNotificationCenter) {
         notificationCenter.removeAllPendingNotificationRequests()
         let content = UNMutableNotificationContent()
-        content.title = "와두"
+        content.title = "와디"
         content.subtitle = "오늘 운동하셨나요?"
         var dateComponents = DateComponents()
         dateComponents.hour = 22
