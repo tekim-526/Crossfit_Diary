@@ -10,13 +10,14 @@ import UIKit
 import CoreLocation
 import MapKit
 import SnapKit
+import Cluster
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate {
     var mapView = MapView()
     var locationManager = CLLocationManager()
     var authStatus: CLAuthorizationStatus!
     var placeList: [Place]!
-    
+    let clusterManager = ClusterManager()
     override func loadView() {
         view = mapView
     }
@@ -27,17 +28,16 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
         locationManager.delegate = self
         checkDeviceLocationAuth()
         mapView.map.showsUserLocation = true
-    
         mapView.map.setUserTrackingMode(.follow, animated: true)
-        
         view.backgroundColor = .mainColor
     }
     
     // MARK: - Methods
     func mapViewSetUp(center: CLLocationCoordinate2D) {
 
-        let region = MKCoordinateRegion(center: center, latitudinalMeters: 3000, longitudinalMeters: 300)
-        mapView.map.setRegion(region, animated: true)
+        let region = MKCoordinateRegion(center: center, latitudinalMeters: 3000, longitudinalMeters: 3000)
+        mapView.map.setRegion(region, animated: false)
+        
     }
     
     func checkDeviceLocationAuth() {
@@ -54,7 +54,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
             }
         }
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print(mapView.map.annotations.count)
+    }
     func checkAppLocationAuth(authStatus: CLAuthorizationStatus) {
         switch authStatus {
         case .notDetermined:
@@ -77,7 +80,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
         let x = CLLocationDegrees(floatLiteral: Double(place.longitudeX) ?? 0.0)
         let y = CLLocationDegrees(floatLiteral: Double(place.latitudeY) ?? 0.0)
         annotation.coordinate = CLLocationCoordinate2DMake(y, x)
+        
         annotation.title = place.placeName
+        
         mapView.map.addAnnotation(annotation)
     }
 }
@@ -101,17 +106,22 @@ extension MapViewController {
                 self.placeList = placeList
             }
         }
+        
         locationManager.stopUpdatingLocation()
     }
+    
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        checkDeviceLocationAuth()
+    }
+    
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         print(#function)
         self.mapView.map.reloadInputViews()
     }
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        checkDeviceLocationAuth()
-    }
+
+
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if view.annotation?.title == "My Location" {
             self.mapView.annotationDetailView.isHidden = true
@@ -128,36 +138,17 @@ extension MapViewController {
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         self.mapView.annotationDetailView.isHidden = true
     }
-    
+
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-       
-        
         if annotation is MKUserLocation {
             return nil
         }
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "custom")
-
-        if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "custom")
-        } else {
-            annotationView?.annotation = annotation
-        }
-
-        let mappinImage = UIImage(named: "mappin")
-        let size = CGSize(width: 40, height: 40)
-        UIGraphicsBeginImageContext(size)
-        mappinImage?.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-        annotationView?.image = resizedImage
-
-        let annotationLabel = UILabel(frame: CGRect(x: -20, y: 40, width: 80, height: 30))
-        annotationLabel.numberOfLines = 1
-        annotationLabel.textAlignment = .center
-        annotationLabel.font = .systemFont(ofSize: 8, weight: .bold)
-        annotationLabel.text = (annotation.title ?? "") ?? ""
-        annotationView?.addSubview(annotationLabel)
-
+        
+        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "Custom")
+        annotationView.markerTintColor = .mainColor
+        annotationView.glyphImage = UIImage(named: "gym")
         return annotationView
+
     }
     
     func makeAttributedLabel(label: UILabel, first: String, second: String, third: String?) {

@@ -31,6 +31,9 @@
 		93CAC5FF28E2CA8B00DC85D0 /* WriteTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CAC5FE28E2CA8B00DC85D0 /* WriteTableViewHeaderView.swift */; };
 		93CAC60228E3DCEE00DC85D0 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC60128E3DCEE00DC85D0 /* Realm */; };
 		93CAC60428E3DCEE00DC85D0 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC60328E3DCEE00DC85D0 /* RealmSwift */; };
+		93CAC60C28E8472700DC85D0 /* Cluster in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC60B28E8472700DC85D0 /* Cluster */; };
+		93CAC63028ED1D6000DC85D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93CAC62F28ED1D6000DC85D0 /* GoogleService-Info.plist */; };
+		93CAC63328ED1E9D00DC85D0 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC63228ED1E9D00DC85D0 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		93D941AB28CB129F002CDB03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AA28CB129F002CDB03 /* AppDelegate.swift */; };
 		93D941AD28CB129F002CDB03 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AC28CB129F002CDB03 /* SceneDelegate.swift */; };
 		93D941B428CB12A3002CDB03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93D941B328CB12A3002CDB03 /* Assets.xcassets */; };
@@ -67,6 +70,7 @@
 		9374378628DD94C800D67C12 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		9397458528D446B300F81DA5 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		93CAC5FE28E2CA8B00DC85D0 /* WriteTableViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTableViewHeaderView.swift; sourceTree = "<group>"; };
+		93CAC62F28ED1D6000DC85D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		93D941A728CB129F002CDB03 /* Crossfit Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crossfit Diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93D941AA28CB129F002CDB03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93D941AC28CB129F002CDB03 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,11 +95,13 @@
 				9374377B28D97E1300D67C12 /* SwiftyJSON in Frameworks */,
 				93D941E828CB1FAC002CDB03 /* FSCalendar in Frameworks */,
 				93CAC60428E3DCEE00DC85D0 /* RealmSwift in Frameworks */,
+				93CAC63328ED1E9D00DC85D0 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				9374378A28DDA3D100D67C12 /* IQKeyboardManagerSwift in Frameworks */,
 				9374377828D97DFF00D67C12 /* Alamofire in Frameworks */,
 				93D941E028CB1F72002CDB03 /* SnapKit in Frameworks */,
 				93CAC60228E3DCEE00DC85D0 /* Realm in Frameworks */,
 				93333C760EDC28331BCD8463 /* Pods_Crossfit_Diary.framework in Frameworks */,
+				93CAC60C28E8472700DC85D0 /* Cluster in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +179,7 @@
 				93D941E928CB2D1A002CDB03 /* Main.storyboard */,
 				93D941B328CB12A3002CDB03 /* Assets.xcassets */,
 				93D941B528CB12A3002CDB03 /* LaunchScreen.storyboard */,
+				93CAC62F28ED1D6000DC85D0 /* GoogleService-Info.plist */,
 				93D941B828CB12A3002CDB03 /* Info.plist */,
 			);
 			path = "Crossfit Diary";
@@ -263,6 +270,8 @@
 				9374378928DDA3D100D67C12 /* IQKeyboardManagerSwift */,
 				93CAC60128E3DCEE00DC85D0 /* Realm */,
 				93CAC60328E3DCEE00DC85D0 /* RealmSwift */,
+				93CAC60B28E8472700DC85D0 /* Cluster */,
+				93CAC63228ED1E9D00DC85D0 /* FirebaseAnalyticsWithoutAdIdSupport */,
 			);
 			productName = "Crossfit Diary";
 			productReference = 93D941A728CB129F002CDB03 /* Crossfit Diary.app */;
@@ -300,6 +309,8 @@
 				9374378128DAEF6D00D67C12 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				9374378828DDA3D000D67C12 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				93CAC60028E3DCEE00DC85D0 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				93CAC60A28E8472700DC85D0 /* XCRemoteSwiftPackageReference "Cluster" */,
+				93CAC63128ED1E9D00DC85D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 93D941A828CB129F002CDB03 /* Products */;
 			projectDirPath = "";
@@ -318,6 +329,7 @@
 				93D941EA28CB2D1A002CDB03 /* Main.storyboard in Resources */,
 				93D941B728CB12A3002CDB03 /* LaunchScreen.storyboard in Resources */,
 				93D941B428CB12A3002CDB03 /* Assets.xcassets in Resources */,
+				93CAC63028ED1D6000DC85D0 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,7 +528,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = FQ63CT4A3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Crossfit Diary/Info.plist";
@@ -533,7 +545,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tekim.Crossfit-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -552,7 +564,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = FQ63CT4A3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Crossfit Diary/Info.plist";
@@ -569,7 +581,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tekim.Crossfit-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -645,6 +657,22 @@
 				version = 10.30.0;
 			};
 		};
+		93CAC60A28E8472700DC85D0 /* XCRemoteSwiftPackageReference "Cluster" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/efremidze/Cluster.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		93CAC63128ED1E9D00DC85D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		93D941DE28CB1F72002CDB03 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -693,6 +721,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 93CAC60028E3DCEE00DC85D0 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		93CAC60B28E8472700DC85D0 /* Cluster */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 93CAC60A28E8472700DC85D0 /* XCRemoteSwiftPackageReference "Cluster" */;
+			productName = Cluster;
+		};
+		93CAC63228ED1E9D00DC85D0 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 93CAC63128ED1E9D00DC85D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
 		};
 		93D941DF28CB1F72002CDB03 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

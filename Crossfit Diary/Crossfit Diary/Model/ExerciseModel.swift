@@ -14,7 +14,7 @@ struct ExerciseModel {
     var cleans = ["Clean", "Clean Extension", "Clean Pull", "Hang Clean", "Hang Power Clean", "Hang Squat Clean", "Muscle Clean", "Power Clean", "Squat Clean", "Squat Pause Clean"]
     var presses = ["Bench Press", "Floor Press", "Push Press", "Seated Press", "Shoulder Press", "Shoulder To Overhead", "Snatch Grip Press", "Sots Press"]
     var jerks = ["Jerk Balance", "Jerk Dip", "Push Jerk", "Split Jerk", "Squat Jerk"]
-    var snatches = ["Hang Power Snatch", "Hang Squat Snatch", "Muscle Snatch", "Power Snatch", "Snatch", "Snatch Balance", "Snatch Extension", "Snatch Pull", "Squat Pause Snatch", "Squat Snatch"]
+    var snatches = ["Hang Power Snatch", "Hang Squat Snatch", "Muscle Snatch", "Power Snatch", "Snatch Balance", "Snatch Extension", "Snatch Pull", "Squat Pause Snatch", "Squat Snatch"]
     var deadlifts = ["Deadlift", "Romanian Deadlift", "Snatch Grip Deadlift", "Stiff Legged Deadlift", "Sumo Deadlift", "Sumo Deadlift High Pull"]
     var olympicLifts = ["Clean & Jerk", "Snatch"]
     var other = ["Back Rack Lunges", "Front Rack Lunges", "OverHead Lunges", "Thruster"]
@@ -23,18 +23,17 @@ struct ExerciseModel {
 
     // MARK: - Gymnastics
     var gymnastics: [String]
-    var bar = ["Banded Pull Ups", "Chest To Bar Pull Ups", "Muscle Ups", "Pull Ups", "Strict Banded Pull Ups", "Strict Chest To Bar Pull Ups", "Strict Muscle Ups", "Strict Pull Ups", "Toes To Bar"]
+    var bar = ["Banded Pull Ups", "Chest To Bar Pull Ups", "Muscle Ups", "Pull Ups", "Strict Banded Pull Ups", "Strict Chest To Bar Pull Ups", "Strict Muscle Ups", "Strict Pull Ups", "Toes To Bar", "Jumping Pull Ups"]
     var box = ["Box Jumps","Box Jump Overs", "Box Jump(Step Down)", "Box Step Ups", "Burpee Box Jump Overs"]
     var handstand = ["Handstand Hold", "Handstand Push Ups", "Handstand Walk", "Strict Handstand Push Ups"]
-    var ring = ["Ring Muscle Ups", "Ring Dips", "Ring Rows", "Toes To Ring"]
+    var ring = ["Ring Muscle Ups", "Ring Dips", "Ring Rows", "Toes To Ring", "Dips"]
     var jumpRope = ["Single Unders", "Double Unders", "Triple Unders"]
 
     // MARK: - Endurance
     var endurance = ["Row", "Run", "Ski"]
-
     // MARK: - calisthenics
     var calisthenics: [String]
-    var burpees = ["Burpees", "Target Burpees", "Burpee To Plates", "Burpee Over The Rower", "Bar Facing Burpee", "Bar Lateral Burpee"]
+    var burpees = ["Burpees", "Target Burpees", "Burpee To Plates", "Burpee Over The Rower", "Bar Facing Burpee", "Bar Lateral Burpee", "Burpee Pull Ups"]
     var lunges = ["Lunges", "Walking Lunges"]
     var bodySquats = ["Air Squats", "Single Leg Squats"]
     var pushups = ["Hand Release Push Ups", "Kneeling Push Ups" ,"Push Ups", "Wave Push Ups"]
@@ -51,7 +50,7 @@ struct ExerciseModel {
     var dumbellPress = ["Dumbell Push Press", "Dumbell Shoulder Press", "Dumbell Shoulder To Overhead", "Devil Press", "Single Arm Devil Press"]
 
     // MARK: - Others
-    var others = ["AB Mat Sit Ups", "GHD Sit Ups", "Sit Ups", "Medicine Ball Clean", "Wall Ball Shot", "Rest"]
+    var others = ["AB Mat Sit Ups", "GHD Sit Ups", "Sit Ups", "Medicine Ball Clean", "Wall Ball Shot", "Rope Climbs, 15ft", "Rope Climbs, Lying To Standing", "Rest"]
     var allWorkOutArray: [[String]]
     init() {
         self.barbells = [squats, cleans, presses, jerks, snatches, deadlifts, olympicLifts, other].flatMap{ $0 }.sorted()

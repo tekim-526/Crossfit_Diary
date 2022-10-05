@@ -9,6 +9,7 @@ import UIKit
 import UserNotifications
 
 import FSCalendar
+import FirebaseAnalytics
 import RealmSwift
 
 class CalendarViewController: BaseViewController {
@@ -31,7 +32,16 @@ class CalendarViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+//        Analytics.logEvent("taesu", parameters: [
+//          "name": "Taesu",
+//          "full_text": "text as NSObject",
+//        ])
+//        
+//        Analytics.setDefaultEventParameters([
+//          "level_name": "Caverns01",
+//          "level_difficulty": 4
+//        ])
+//        
         // SwipeGesture
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeEvent(_:)))
         swipeUp.direction = .up
