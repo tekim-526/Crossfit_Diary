@@ -76,17 +76,7 @@ class CalendarViewController: BaseViewController {
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil)
         let uiMenu = UIMenu(title: "운동종류", image: nil, identifier: nil, options: .displayInline, children: makePopUpMenu())
         rightBarButtonItem.menu = uiMenu
-        
-        navigationItem.title = "WODI"
-        navigationItem.rightBarButtonItem = rightBarButtonItem
-        navigationController?.navigationBar.tintColor = .white
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .mainColor
-        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
+        makeNavigationUI(title: "WODI", rightBarButtonItem: rightBarButtonItem)
         
         calendarView.calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red
     }
@@ -176,6 +166,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource, UI
         writeVC.kindOfWOD = tasks[indexPath.section].kindOfWOD
         writeVC.view.endEditing(true)
         self.navigationController?.pushViewController(writeVC, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "WOD - \(section + 1)"

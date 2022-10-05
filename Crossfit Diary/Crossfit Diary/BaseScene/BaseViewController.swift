@@ -20,4 +20,17 @@ class BaseViewController: UIViewController {
         alert.addAction(ok)
         self.present(alert, animated: true)
     }
+    func makeNavigationUI(title: String ,rightBarButtonItem: UIBarButtonItem?) {
+        navigationItem.title = title
+        navigationItem.rightBarButtonItem = rightBarButtonItem
+        navigationController?.navigationBar.tintColor = .white
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .mainColor
+        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
+        
+    }
 }

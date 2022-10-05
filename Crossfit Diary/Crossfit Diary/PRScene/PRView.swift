@@ -8,11 +8,10 @@
 import UIKit
 import SnapKit
 
-class RMView: BaseView {
+class PRView: BaseView {
     
     let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .red
         return tableView
     }()
     override init(frame: CGRect) {

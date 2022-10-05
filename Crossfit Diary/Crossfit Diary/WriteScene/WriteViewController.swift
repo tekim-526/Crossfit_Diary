@@ -339,6 +339,7 @@ extension WriteViewController: UIPickerViewDataSource, UIPickerViewDelegate {
             firstString = "\(row)Reps"
             lastString = firstString
         }
+        
     }
 }
 
@@ -364,6 +365,7 @@ extension WriteViewController: UITableViewDelegate, UITableViewDataSource {
         modifyVC.indexPath = indexPath
         modifyVC.workout = workout
         present(modifyVC, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

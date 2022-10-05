@@ -1,5 +1,5 @@
 //
-//  RMViewController.swift
+//  WritePRViewController.swift
 //  Crossfit Diary
 //
 //  Created by Kim TaeSoo on 2022/10/05.
@@ -7,14 +7,13 @@
 
 import UIKit
 
-class RMViewController: BaseViewController {
-    let rmView = RMView()
-    
-    
+class WritePRViewController: BaseViewController {
+    let writePRView = WritePRView()
     override func loadView() {
-        view = rmView
+        view = writePRView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
 }

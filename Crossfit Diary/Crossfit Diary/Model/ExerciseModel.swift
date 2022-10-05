@@ -52,11 +52,13 @@ struct ExerciseModel {
     // MARK: - Others
     var others = ["AB Mat Sit Ups", "GHD Sit Ups", "Sit Ups", "Medicine Ball Clean", "Wall Ball Shot", "Rope Climbs, 15ft", "Rope Climbs, Lying To Standing", "Rest"]
     var allWorkOutArray: [[String]]
+    var rm: [[String]]
     init() {
         self.barbells = [squats, cleans, presses, jerks, snatches, deadlifts, olympicLifts, other].flatMap{ $0 }.sorted()
         self.dumbells = [dumbellSquat, dumbellLunge, dumbellClean, dumbellSnatch, dumbellPress].flatMap{ $0 }.sorted()
         self.gymnastics = [bar, box, handstand, ring, jumpRope].flatMap{ $0 }.sorted()
         self.calisthenics = [burpees, lunges, bodySquats, pushups].flatMap{ $0 }.sorted()
         self.allWorkOutArray = [barbells, dumbells, kettlebells, gymnastics, calisthenics, endurance, others]
+        self.rm = [squats, deadlifts, presses, cleans,  jerks, snatches, olympicLifts, other]
     }
 }
