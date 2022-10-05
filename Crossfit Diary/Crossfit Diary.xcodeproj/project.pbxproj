@@ -33,7 +33,8 @@
 		93CAC60428E3DCEE00DC85D0 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC60328E3DCEE00DC85D0 /* RealmSwift */; };
 		93CAC60C28E8472700DC85D0 /* Cluster in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC60B28E8472700DC85D0 /* Cluster */; };
 		93CAC63028ED1D6000DC85D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93CAC62F28ED1D6000DC85D0 /* GoogleService-Info.plist */; };
-		93CAC63328ED1E9D00DC85D0 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC63228ED1E9D00DC85D0 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		93CAC63628ED2B5000DC85D0 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC63528ED2B5000DC85D0 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		93CAC63828ED2B5000DC85D0 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC63728ED2B5000DC85D0 /* FirebaseCrashlytics */; };
 		93D941AB28CB129F002CDB03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AA28CB129F002CDB03 /* AppDelegate.swift */; };
 		93D941AD28CB129F002CDB03 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AC28CB129F002CDB03 /* SceneDelegate.swift */; };
 		93D941B428CB12A3002CDB03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93D941B328CB12A3002CDB03 /* Assets.xcassets */; };
@@ -95,11 +96,12 @@
 				9374377B28D97E1300D67C12 /* SwiftyJSON in Frameworks */,
 				93D941E828CB1FAC002CDB03 /* FSCalendar in Frameworks */,
 				93CAC60428E3DCEE00DC85D0 /* RealmSwift in Frameworks */,
-				93CAC63328ED1E9D00DC85D0 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				93CAC63628ED2B5000DC85D0 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				9374378A28DDA3D100D67C12 /* IQKeyboardManagerSwift in Frameworks */,
 				9374377828D97DFF00D67C12 /* Alamofire in Frameworks */,
 				93D941E028CB1F72002CDB03 /* SnapKit in Frameworks */,
 				93CAC60228E3DCEE00DC85D0 /* Realm in Frameworks */,
+				93CAC63828ED2B5000DC85D0 /* FirebaseCrashlytics in Frameworks */,
 				93333C760EDC28331BCD8463 /* Pods_Crossfit_Diary.framework in Frameworks */,
 				93CAC60C28E8472700DC85D0 /* Cluster in Frameworks */,
 			);
@@ -255,6 +257,7 @@
 				93D941A328CB129F002CDB03 /* Sources */,
 				93D941A428CB129F002CDB03 /* Frameworks */,
 				93D941A528CB129F002CDB03 /* Resources */,
+				93CAC63928ED2E3A00DC85D0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -271,7 +274,8 @@
 				93CAC60128E3DCEE00DC85D0 /* Realm */,
 				93CAC60328E3DCEE00DC85D0 /* RealmSwift */,
 				93CAC60B28E8472700DC85D0 /* Cluster */,
-				93CAC63228ED1E9D00DC85D0 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				93CAC63528ED2B5000DC85D0 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				93CAC63728ED2B5000DC85D0 /* FirebaseCrashlytics */,
 			);
 			productName = "Crossfit Diary";
 			productReference = 93D941A728CB129F002CDB03 /* Crossfit Diary.app */;
@@ -310,7 +314,7 @@
 				9374378828DDA3D000D67C12 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				93CAC60028E3DCEE00DC85D0 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				93CAC60A28E8472700DC85D0 /* XCRemoteSwiftPackageReference "Cluster" */,
-				93CAC63128ED1E9D00DC85D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				93CAC63428ED2B5000DC85D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 93D941A828CB129F002CDB03 /* Products */;
 			projectDirPath = "";
@@ -336,6 +340,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		93CAC63928ED2E3A00DC85D0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
 		C5E7EBF1E6D836B71E6E3937 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -529,6 +552,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 8;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = FQ63CT4A3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Crossfit Diary/Info.plist";
@@ -665,7 +689,7 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		93CAC63128ED1E9D00DC85D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		93CAC63428ED2B5000DC85D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
@@ -727,10 +751,15 @@
 			package = 93CAC60A28E8472700DC85D0 /* XCRemoteSwiftPackageReference "Cluster" */;
 			productName = Cluster;
 		};
-		93CAC63228ED1E9D00DC85D0 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+		93CAC63528ED2B5000DC85D0 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 93CAC63128ED1E9D00DC85D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 93CAC63428ED2B5000DC85D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		93CAC63728ED2B5000DC85D0 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 93CAC63428ED2B5000DC85D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 		93D941DF28CB1F72002CDB03 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
