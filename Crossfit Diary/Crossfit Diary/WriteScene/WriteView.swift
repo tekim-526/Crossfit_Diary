@@ -180,26 +180,4 @@ extension WriteView {
     }
 }
 
-extension UITextField {
-    func customTextField() -> UITextField {
-        let tf = UITextField()
-        tf.borderStyle = .none
-        tf.font = UIFont.systemFont(ofSize: 18, weight: .black)
-        tf.textColor = .label
-        tf.attributedPlaceholder = NSAttributedString(string: "--", attributes: [NSAttributedString.Key.foregroundColor : UIColor.label])
-        tf.textAlignment = .center
-        tf.keyboardType = .numberPad
-        tf.resignFirstResponder()
-        return tf
-    }
-}
-extension UILabel {
-    func customLabel(weightKind: String, unit: String) -> UILabel {
-        let label = UILabel()
-        label.text = weightKind + "\n" + "(\(unit))"
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
-        label.textAlignment = .center
-        label.numberOfLines = 2
-        return label
-    }
-}
+
