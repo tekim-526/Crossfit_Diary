@@ -15,12 +15,13 @@ class TabBarController: UITabBarController {
         view.backgroundColor = .systemBackground
         let calendarVC = CalendarViewController()
         let mapVC = MapViewController()
-        
+        let rmVC = RMViewController()
+        rmVC.tabBarItem = UITabBarItem(title: "RM", image: UIImage(systemName: "chart.bar.xaxis"), selectedImage: nil)
         calendarVC.tabBarItem = UITabBarItem(title: "기록", image: UIImage(systemName: "note.text"), selectedImage: nil)
         mapVC.tabBarItem = UITabBarItem(title: "주변 박스", image: UIImage(systemName: "mappin.and.ellipse"), selectedImage: nil)
         let calendarNav = UINavigationController(rootViewController: calendarVC)
         self.tabBar.tintColor = .mainColor
         self.tabBar.backgroundColor = .systemBackground
-        viewControllers = [calendarNav, mapVC]
+        viewControllers = [calendarNav, rmVC, mapVC]
     }
 }

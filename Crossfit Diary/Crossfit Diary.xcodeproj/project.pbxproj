@@ -35,6 +35,8 @@
 		93CAC63028ED1D6000DC85D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93CAC62F28ED1D6000DC85D0 /* GoogleService-Info.plist */; };
 		93CAC63628ED2B5000DC85D0 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC63528ED2B5000DC85D0 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		93CAC63828ED2B5000DC85D0 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC63728ED2B5000DC85D0 /* FirebaseCrashlytics */; };
+		93CAC63C28ED57C300DC85D0 /* RMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CAC63B28ED57C300DC85D0 /* RMView.swift */; };
+		93CAC63E28ED57CD00DC85D0 /* RMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CAC63D28ED57CD00DC85D0 /* RMViewController.swift */; };
 		93D941AB28CB129F002CDB03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AA28CB129F002CDB03 /* AppDelegate.swift */; };
 		93D941AD28CB129F002CDB03 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D941AC28CB129F002CDB03 /* SceneDelegate.swift */; };
 		93D941B428CB12A3002CDB03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93D941B328CB12A3002CDB03 /* Assets.xcassets */; };
@@ -72,6 +74,8 @@
 		9397458528D446B300F81DA5 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		93CAC5FE28E2CA8B00DC85D0 /* WriteTableViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTableViewHeaderView.swift; sourceTree = "<group>"; };
 		93CAC62F28ED1D6000DC85D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		93CAC63B28ED57C300DC85D0 /* RMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMView.swift; sourceTree = "<group>"; };
+		93CAC63D28ED57CD00DC85D0 /* RMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMViewController.swift; sourceTree = "<group>"; };
 		93D941A728CB129F002CDB03 /* Crossfit Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crossfit Diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93D941AA28CB129F002CDB03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93D941AC28CB129F002CDB03 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -146,6 +150,15 @@
 			path = "Utils & Network";
 			sourceTree = "<group>";
 		};
+		93CAC63A28ED56E100DC85D0 /* RMScene */ = {
+			isa = PBXGroup;
+			children = (
+				93CAC63B28ED57C300DC85D0 /* RMView.swift */,
+				93CAC63D28ED57CD00DC85D0 /* RMViewController.swift */,
+			);
+			path = RMScene;
+			sourceTree = "<group>";
+		};
 		93D9419E28CB129F002CDB03 = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +187,7 @@
 				93D941CB28CB143C002CDB03 /* WriteScene */,
 				9323D1F428D09A7F00659885 /* WorkOutListScene */,
 				93D941CA28CB141C002CDB03 /* MapScene */,
+				93CAC63A28ED56E100DC85D0 /* RMScene */,
 				932B83B328D1C2FD00EAF221 /* BaseScene */,
 				93D941AA28CB129F002CDB03 /* AppDelegate.swift */,
 				93D941AC28CB129F002CDB03 /* SceneDelegate.swift */,
@@ -394,6 +408,7 @@
 				932B83BE28D2F42300EAF221 /* ModifyView.swift in Sources */,
 				93D941DD28CB1E33002CDB03 /* TabBarController.swift in Sources */,
 				9374378728DD94C800D67C12 /* UIColor+Extension.swift in Sources */,
+				93CAC63E28ED57CD00DC85D0 /* RMViewController.swift in Sources */,
 				932B83B528D1C30C00EAF221 /* BaseView.swift in Sources */,
 				932B83A628D1ADA300EAF221 /* WODRealmTable.swift in Sources */,
 				932B83B728D1C31600EAF221 /* BaseViewController.swift in Sources */,
@@ -405,6 +420,7 @@
 				93D941AB28CB129F002CDB03 /* AppDelegate.swift in Sources */,
 				9323D1F828D09AB000659885 /* WorkOutListView.swift in Sources */,
 				9323D1F628D09AA200659885 /* WorkOutListViewController.swift in Sources */,
+				93CAC63C28ED57C300DC85D0 /* RMView.swift in Sources */,
 				93D941CD28CB1462002CDB03 /* CalendarViewController.swift in Sources */,
 				9323D1FA28D0A56B00659885 /* ExerciseModel.swift in Sources */,
 				932B83AA28D1B9B900EAF221 /* DateFormatter+Extension.swift in Sources */,
