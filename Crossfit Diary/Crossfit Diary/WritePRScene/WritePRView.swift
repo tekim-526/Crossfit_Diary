@@ -38,6 +38,24 @@ class WritePRView: BaseView {
         return seg
     }()
     
+    let percent110: UILabel = { return UILabel().percentLabel(percent: 110) }()
+    let percent105: UILabel = { return UILabel().percentLabel(percent: 105) }()
+    let percent95: UILabel = { return UILabel().percentLabel(percent: 95) }()
+    
+    let percent90: UILabel = { return UILabel().percentLabel(percent: 90) }()
+    let percent85: UILabel = { return UILabel().percentLabel(percent: 85) }()
+    let percent80: UILabel = { return UILabel().percentLabel(percent: 80) }()
+    
+    let percent75: UILabel = { return UILabel().percentLabel(percent: 75) }()
+    let percent70: UILabel = { return UILabel().percentLabel(percent: 70) }()
+    let percent65: UILabel = { return UILabel().percentLabel(percent: 65) }()
+    
+    let percent60: UILabel = { return UILabel().percentLabel(percent: 60) }()
+    let percent55: UILabel = { return UILabel().percentLabel(percent: 55) }()
+    let percent50: UILabel = { return UILabel().percentLabel(percent: 50) }()
+    
+    lazy var percentLabelArray = [percent110, percent105, percent95, percent90, percent85, percent80, percent75, percent70, percent65, percent60, percent55, percent50]
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -49,6 +67,7 @@ class WritePRView: BaseView {
     override func setupUI() {
         self.backgroundColor = .systemBackground
         [oneRMLabel, oneRMTextField, threeRMLabel, threeRMTextField, fiveRMLabel, fiveRMTextField, saveButton, segmentControl].forEach { self.addSubview($0) }
+        percentLabelArray.forEach { self.addSubview($0) }
     }
     
     override func makeConstraints() {
@@ -67,6 +86,10 @@ class WritePRView: BaseView {
             make.trailing.equalTo(self.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(28)
         }
+        constraintsCenterXLabel(leadingLabel: percent110, centerLabel: percent105, trailingLabel: percent95, top: segmentControl.snp.bottom)
+        constraintsCenterXLabel(leadingLabel: percent90, centerLabel: percent85, trailingLabel: percent80, top: percent105.snp.bottom)
+        constraintsCenterXLabel(leadingLabel: percent75, centerLabel: percent70, trailingLabel: percent65, top: percent85.snp.bottom)
+        constraintsCenterXLabel(leadingLabel: percent60, centerLabel: percent55, trailingLabel: percent50, top: percent70.snp.bottom)
     }
 }
 
@@ -80,14 +103,36 @@ extension WritePRView {
         tf.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide).offset(top)
             make.leading.equalTo(leading)
-            make.width.equalTo(self.snp.width).multipliedBy(0.333)
+            make.width.equalTo(self.snp.width).multipliedBy(0.33333)
             make.height.equalTo(tfHeight)
         }
         label.snp.makeConstraints { make in
             make.top.equalTo(tf.snp.bottom)
             make.centerX.equalTo(tf.snp.centerX)
-            make.width.equalTo(self.snp.width).multipliedBy(0.333)
+            make.width.equalTo(self.snp.width).multipliedBy(0.33333)
             make.height.equalTo(labelHeight)
+        }
+    }
+    func constraintsCenterXLabel(leadingLabel: UILabel, centerLabel: UILabel, trailingLabel: UILabel, top: ConstraintRelatableTarget) {
+        let widthRatio = 0.2
+        let topPadding: CGFloat = 40
+        let spacing: CGFloat = 40
+        
+        centerLabel.snp.makeConstraints { make in
+            
+            make.top.equalTo(top).offset(topPadding)
+            make.centerX.equalTo(self.snp.centerX)
+            make.width.equalTo(self.snp.width).multipliedBy(widthRatio)
+        }
+        leadingLabel.snp.makeConstraints { make in
+            make.top.equalTo(top).offset(topPadding)
+            make.trailing.equalTo(centerLabel.snp.leading).offset(-spacing)
+            make.width.equalTo(self.snp.width).multipliedBy(widthRatio)
+        }
+        trailingLabel.snp.makeConstraints { make in
+            make.top.equalTo(top).offset(topPadding)
+            make.leading.equalTo(centerLabel.snp.trailing).offset(spacing)
+            make.width.equalTo(self.snp.width).multipliedBy(widthRatio)
         }
     }
 }

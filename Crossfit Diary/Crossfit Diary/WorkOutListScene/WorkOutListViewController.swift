@@ -38,6 +38,8 @@ class WorkOutListViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         workOutListView.searchbar.autocapitalizationType = .words
+        print("allworkout", allWorkOut)
+        print("allWorkOut.flatMap { $0 }.count : ", allWorkOut.flatMap { $0 }.count)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
