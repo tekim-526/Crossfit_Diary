@@ -70,11 +70,3 @@ class Workout: Object {
     @Persisted var reps: Int = 0
 }
 
-//class OneRM: Object {
-//    @Persisted (primaryKey: true) var objectID: ObjectId
-//    @Persisted var oneRM: Double
-//    @Persisted var twoRM: Double
-//    @Persisted var threeRM: Double
-//    @Persisted var fiveRM: Double
-//    @Persisted var workout: String
-//}

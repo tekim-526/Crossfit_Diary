@@ -19,6 +19,8 @@
 		932B83BC28D2F41400EAF221 /* ModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83BB28D2F41400EAF221 /* ModifyViewController.swift */; };
 		932B83BE28D2F42300EAF221 /* ModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83BD28D2F42300EAF221 /* ModifyView.swift */; };
 		93333C760EDC28331BCD8463 /* Pods_Crossfit_Diary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 078181CAD74CA8352254757D /* Pods_Crossfit_Diary.framework */; };
+		9353F98B28EEA23100B28B32 /* PRRealmTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9353F98A28EEA23100B28B32 /* PRRealmTable.swift */; };
+		9353F98D28EEA23B00B28B32 /* PRRealmCRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9353F98C28EEA23B00B28B32 /* PRRealmCRUD.swift */; };
 		9374377328D97D6800D67C12 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374377228D97D6800D67C12 /* APIKey.swift */; };
 		9374377528D97DB400D67C12 /* KakaoSearchAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374377428D97DB400D67C12 /* KakaoSearchAPIManager.swift */; };
 		9374377828D97DFF00D67C12 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9374377728D97DFF00D67C12 /* Alamofire */; };
@@ -72,6 +74,8 @@
 		932B83B628D1C31600EAF221 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		932B83BB28D2F41400EAF221 /* ModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyViewController.swift; sourceTree = "<group>"; };
 		932B83BD28D2F42300EAF221 /* ModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyView.swift; sourceTree = "<group>"; };
+		9353F98A28EEA23100B28B32 /* PRRealmTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRRealmTable.swift; sourceTree = "<group>"; };
+		9353F98C28EEA23B00B28B32 /* PRRealmCRUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRRealmCRUD.swift; sourceTree = "<group>"; };
 		9374377228D97D6800D67C12 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		9374377428D97DB400D67C12 /* KakaoSearchAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSearchAPIManager.swift; sourceTree = "<group>"; };
 		9374377F28D99FEF00D67C12 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -228,6 +232,8 @@
 				9323D1F928D0A56B00659885 /* ExerciseModel.swift */,
 				932B83A528D1ADA300EAF221 /* WODRealmTable.swift */,
 				932B83A728D1B17D00EAF221 /* WODRealmCRUD.swift */,
+				9353F98A28EEA23100B28B32 /* PRRealmTable.swift */,
+				9353F98C28EEA23B00B28B32 /* PRRealmCRUD.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -428,9 +434,11 @@
 				93D941D528CB14D5002CDB03 /* MapViewController.swift in Sources */,
 				9374378028D99FEF00D67C12 /* MapView.swift in Sources */,
 				9374377328D97D6800D67C12 /* APIKey.swift in Sources */,
+				9353F98B28EEA23100B28B32 /* PRRealmTable.swift in Sources */,
 				932B83BE28D2F42300EAF221 /* ModifyView.swift in Sources */,
 				93D941DD28CB1E33002CDB03 /* TabBarController.swift in Sources */,
 				9374378728DD94C800D67C12 /* UIColor+Extension.swift in Sources */,
+				9353F98D28EEA23B00B28B32 /* PRRealmCRUD.swift in Sources */,
 				93CAC63E28ED57CD00DC85D0 /* PRViewController.swift in Sources */,
 				932B83B528D1C30C00EAF221 /* BaseView.swift in Sources */,
 				932B83A628D1ADA300EAF221 /* WODRealmTable.swift in Sources */,
