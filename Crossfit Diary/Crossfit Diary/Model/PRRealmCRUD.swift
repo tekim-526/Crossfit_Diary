@@ -12,7 +12,6 @@ class PRRealmCRUD {
     let localRealm = try! Realm()
     
     func fetch() -> Results<PR> {
-        print(localRealm.configuration.fileURL!)
         return localRealm.objects(PR.self)
     }
     

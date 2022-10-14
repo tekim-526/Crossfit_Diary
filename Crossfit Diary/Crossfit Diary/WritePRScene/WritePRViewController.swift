@@ -72,6 +72,7 @@ class WritePRViewController: BaseViewController {
         }
         self.view.makeToast("저장되었습니다", duration: 1.0, position: .top)
         showLabelThroughSegmentIndex()
+        view.endEditing(true)
     }
     // MARK: - Button & Segment
     func showLabelThroughSegmentIndex() {

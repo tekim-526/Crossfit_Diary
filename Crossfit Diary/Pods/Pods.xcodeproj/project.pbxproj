@@ -19,7 +19,7 @@
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		909A513E246EDBD8C2EEC504DB1A2464 /* Pods-Crossfit Diary-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Crossfit Diary-acknowledgements.plist"; sourceTree = "<group>"; };
 		93517EF753724811E06A7646F5BC137C /* Pods-Crossfit Diary.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Crossfit Diary.modulemap"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		AB1F93E800392BD783F87E05153FD408 /* Pods-Crossfit Diary-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Crossfit Diary-dummy.m"; sourceTree = "<group>"; };
 		B499C0FBB4014288E9FD9211EAF63B82 /* Pods-Crossfit Diary-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Crossfit Diary-umbrella.h"; sourceTree = "<group>"; };
 		CD71D0DD7065CFDB05A87760BA7B4303 /* Pods-Crossfit Diary-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Crossfit Diary-Info.plist"; sourceTree = "<group>"; };
@@ -124,6 +124,8 @@
 			dependencies = (
 			);
 			name = "Pods-Crossfit Diary";
+			packageProductDependencies = (
+			);
 			productName = Pods_Crossfit_Diary;
 			productReference = E4EF47A1E8E4A24F89B31B7D34CEE9E3 /* Pods-Crossfit Diary */;
 			productType = "com.apple.product-type.framework";
@@ -146,6 +148,9 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			packageReferences = (
+				93DB552A28F9268300740087 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 373FDEE7AD2F51AE88D824D04D2D708A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -402,6 +407,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		93DB552A28F9268300740087 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 }
