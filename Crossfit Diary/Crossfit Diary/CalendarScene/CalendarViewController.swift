@@ -12,7 +12,7 @@ import FSCalendar
 import FirebaseAnalytics
 import RealmSwift
 
-class CalendarViewController: BaseViewController {
+final class CalendarViewController: BaseViewController {
     let calendarView = CalendarView()
     let writeVC = WriteViewController()
     let wodCRUD = WODRealmCRUD()
@@ -111,6 +111,7 @@ class CalendarViewController: BaseViewController {
             calendarView.calendar.setScope(.month, animated: true)
         }
     }
+    
 }
 
 

@@ -86,6 +86,7 @@ class WritePRViewController: BaseViewController {
         }
         changeLabelText(textField: textField, label: writePRView.percentLabelArray, percent: percentArr)
     }
+    
 }
 extension WritePRViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

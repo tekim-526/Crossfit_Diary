@@ -13,7 +13,7 @@ protocol SendWorkoutListDelegate {
     func getWorkoutRecordWorkout(list: [Workout])
 }
 
-class WorkOutListViewController: BaseViewController {
+final class WorkOutListViewController: BaseViewController {
     let workOutListView = WorkOutListView()
     var allWorkOut = ExerciseModel().allWorkOutArray
     
@@ -21,7 +21,6 @@ class WorkOutListViewController: BaseViewController {
     
     // SendData
     var delegate: SendWorkoutListDelegate!
-    
     
     override func loadView() {
         view = workOutListView
@@ -37,9 +36,6 @@ class WorkOutListViewController: BaseViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        workOutListView.searchbar.autocapitalizationType = .words
-        print("allworkout", allWorkOut)
-        print("allWorkOut.flatMap { $0 }.count : ", allWorkOut.flatMap { $0 }.count)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -129,7 +125,7 @@ extension WorkOutListViewController: UITableViewDelegate, UITableViewDataSource,
         if searchText != "" {
             allWorkOut = ExerciseModel().allWorkOutArray
             for i in allWorkOut.indices {
-                allWorkOut[i] = allWorkOut[i].filter { $0.contains(searchText) }
+                allWorkOut[i] = allWorkOut[i].filter { $0.lowercased().hasPrefix(searchText.lowercased()) }
             }
         } else {
             allWorkOut = ExerciseModel().allWorkOutArray

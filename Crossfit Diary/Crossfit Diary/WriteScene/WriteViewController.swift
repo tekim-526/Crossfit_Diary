@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class WriteViewController: BaseViewController {
+final class WriteViewController: BaseViewController {
     
     let workoutListVC = WorkOutListViewController()
     let modifyVC = ModifyViewController()
@@ -27,7 +27,6 @@ class WriteViewController: BaseViewController {
         }
     }
   
-    
     private var tasks: Results<WODRealmTable>! {
         didSet {
             writeView.tableView.reloadData()
@@ -124,6 +123,7 @@ class WriteViewController: BaseViewController {
         }
         return arr
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         view.endEditing(true)
@@ -240,7 +240,6 @@ class WriteViewController: BaseViewController {
         var temp = 0
         for i in workout {
             if i.reps == 0 { temp += 1 }
-            
             temp += i.reps
         }
         if temp == 0 { temp = 1 }
@@ -258,7 +257,7 @@ class WriteViewController: BaseViewController {
     }
 }
 
-// MARK: - PassingData Extension (Custom)
+// MARK: - PassingData Extension (Custom Delegate)
 extension WriteViewController: SendWorkoutListDelegate, SendRepsDelegate{
     func getWorkoutRecordWorkout(list: [Workout]) {
         self.workout = list

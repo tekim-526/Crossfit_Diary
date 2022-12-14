@@ -10,14 +10,12 @@ import UIKit
 import CoreLocation
 import MapKit
 import SnapKit
-import Cluster
 
-class MapViewController: BaseViewController, CLLocationManagerDelegate {
+final class MapViewController: BaseViewController, CLLocationManagerDelegate {
     var mapView = MapView()
     var locationManager = CLLocationManager()
     var authStatus: CLAuthorizationStatus!
     var placeList: [Place]!
-    let clusterManager = ClusterManager()
     override func loadView() {
         view = mapView
     }
@@ -56,7 +54,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print(mapView.map.annotations.count)
     }
     func checkAppLocationAuth(authStatus: CLAuthorizationStatus) {
         switch authStatus {
@@ -117,7 +114,6 @@ extension MapViewController {
     
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        print(#function)
         self.mapView.map.reloadInputViews()
     }
 

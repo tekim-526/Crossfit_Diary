@@ -33,7 +33,7 @@ struct ExerciseModel {
     var endurance = ["Air Bike", "Row", "Row 500m", "Row 1000m", "Row 1500m", "Row 2000m", "Row 5000m", "Row 10000m", "Run" ,"Run 100m", "Run 200m", "Run 400m", "Ski"]
     // MARK: - calisthenics
     var calisthenics: [String]
-    var burpees = ["Burpees", "Target Burpees", "Burpee To Plates", "Burpee Over The Rower", "Bar Facing Burpee", "Bar Lateral Burpee", "Burpee Pull Ups"]
+    var burpees = ["Burpees", "Target Burpees", "Burpee To Plates", "Burpee Over The Rower", "Bar Facing Burpee", "Bar Lateral Burpee", "Burpee Pull Ups", "Line Facing Burpees"]
     var lunges = ["Lunges", "Walking Lunges"]
     var bodySquats = ["Air Squats", "Single Leg Squats"]
     var pushups = ["Hand Release Push Ups", "Kneeling Push Ups" ,"Push Ups", "Wave Push Ups"]
@@ -48,14 +48,14 @@ struct ExerciseModel {
     var dumbellClean = ["Dumbell Clean", "Dumbell Power Clean", "Dumbell Squat Clean", "Dumbell Hang Power Clean", "Dumbell Hang Squat Clean"]
     var dumbellSnatch = ["Dumbell Snatch", "Dumbell Power Snatch", "Dumbell Squat Snatch", "Dumbell Hang Power Snatch", "Dumbell Hang Squat Snatch"]
     var dumbellPress = ["Dumbell Push Press", "Dumbell Shoulder Press", "Dumbell Shoulder To Overhead", "Devil Press", "Single Arm Devil Press"]
-
+    var dumbellCarry = ["Famers Carry", "Front Rack Carry"]
     // MARK: - Others
     var others = ["AB Mat Sit Ups", "GHD Sit Ups", "Sit Ups", "Medicine Ball Clean", "Wall Ball Shot", "Rope Climbs, 15ft", "Rope Climbs, Lying To Standing", "Rest"]
     var allWorkOutArray: [[String]]
     var rm: [[String]]
     init() {
         self.barbells = [squats, cleans, presses, jerks, snatches, deadlifts, olympicLifts, other].flatMap{ $0 }.sorted()
-        self.dumbells = [dumbellSquat, dumbellLunge, dumbellClean, dumbellSnatch, dumbellPress].flatMap{ $0 }.sorted()
+        self.dumbells = [dumbellSquat, dumbellLunge, dumbellClean, dumbellSnatch, dumbellPress, dumbellCarry].flatMap{ $0 }.sorted()
         self.gymnastics = [bar, box, handstand, ring, jumpRope].flatMap{ $0 }.sorted()
         self.calisthenics = [burpees, lunges, bodySquats, pushups, wallWalk].flatMap{ $0 }.sorted()
         self.allWorkOutArray = [barbells, dumbells, kettlebells, gymnastics, calisthenics, endurance, others]

@@ -33,7 +33,6 @@
 		93CAC5FF28E2CA8B00DC85D0 /* WriteTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CAC5FE28E2CA8B00DC85D0 /* WriteTableViewHeaderView.swift */; };
 		93CAC60228E3DCEE00DC85D0 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC60128E3DCEE00DC85D0 /* Realm */; };
 		93CAC60428E3DCEE00DC85D0 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC60328E3DCEE00DC85D0 /* RealmSwift */; };
-		93CAC60C28E8472700DC85D0 /* Cluster in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC60B28E8472700DC85D0 /* Cluster */; };
 		93CAC63028ED1D6000DC85D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93CAC62F28ED1D6000DC85D0 /* GoogleService-Info.plist */; };
 		93CAC63C28ED57C300DC85D0 /* PRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CAC63B28ED57C300DC85D0 /* PRView.swift */; };
 		93CAC63E28ED57CD00DC85D0 /* PRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CAC63D28ED57CD00DC85D0 /* PRViewController.swift */; };
@@ -124,7 +123,6 @@
 				93CAC60228E3DCEE00DC85D0 /* Realm in Frameworks */,
 				93DB553528F926E300740087 /* FirebaseCrashlytics in Frameworks */,
 				93333C760EDC28331BCD8463 /* Pods_Crossfit_Diary.framework in Frameworks */,
-				93CAC60C28E8472700DC85D0 /* Cluster in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,7 +318,6 @@
 				9374378928DDA3D100D67C12 /* IQKeyboardManagerSwift */,
 				93CAC60128E3DCEE00DC85D0 /* Realm */,
 				93CAC60328E3DCEE00DC85D0 /* RealmSwift */,
-				93CAC60B28E8472700DC85D0 /* Cluster */,
 				93DB553228F926E300740087 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				93DB553428F926E300740087 /* FirebaseCrashlytics */,
 				93DB553628F926E300740087 /* FirebaseMessaging */,
@@ -361,7 +358,6 @@
 				9374378128DAEF6D00D67C12 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				9374378828DDA3D000D67C12 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				93CAC60028E3DCEE00DC85D0 /* XCRemoteSwiftPackageReference "realm-swift" */,
-				93CAC60A28E8472700DC85D0 /* XCRemoteSwiftPackageReference "Cluster" */,
 				93DB553128F926E200740087 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 93D941A828CB129F002CDB03 /* Products */;
@@ -609,7 +605,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Crossfit Diary/Crossfit Diary.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = FQ63CT4A3G;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -628,7 +624,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tekim.Crossfit-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -648,7 +644,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Crossfit Diary/Crossfit Diary.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FQ63CT4A3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Crossfit Diary/Info.plist";
@@ -666,7 +662,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tekim.Crossfit-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -742,14 +738,6 @@
 				version = 10.30.0;
 			};
 		};
-		93CAC60A28E8472700DC85D0 /* XCRemoteSwiftPackageReference "Cluster" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/efremidze/Cluster.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
 		93D941DE28CB1F72002CDB03 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -806,11 +794,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 93CAC60028E3DCEE00DC85D0 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
-		};
-		93CAC60B28E8472700DC85D0 /* Cluster */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 93CAC60A28E8472700DC85D0 /* XCRemoteSwiftPackageReference "Cluster" */;
-			productName = Cluster;
 		};
 		93D941DF28CB1F72002CDB03 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
