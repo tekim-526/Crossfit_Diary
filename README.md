@@ -52,7 +52,7 @@
 
 ``` swift
 class WODRealmTable: Object {
-	////중략
+	//중략
 	@Persisted var workoutWithReps: List<Workout> = List<Workout>()
     var workoutWithRepsArray: [Workout] {
         get {
@@ -63,7 +63,7 @@ class WODRealmTable: Object {
             workoutWithReps.append(objectsIn: newValue)
         }
     }
-	////중략
+	//중략
 }
 
 class Workout: Object {
