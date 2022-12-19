@@ -52,7 +52,8 @@
 
 ``` swift
 class WODRealmTable: Object {
-	//중략
+	//중략...
+	
 	@Persisted var workoutWithReps: List<Workout> = List<Workout>()
     var workoutWithRepsArray: [Workout] {
         get {
@@ -63,7 +64,8 @@ class WODRealmTable: Object {
             workoutWithReps.append(objectsIn: newValue)
         }
     }
-	//중략
+	
+	//중략...
 }
 
 class Workout: Object {
@@ -72,7 +74,6 @@ class Workout: Object {
     @Persisted var reps: Int = 0
 }
 ```
-다음으로 어려웠던 점은 TableView의 높이를 지정하는 과정에서 TableView의 automaicDemension을 어떻게 주는지 몰라서 높이지정하는데 애먹었다.
 
 ### ___출시 이후___
 현재는 리뷰들어온거 있으면 확인하고 피드백 받은 것들 위주로 업데이트를 하고 있다. 또한 출시하고 아쉬웠던 부분들에 대해서 업데이트를 진행하고 있다.
