@@ -39,7 +39,7 @@ final class MapViewController: BaseViewController, CLLocationManagerDelegate {
     }
     
     func checkDeviceLocationAuth() {
-        DispatchQueue.global().async {
+        DispatchQueue.main.async {
             if CLLocationManager.locationServicesEnabled() {
                 if #available(iOS 14.0, *) {
                     self.authStatus = self.locationManager.authorizationStatus
@@ -65,7 +65,7 @@ final class MapViewController: BaseViewController, CLLocationManagerDelegate {
             }
         case .restricted, .denied:
             // 아이폰 설정으로 유도
-            print("denied")
+            goToSettingAlert()
         case .authorizedWhenInUse:
             locationManager.startUpdatingLocation()
         default: print("DEFAULT")

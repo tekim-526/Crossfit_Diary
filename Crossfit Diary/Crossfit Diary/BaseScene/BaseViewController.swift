@@ -20,6 +20,19 @@ class BaseViewController: UIViewController {
         alert.addAction(ok)
         self.present(alert, animated: true)
     }
+    func goToSettingAlert() {
+        let alert = UIAlertController(title: "권한 주세요", message: nil, preferredStyle: .alert)
+        let action = UIAlertAction(title: "설정으로 가기", style: .destructive) {_ in
+            let url = UIApplication.openSettingsURLString
+            if let goSetting = URL(string: url) {
+                UIApplication.shared.open(goSetting)
+            }
+        }
+        let cancel = UIAlertAction(title: "취소", style: .default)
+        alert.addAction(action)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
     func makeNavigationUI(title: String ,rightBarButtonItem: UIBarButtonItem?) {
         navigationItem.title = title
         navigationItem.rightBarButtonItem = rightBarButtonItem

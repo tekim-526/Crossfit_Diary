@@ -12,9 +12,6 @@ import FirebaseAnalytics
 
 import RealmSwift
 
-import RxCocoa
-import RxDataSources
-import RxSwift
 
 final class CalendarViewController: BaseViewController {
     
@@ -116,40 +113,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource, UI
     func numberOfSections(in tableView: UITableView) -> Int {
         return tasks.count
     }
-//    func bindTableView() {
-//        let datasource = RxTableViewSectionedReloadDataSource<SectionWodRealm> { [unowned self] dataSource, tableView, indexPath, item in
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CalendarTableViewCell", for: indexPath) as? CalendarTableViewCell else { return UITableViewCell() }
-//
-//            let workoutString = viewModel.workoutString(task: self.tasks[indexPath.section])
-//            cell.secondLine.isHidden = false
-//
-//            cell.wodLabel.text = viewModel.getCalendarTableViewString(task: self.tasks[indexPath.section])
-//            cell.additionalTextLabel.text = self.tasks[indexPath.section].additionalText
-//            cell.workoutLabel.attributedText = workoutString
-//
-//            cell.wodLabel.textAlignment = .center
-//            cell.additionalTextLabel.textAlignment = .center
-//            cell.workoutLabel.textAlignment = .center
-//
-//            cell.resultLabel.text = self.tasks[indexPath.section].resultText
-//
-//            if cell.additionalTextLabel.text == nil || cell.additionalTextLabel.text == "" {
-//                cell.secondLine.isHidden = true
-//            }
-//            return cell
-//        }
-//        datasource.titleForHeaderInSection = { datasource, index in
-//            return "WOD - \(index + 1)"
-//        }
-//        var sections: [SectionWodRealm] = []
-//        var tmp = [WODRealm]()
-//        for i in tasks {
-//            tmp.append(WODRealm(wod: i))
-//        }
-//        sections.append(SectionWodRealm(items: tmp))
-//        Observable.just(sections)
-//            .bind(to: calendarView.tableView.rx.items(dataSource: datasource))
-//    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CalendarTableViewCell", for: indexPath) as? CalendarTableViewCell else { return UITableViewCell() }
         let workoutString = viewModel.workoutString(task: tasks[indexPath.section])

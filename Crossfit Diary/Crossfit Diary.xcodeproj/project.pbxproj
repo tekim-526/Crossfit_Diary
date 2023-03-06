@@ -18,7 +18,6 @@
 		932B83B728D1C31600EAF221 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83B628D1C31600EAF221 /* BaseViewController.swift */; };
 		932B83BC28D2F41400EAF221 /* ModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83BB28D2F41400EAF221 /* ModifyViewController.swift */; };
 		932B83BE28D2F42300EAF221 /* ModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932B83BD28D2F42300EAF221 /* ModifyView.swift */; };
-		93333C760EDC28331BCD8463 /* Pods_Crossfit_Diary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 078181CAD74CA8352254757D /* Pods_Crossfit_Diary.framework */; };
 		9353F98B28EEA23100B28B32 /* PRRealmTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9353F98A28EEA23100B28B32 /* PRRealmTable.swift */; };
 		9353F98D28EEA23B00B28B32 /* PRRealmCRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9353F98C28EEA23B00B28B32 /* PRRealmCRUD.swift */; };
 		9374377328D97D6800D67C12 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374377228D97D6800D67C12 /* APIKey.swift */; };
@@ -30,8 +29,6 @@
 		9374378728DD94C800D67C12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374378628DD94C800D67C12 /* UIColor+Extension.swift */; };
 		9374378A28DDA3D100D67C12 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9374378928DDA3D100D67C12 /* IQKeyboardManagerSwift */; };
 		9397458628D446B300F81DA5 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9397458528D446B300F81DA5 /* CalendarTableViewCell.swift */; };
-		93B2767E299B532700C31836 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 93B2767D299B532700C31836 /* RxCocoa */; };
-		93B27680299B532700C31836 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 93B2767F299B532700C31836 /* RxSwift */; };
 		93B27682299B548100C31836 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B27681299B548100C31836 /* CalendarViewModel.swift */; };
 		93B27684299B568600C31836 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B27683299B568600C31836 /* NotificationManager.swift */; };
 		93CAC5FF28E2CA8B00DC85D0 /* WriteTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CAC5FE28E2CA8B00DC85D0 /* WriteTableViewHeaderView.swift */; };
@@ -64,7 +61,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		078181CAD74CA8352254757D /* Pods_Crossfit_Diary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Crossfit_Diary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C1D94B4648AFEF3AC1ECC18 /* Pods-Crossfit Diary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Crossfit Diary.debug.xcconfig"; path = "Target Support Files/Pods-Crossfit Diary/Pods-Crossfit Diary.debug.xcconfig"; sourceTree = "<group>"; };
 		6BA27EEFE1299CF16BB157A4 /* Pods-Crossfit Diary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Crossfit Diary.release.xcconfig"; path = "Target Support Files/Pods-Crossfit Diary/Pods-Crossfit Diary.release.xcconfig"; sourceTree = "<group>"; };
 		9323D1F528D09AA200659885 /* WorkOutListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutListViewController.swift; sourceTree = "<group>"; };
@@ -120,17 +116,14 @@
 				9374378328DAEF6D00D67C12 /* Toast in Frameworks */,
 				9374377B28D97E1300D67C12 /* SwiftyJSON in Frameworks */,
 				93D941E828CB1FAC002CDB03 /* FSCalendar in Frameworks */,
-				93B2767E299B532700C31836 /* RxCocoa in Frameworks */,
 				93CAC60428E3DCEE00DC85D0 /* RealmSwift in Frameworks */,
 				93DB553328F926E300740087 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
-				93B27680299B532700C31836 /* RxSwift in Frameworks */,
 				9374378A28DDA3D100D67C12 /* IQKeyboardManagerSwift in Frameworks */,
 				9374377828D97DFF00D67C12 /* Alamofire in Frameworks */,
 				93D941E028CB1F72002CDB03 /* SnapKit in Frameworks */,
 				93DB553728F926E300740087 /* FirebaseMessaging in Frameworks */,
 				93CAC60228E3DCEE00DC85D0 /* Realm in Frameworks */,
 				93DB553528F926E300740087 /* FirebaseCrashlytics in Frameworks */,
-				93333C760EDC28331BCD8463 /* Pods_Crossfit_Diary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,7 +133,6 @@
 		6610791295C8B44CA6A871C9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				078181CAD74CA8352254757D /* Pods_Crossfit_Diary.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -331,8 +323,6 @@
 				93DB553228F926E300740087 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				93DB553428F926E300740087 /* FirebaseCrashlytics */,
 				93DB553628F926E300740087 /* FirebaseMessaging */,
-				93B2767D299B532700C31836 /* RxCocoa */,
-				93B2767F299B532700C31836 /* RxSwift */,
 			);
 			productName = "Crossfit Diary";
 			productReference = 93D941A728CB129F002CDB03 /* Crossfit Diary.app */;
@@ -371,7 +361,6 @@
 				9374378828DDA3D000D67C12 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				93CAC60028E3DCEE00DC85D0 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				93DB553128F926E200740087 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				93B2767C299B532700C31836 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 93D941A828CB129F002CDB03 /* Products */;
 			projectDirPath = "";
@@ -745,14 +734,6 @@
 				minimumVersion = 6.3.0;
 			};
 		};
-		93B2767C299B532700C31836 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.0;
-			};
-		};
 		93CAC60028E3DCEE00DC85D0 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -807,16 +788,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9374378828DDA3D000D67C12 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
-		};
-		93B2767D299B532700C31836 /* RxCocoa */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 93B2767C299B532700C31836 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxCocoa;
-		};
-		93B2767F299B532700C31836 /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 93B2767C299B532700C31836 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxSwift;
 		};
 		93CAC60128E3DCEE00DC85D0 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
