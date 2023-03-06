@@ -6,17 +6,23 @@
 //
 
 import UIKit
-import UserNotifications
 
 import FSCalendar
 import FirebaseAnalytics
+
 import RealmSwift
 
+import RxCocoa
+import RxDataSources
+import RxSwift
+
 final class CalendarViewController: BaseViewController {
+    
     let calendarView = CalendarView()
     let writeVC = WriteViewController()
     let wodCRUD = WODRealmCRUD()
     var selectedDate: Date?
+    let viewModel = CalendarViewModel()
     
     private var tasks: Results<WODRealmTable>! {
         didSet {
@@ -32,16 +38,7 @@ final class CalendarViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        Analytics.logEvent("taesu", parameters: [
-//          "name": "Taesu",
-//          "full_text": "text as NSObject",
-//        ])
-//
-//        Analytics.setDefaultEventParameters([
-//          "level_name": "Caverns01",
-//          "level_difficulty": 4
-//        ])
-//
+        
         // SwipeGesture
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeEvent(_:)))
         swipeUp.direction = .up
@@ -50,7 +47,7 @@ final class CalendarViewController: BaseViewController {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(swipeEvent(_:)))
         swipeDown.direction = .down
         self.view.addGestureRecognizer(swipeDown)
-                
+    
         // calendar
         calendarView.calendar.delegate = self
         calendarView.tableView.delegate = self
@@ -59,17 +56,14 @@ final class CalendarViewController: BaseViewController {
         calendarView.tableView.register(CalendarTableViewCell.self, forCellReuseIdentifier: "CalendarTableViewCell")
         calendarView.tableView.rowHeight = UITableView.automaticDimension
         
-        // notification
-        let notificationCenter = UNUserNotificationCenter.current()
-        requestNotificationAuth(notificationCenter: notificationCenter)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()
-        
         calendarView.calendar.reloadData()
         tasks = wodCRUD.fetchDate(date: selectedDate ?? calendarView.calendar.today!)
+
     }
     
     override func setupUI() {
@@ -77,24 +71,23 @@ final class CalendarViewController: BaseViewController {
         let uiMenu = UIMenu(title: "운동종류", image: nil, identifier: nil, options: .displayInline, children: makePopUpMenu())
         rightBarButtonItem.menu = uiMenu
         makeNavigationUI(title: "WODI", rightBarButtonItem: rightBarButtonItem)
-        
         calendarView.calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red
     }
     
     func makePopUpMenu() -> [UIAction] {
-        let amrap = UIAction(title: "AMRAP", state: .off) { action in
+        let amrap = UIAction(title: "AMRAP", state: .off) { [unowned self] action in
             self.writeVC.kindOfWOD = "AMRAP"
             self.navigationController?.pushViewController(self.writeVC, animated: true)
         }
-        let forTime = UIAction(title: "For Time", state: .off) { action in
+        let forTime = UIAction(title: "For Time", state: .off) { [unowned self] action in
             self.writeVC.kindOfWOD = "For Time"
             self.navigationController?.pushViewController(self.writeVC, animated: true)
         }
-        let eMOM = UIAction(title: "EMOM", state: .off) { action in
+        let eMOM = UIAction(title: "EMOM", state: .off) { [unowned self] action in
             self.writeVC.kindOfWOD = "EMOM"
             self.navigationController?.pushViewController(self.writeVC, animated: true)
         }
-        let extra = UIAction(title: "Extra", state: .off) { action in
+        let extra = UIAction(title: "Extra", state: .off) { [unowned self] action in
             self.writeVC.kindOfWOD = "Extra"
             self.navigationController?.pushViewController(self.writeVC, animated: true)
         }
@@ -114,8 +107,6 @@ final class CalendarViewController: BaseViewController {
     
 }
 
-
-
 // MARK: - TableView Extensions
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -125,26 +116,59 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource, UI
     func numberOfSections(in tableView: UITableView) -> Int {
         return tasks.count
     }
-    
+//    func bindTableView() {
+//        let datasource = RxTableViewSectionedReloadDataSource<SectionWodRealm> { [unowned self] dataSource, tableView, indexPath, item in
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CalendarTableViewCell", for: indexPath) as? CalendarTableViewCell else { return UITableViewCell() }
+//
+//            let workoutString = viewModel.workoutString(task: self.tasks[indexPath.section])
+//            cell.secondLine.isHidden = false
+//
+//            cell.wodLabel.text = viewModel.getCalendarTableViewString(task: self.tasks[indexPath.section])
+//            cell.additionalTextLabel.text = self.tasks[indexPath.section].additionalText
+//            cell.workoutLabel.attributedText = workoutString
+//
+//            cell.wodLabel.textAlignment = .center
+//            cell.additionalTextLabel.textAlignment = .center
+//            cell.workoutLabel.textAlignment = .center
+//
+//            cell.resultLabel.text = self.tasks[indexPath.section].resultText
+//
+//            if cell.additionalTextLabel.text == nil || cell.additionalTextLabel.text == "" {
+//                cell.secondLine.isHidden = true
+//            }
+//            return cell
+//        }
+//        datasource.titleForHeaderInSection = { datasource, index in
+//            return "WOD - \(index + 1)"
+//        }
+//        var sections: [SectionWodRealm] = []
+//        var tmp = [WODRealm]()
+//        for i in tasks {
+//            tmp.append(WODRealm(wod: i))
+//        }
+//        sections.append(SectionWodRealm(items: tmp))
+//        Observable.just(sections)
+//            .bind(to: calendarView.tableView.rx.items(dataSource: datasource))
+//    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CalendarTableViewCell", for: indexPath) as? CalendarTableViewCell else { return UITableViewCell() }
-        let workoutString = workoutString(task: tasks[indexPath.section])
+        let workoutString = viewModel.workoutString(task: tasks[indexPath.section])
         cell.secondLine.isHidden = false
-        
-        cell.wodLabel.text = getCalendarTableViewString(task: tasks[indexPath.section])
+
+        cell.wodLabel.text = viewModel.getCalendarTableViewString(task: tasks[indexPath.section])
         cell.additionalTextLabel.text = tasks[indexPath.section].additionalText
         cell.workoutLabel.attributedText = workoutString
-        
+
         cell.wodLabel.textAlignment = .center
         cell.additionalTextLabel.textAlignment = .center
         cell.workoutLabel.textAlignment = .center
-        
+
         cell.resultLabel.text = tasks[indexPath.section].resultText
-        
+
         if cell.additionalTextLabel.text == nil || cell.additionalTextLabel.text == "" {
             cell.secondLine.isHidden = true
         }
-        
+
         return cell
     }
     
@@ -169,6 +193,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource, UI
         self.navigationController?.pushViewController(writeVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "WOD - \(section + 1)"
     }
@@ -179,50 +204,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource, UI
         header.textLabel?.textColor = .label
     }
 
-    // Method usage in TableView - Make Text
-    func getCalendarTableViewString(task: WODRealmTable) -> String {
-        let kindOfWOD = task.kindOfWOD ?? "Extra"
-        guard let rounds = task.rounds else { return "" }
-        var round = rounds == "" ? "-" : rounds
-        switch kindOfWOD {
-        case "AMRAP":
-            return "Team of \(task.peopleCount == "" ? "-" : task.peopleCount)\n\(kindOfWOD) \(round) minutes"
-        case "For Time":
-            if round == "-" || round == "1" {
-                round = ""
-            } else {
-                round += " rounds "
-            }
-            return "Team of \(task.peopleCount == "" ? "-" : task.peopleCount)\n" + "\(round)\(kindOfWOD) Of :"
-        case "EMOM":
-            return "\(kindOfWOD) \(round) minutes"
-        default:
-            return "Extra"
-        }
-    }
-    
-    func workoutString(task: WODRealmTable) -> NSAttributedString {
-        var wodStringArr: [String] = []
-        for i in task.workoutWithRepsArray.indices {
-            var wodString: String
-            if task.workoutWithRepsArray[i].reps == 0 || task.workoutWithRepsArray[i].reps == 1 {
-                wodString = task.workoutWithRepsArray[i].workout
-            } else {
-                wodString = "\(task.workoutWithRepsArray[i].reps) \(task.workoutWithRepsArray[i].workout)"
-            }
-            wodStringArr.append(wodString)
-        }
-        
-        let attrString = NSMutableAttributedString(string: wodStringArr.reduce("") { $0 + $1 + "\n" })
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 1
-        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
-        
-        return attrString
-    }
 }
-
-
 
 // MARK: - Calendar Extensions
 extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
@@ -256,32 +238,3 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     }
 }
 
-// MARK: - Notification Method (Push Alarm)
-extension CalendarViewController {
-    func requestNotificationAuth(notificationCenter: UNUserNotificationCenter) {
-        let authOptions: UNAuthorizationOptions = UNAuthorizationOptions(arrayLiteral: .badge, .alert, .sound)
-        notificationCenter.requestAuthorization(options: authOptions) { success, error in
-            if success {
-                self.sendNoti(notificationCenter: notificationCenter)
-            }
-        }
-    }
-    
-    func sendNoti(notificationCenter: UNUserNotificationCenter) {
-        notificationCenter.removeAllPendingNotificationRequests()
-        let content = UNMutableNotificationContent()
-        content.title = "와디"
-        content.subtitle = "오늘 운동하셨나요?"
-        var dateComponents = DateComponents()
-        dateComponents.hour = 22
-        dateComponents.minute = 00
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        notificationCenter.add(request) { (error) in
-            if error != nil {
-                self.showAlert(title: "푸쉬 알람 등록을 실패했습니다.", message: "다시 시도해 보세요.")
-            }
-        }
-    }
-    
-}

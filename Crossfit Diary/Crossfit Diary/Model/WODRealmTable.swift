@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import RxDataSources
 
 class WODRealmTable: Object {
     @Persisted var kindOfWOD: String?

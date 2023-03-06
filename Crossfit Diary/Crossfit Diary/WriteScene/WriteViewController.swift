@@ -128,7 +128,6 @@ final class WriteViewController: BaseViewController {
         super.viewWillDisappear(animated)
         view.endEditing(true)
         // save data to realm
-        
         if isNew {
             tasks = wodCRUD.fetch()
             wodCRUD.addTask(task: WODRealmTable()) {

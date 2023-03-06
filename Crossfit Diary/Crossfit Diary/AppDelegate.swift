@@ -13,8 +13,6 @@ import FirebaseMessaging
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate{
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         IQKeyboardManager.shared.enable = true
@@ -30,16 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         )
         application.registerForRemoteNotifications()
         Messaging.messaging().delegate = self
-        
-        // 테스트위한 토큰 받는 코드
-//        Messaging.messaging().token { token, error in
-//          if let error = error {
-//            print("Error fetching FCM registration token: \(error)")
-//          } else if let token = token {
-//            print("FCM registration token: \(token)")
-//          }
-//        }
-
         return true
     }
 
@@ -64,29 +52,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     // 포그라운드 알림 수신 : 로컬 푸시 동일
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // Setting 화면에 있다면 포그라운드 푸시 띄우지 마라! 여기서 구현
-        
         completionHandler([.badge, .sound, .banner, .list])
-        
     }
-    
-    // 푸시 클릭 -> 유저가 푸시를 클릭했을 때에만 수신 확인 가능
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
-        print("User Get Message")
-        print(response.notification.request.content.body)
-        print(response.notification.request.content.userInfo)
-        
-        
-        //        guard let viewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController?.topViewController else { return }
-        //        print(viewController)
-        //        if viewController is ViewController {
-        //            viewController.navigationController?.pushViewController(SettingViewController(), animated: true)
-        //        } else if viewController is ProfileViewController {
-        //            viewController.dismiss(animated: true)
-        //        } else if viewController is SettingViewController {
-        //            viewController.navigationController?.popViewController(animated: true)
-        //        }
-    }
+
 }
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {

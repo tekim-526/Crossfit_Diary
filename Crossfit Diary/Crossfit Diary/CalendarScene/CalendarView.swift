@@ -55,7 +55,6 @@ class CalendarView: BaseView {
             self.calendarHeightConstraint = make.height.equalTo(self.snp.height).multipliedBy(0.36).constraint
             make.top.equalTo(self.safeAreaLayoutGuide)
             make.leading.trailing.equalTo(0)
-    
         }
         lineViewBetweenCalendarAndTableView.snp.makeConstraints { make in
             make.top.equalTo(calendar.snp.bottom)

@@ -24,5 +24,13 @@ class TabBarController: UITabBarController {
         self.tabBar.tintColor = .mainColor
         self.tabBar.backgroundColor = .systemBackground
         viewControllers = [calendarNav, rmNav, mapVC]
+        
+        // notification
+        NotificationManager.shared.requestNotificationAuth { error in
+            let alert = UIAlertController(title: "푸쉬알람 등록에 실패했습니다", message: "다시 시도해주세요", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "확인", style: .default)
+            alert.addAction(ok)
+            self.present(alert, animated: true)
+        }
     }
 }

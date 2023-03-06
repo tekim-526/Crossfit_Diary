@@ -30,6 +30,10 @@
 		9374378728DD94C800D67C12 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374378628DD94C800D67C12 /* UIColor+Extension.swift */; };
 		9374378A28DDA3D100D67C12 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9374378928DDA3D100D67C12 /* IQKeyboardManagerSwift */; };
 		9397458628D446B300F81DA5 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9397458528D446B300F81DA5 /* CalendarTableViewCell.swift */; };
+		93B2767E299B532700C31836 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 93B2767D299B532700C31836 /* RxCocoa */; };
+		93B27680299B532700C31836 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 93B2767F299B532700C31836 /* RxSwift */; };
+		93B27682299B548100C31836 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B27681299B548100C31836 /* CalendarViewModel.swift */; };
+		93B27684299B568600C31836 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B27683299B568600C31836 /* NotificationManager.swift */; };
 		93CAC5FF28E2CA8B00DC85D0 /* WriteTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CAC5FE28E2CA8B00DC85D0 /* WriteTableViewHeaderView.swift */; };
 		93CAC60228E3DCEE00DC85D0 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC60128E3DCEE00DC85D0 /* Realm */; };
 		93CAC60428E3DCEE00DC85D0 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 93CAC60328E3DCEE00DC85D0 /* RealmSwift */; };
@@ -81,6 +85,8 @@
 		9374377F28D99FEF00D67C12 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		9374378628DD94C800D67C12 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		9397458528D446B300F81DA5 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
+		93B27681299B548100C31836 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		93B27683299B568600C31836 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		93CAC5FE28E2CA8B00DC85D0 /* WriteTableViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTableViewHeaderView.swift; sourceTree = "<group>"; };
 		93CAC62F28ED1D6000DC85D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		93CAC63B28ED57C300DC85D0 /* PRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRView.swift; sourceTree = "<group>"; };
@@ -114,8 +120,10 @@
 				9374378328DAEF6D00D67C12 /* Toast in Frameworks */,
 				9374377B28D97E1300D67C12 /* SwiftyJSON in Frameworks */,
 				93D941E828CB1FAC002CDB03 /* FSCalendar in Frameworks */,
+				93B2767E299B532700C31836 /* RxCocoa in Frameworks */,
 				93CAC60428E3DCEE00DC85D0 /* RealmSwift in Frameworks */,
 				93DB553328F926E300740087 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				93B27680299B532700C31836 /* RxSwift in Frameworks */,
 				9374378A28DDA3D100D67C12 /* IQKeyboardManagerSwift in Frameworks */,
 				9374377828D97DFF00D67C12 /* Alamofire in Frameworks */,
 				93D941E028CB1F72002CDB03 /* SnapKit in Frameworks */,
@@ -161,6 +169,7 @@
 			children = (
 				9374377228D97D6800D67C12 /* APIKey.swift */,
 				9374377428D97DB400D67C12 /* KakaoSearchAPIManager.swift */,
+				93B27683299B568600C31836 /* NotificationManager.swift */,
 			);
 			path = "Utils & Network";
 			sourceTree = "<group>";
@@ -257,6 +266,7 @@
 				93D941CC28CB1462002CDB03 /* CalendarViewController.swift */,
 				9397458528D446B300F81DA5 /* CalendarTableViewCell.swift */,
 				93D941CE28CB1479002CDB03 /* CalendarView.swift */,
+				93B27681299B548100C31836 /* CalendarViewModel.swift */,
 			);
 			path = CalendarScene;
 			sourceTree = "<group>";
@@ -321,6 +331,8 @@
 				93DB553228F926E300740087 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				93DB553428F926E300740087 /* FirebaseCrashlytics */,
 				93DB553628F926E300740087 /* FirebaseMessaging */,
+				93B2767D299B532700C31836 /* RxCocoa */,
+				93B2767F299B532700C31836 /* RxSwift */,
 			);
 			productName = "Crossfit Diary";
 			productReference = 93D941A728CB129F002CDB03 /* Crossfit Diary.app */;
@@ -359,6 +371,7 @@
 				9374378828DDA3D000D67C12 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				93CAC60028E3DCEE00DC85D0 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				93DB553128F926E200740087 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				93B2767C299B532700C31836 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 93D941A828CB129F002CDB03 /* Products */;
 			projectDirPath = "";
@@ -462,10 +475,12 @@
 				93CAC64728ED668800DC85D0 /* UITextField+Extension.swift in Sources */,
 				93CAC64528ED639D00DC85D0 /* WritePRViewController.swift in Sources */,
 				93D941AD28CB129F002CDB03 /* SceneDelegate.swift in Sources */,
+				93B27684299B568600C31836 /* NotificationManager.swift in Sources */,
 				9397458628D446B300F81DA5 /* CalendarTableViewCell.swift in Sources */,
 				9374377528D97DB400D67C12 /* KakaoSearchAPIManager.swift in Sources */,
 				93D941D128CB14B7002CDB03 /* WriteViewController.swift in Sources */,
 				932B83A828D1B17D00EAF221 /* WODRealmCRUD.swift in Sources */,
+				93B27682299B548100C31836 /* CalendarViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,6 +745,14 @@
 				minimumVersion = 6.3.0;
 			};
 		};
+		93B2767C299B532700C31836 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		93CAC60028E3DCEE00DC85D0 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -784,6 +807,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9374378828DDA3D000D67C12 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		93B2767D299B532700C31836 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 93B2767C299B532700C31836 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		93B2767F299B532700C31836 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 93B2767C299B532700C31836 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 		93CAC60128E3DCEE00DC85D0 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
